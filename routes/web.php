@@ -22,7 +22,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'welcome')->name('home');
+Route::view('/properties', 'properties.index')->name('properties.index');
+Route::view('/properties/1', 'properties.show')->name('properties.show');
 
+
+
+
+
+/*
+ * Auth Routes
+ */
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
         ->name('login');

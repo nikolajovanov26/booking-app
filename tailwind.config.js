@@ -6,6 +6,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+            aspectRatio: {
+                '3/2': '3 / 2',
+                '2/1': '2 / 1',
+            },
         },
     },
     variants: {

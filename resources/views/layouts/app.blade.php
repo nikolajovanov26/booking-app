@@ -16,8 +16,8 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'home'])
-                                @include('components.navigation.link', ['label' => 'Team', 'route' => '#'])
-                                @include('components.navigation.link', ['label' => 'Projects', 'route' => '#'])
+                                @include('components.navigation.link', ['label' => 'Index', 'route' => 'properties.index'])
+                                @include('components.navigation.link', ['label' => 'Show', 'route' => 'properties.show'])
                                 @include('components.navigation.link', ['label' => 'Calendar', 'route' => '#'])
                                 @include('components.navigation.link', ['label' => 'Reports', 'route' => '#'])
                             </div>
