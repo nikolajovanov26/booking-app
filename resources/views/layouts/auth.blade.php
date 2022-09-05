@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('body')
-    <div class="flex w-full">
+    <div class="flex w-full max-h-screen overflow-hidden">
         <div class="w-1/5 bg-gradient-to-r from-blue-grad-dark to-blue-grad-light pl-8 pr-4 py-16">
             <img class="h-14 w-14 pl-3" src="https://tailwindui.com/img/logos/mark.svg?color=white"
                  alt="Your Company">
@@ -56,11 +56,12 @@
                                 x-data="{ profileDropdown: false }"
                                 @click.outside="profileDropdown = false"
                                 class="relative ml-3">
-                                <div>
+                                <div class="flex items-center space-x-4">
+                                    <p>{{ Auth()->user()->name }}</p>
                                     <button
                                         @click="profileDropdown = !profileDropdown"
                                         type="button"
-                                        class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        class="flex max-w-xs items-center rounded-full bg-blue-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-grad-dark"
                                         id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                         <span class="sr-only">Open user menu</span>
                                         <img class="h-8 w-8 rounded-full"
@@ -84,7 +85,7 @@
                 </div>
             </nav>
 
-            <div class="p-10">
+            <div class="p-10 h-full">
                 @yield('content')
 
                 @isset($slot)
