@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('home');
 Route::view('/properties', 'properties.index')->name('properties.index');
 Route::view('/properties/1', 'properties.show')->name('properties.show');
+Route::view('/admin/dashboard', 'admin.dashboard.index')->name('admin.dashboard.index');
 
 
 
