@@ -20,9 +20,9 @@
                         'icon' => 'calendar',
                         'label' => 'Calendar'])
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => '',
+                        'route' => 'admin.transactions',
                         'icon' => 'document',
-                        'label' => 'Reports'])
+                        'label' => 'Transactions'])
                     @include('admin.components.navigation.navigation-link', [
                         'route' => 'admin.notifications',
                         'icon' => 'bell',

@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="hover:bg-gray-100 transition">
                         <td class="px-6 py-4">Standard Triple Room</td>
                         <td class="px-6 py-4">Sea View</td>
                         <td class="px-6 py-4 text-center">
