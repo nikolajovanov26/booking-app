@@ -43,7 +43,7 @@
                     <a href="{{ route('home') }}"
                        class="py-2 px-3 flex items-center text-sm space-x-2 text-white opacity-70 hover:opacity-100 hover:-translate-x-2 transition">
                         <span>@include('icons.arrow-left-long', ['attributes' => 'w-6 h-6'])</span>
-                        <span>Back to Home</span>
+                        <span>Back Home</span>
                     </a>
                 </div>
             </div>

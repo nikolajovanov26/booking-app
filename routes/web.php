@@ -29,6 +29,9 @@ Route::view('/admin/properties', 'admin.properties.index')->name('admin.properti
 Route::view('/admin/properties/1/show', 'admin.properties.show')->name('admin.properties.show');
 Route::view('/admin/properties/create', 'admin.properties.create')->name('admin.properties.create');
 Route::view('/admin/properties/1/edit', 'admin.properties.edit')->name('admin.properties.edit');
+Route::view('/admin/properties/1/rooms', 'admin.properties.rooms.index')->name('admin.properties.rooms.index');
+Route::view('/admin/properties/1/rooms/create', 'admin.properties.rooms.create')->name('admin.properties.rooms.create');
+Route::view('/admin/properties/1/rooms/1/edit', 'admin.properties.rooms.edit')->name('admin.properties.rooms.edit');
 
 
 

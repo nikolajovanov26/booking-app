@@ -13,7 +13,7 @@
                         <th class="w-2/12 px-6 py-6 text-lg bg-gray-800 text-white">Name</th>
                         <th class="w-3/12 px-6 py-6 text-lg bg-gray-800 text-white">Location</th>
                         <th class="w-1/12 px-6 py-6 text-lg bg-gray-800 text-white text-center">Rating</th>
-                        <th class="w-1/12 px-6 py-6 text-lg bg-gray-800 text-white"></th>
+                        <th class="w-1/12 px-6 py-6 text-lg bg-gray-800 text-white text-center">Status</th>
                         <th class="w-3/12 px-6 py-6 text-lg bg-gray-800 text-white"></th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@
                         </td>
                         <td class="flex items-center justify-end px-6 py-4 text-right space-x-3">
                             <a href="{{ route('admin.properties.show') }}" class="text-blue-600 hover:text-blue-900 transition">View Property</a>
-                            <a href="#" class="text-blue-600 hover:text-blue-900 transition">View Rooms</a>
+                            <a href="{{ route('admin.properties.rooms.index') }}" class="text-blue-600 hover:text-blue-900 transition">View Rooms</a>
                             <a href="{{ route('admin.properties.edit') }}" class="bg-blue-600 text-white rounded px-3 py-2 hover:bg-blue-800 transition">Edit</a>
                             <button class="bg-red-700 text-white rounded px-3 py-2">Delete</button>
                         </td>
@@ -43,7 +43,7 @@
                         </td>
                         <td class="flex items-center justify-end px-6 py-4 text-right space-x-3">
                             <a href="{{ route('admin.properties.show') }}" class="text-blue-600 hover:text-blue-900 transition">View Property</a>
-                            <a href="#" class="text-blue-600 hover:text-blue-900 transition">View Rooms</a>
+                            <a href="{{ route('admin.properties.rooms.index') }}" class="text-blue-600 hover:text-blue-900 transition">View Rooms</a>
                             <a href="{{ route('admin.properties.edit') }}" class="bg-blue-600 text-white rounded px-3 py-2 hover:bg-blue-800 transition">Edit</a>
                             <button class="bg-red-700 text-white rounded px-3 py-2 hover:bg-red-900 transition">Delete</button>
                         </td>

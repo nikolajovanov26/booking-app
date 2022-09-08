@@ -25,7 +25,7 @@
                             <div class="flex space-x-6">
                                 @include('admin.components.form.select', [
                                    'label' => 'Property Type',
-                                   'placeholder' => 'Select propery type'
+                                   'placeholder' => 'Select property type'
                                 ])
                                 @include('admin.components.form.select', [
                                     'label' => 'Number of stars the property has',
