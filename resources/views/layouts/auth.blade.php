@@ -30,16 +30,14 @@
                 </div>
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
                 <div class="flex flex-col space-y-2 mt-6">
-                    <a href=""
-                       class="flex items-center space-x-3 text-white text-xl w-full py-2 px-3 rounded hover:bg-white hover:bg-opacity-20 transition">
-                        @include('icons.settings', ['attributes' => 'w-6 h-6'])
-                        <span>Settings</span>
-                    </a>
-                    <a href=""
-                       class="flex items-center space-x-3 text-white text-xl w-full py-2 px-3 rounded hover:bg-white hover:bg-opacity-20 transition">
-                        @include('icons.heart', ['attributes' => 'w-6 h-6'])
-                        <span>Favorites</span>
-                    </a>
+                    @include('admin.components.navigation.navigation-link', [
+                        'route' => '',
+                        'icon' => 'settings',
+                        'label' => 'Settings'])
+                    @include('admin.components.navigation.navigation-link', [
+                        'route' => 'admin.favorites',
+                        'icon' => 'heart',
+                        'label' => 'Favorites'])
                     <a href="{{ route('home') }}"
                        class="py-2 px-3 flex items-center text-sm space-x-2 text-white opacity-70 hover:opacity-100 hover:-translate-x-2 transition">
                         <span>@include('icons.arrow-left-long', ['attributes' => 'w-6 h-6'])</span>
