@@ -16,9 +16,9 @@
                         'icon' => 'house',
                         'label' => 'Properties'])
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => '',
-                        'icon' => 'calendar',
-                        'label' => 'Calendar'])
+                        'route' => 'admin.reviews',
+                        'icon' => 'star',
+                        'label' => 'Reviews'])
                     @include('admin.components.navigation.navigation-link', [
                         'route' => 'admin.transactions',
                         'icon' => 'document',

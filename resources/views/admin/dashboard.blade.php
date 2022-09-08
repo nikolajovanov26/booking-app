@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="#" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition"
+                        <a href="{{ route('admin.reviews') }}" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition"
                         >View Reviews</a>
                     </div>
                 </div>
