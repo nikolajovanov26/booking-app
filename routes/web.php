@@ -25,6 +25,10 @@ Route::view('/', 'welcome')->name('home');
 Route::view('/properties', 'properties.index')->name('properties.index');
 Route::view('/properties/1', 'properties.show')->name('properties.show');
 Route::view('/admin/dashboard', 'admin.dashboard.index')->name('admin.dashboard.index');
+Route::view('/admin/properties', 'admin.properties.index')->name('admin.properties.index');
+Route::view('/admin/properties/1/show', 'admin.properties.show')->name('admin.properties.show');
+Route::view('/admin/properties/create', 'admin.properties.create')->name('admin.properties.create');
+Route::view('/admin/properties/1/edit', 'admin.properties.edit')->name('admin.properties.edit');
 
 
 

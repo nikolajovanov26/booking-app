@@ -1,135 +1,219 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 
 @section('content')
-    <div class="bg-white rounded-xl shadow-2xl">
-        <div class="bg-gradient-to-r rounded-t-xl from-blue-grad-dark to-blue-grad-light px-12 py-6">
-            <h1 class="font-bold text-white text-3xl">Create Property</h1>
-        </div>
-        <div class="px-12 py-8 w-full">
-            <div>
-                <form class="space-y-6">
-                    <div class="w-full flex space-x-6">
-                        <div class="w-2/3 flex flex-col space-y-10">
-                            <div class="flex space-x-6">
-                                @include('admin.components.form.input', [
-                                    'label' => 'Property Title',
-                                    'placeholder' => 'Enter the name of your property',
-                                    'name' => 'name'
-                                ])
-                                @include('admin.components.form.input', [
-                                   'label' => 'Slug',
-                                   'placeholder' => 'Enter slug for your property',
-                                   'name' => 'slug'
-                               ])
+    @include('components.header', ['label' => 'Property Name'])
+    <main>
+        <div class="mx-auto max-w-screen-2xl py-8 sm:px-6 lg:px-8">
+            <div class="flex space-x-6">
+                <div class="w-1/5">
+                    Filter
+                </div>
+                <div class="flex flex-col w-4/5 space-y-6">
+                    <div id="in-page-nav" class="flex space-x-4">
+                        @include('components.properties.in-page-link', ['section' => '#', 'label' => 'Info & prices'])
+                        @include('components.properties.in-page-link', ['section' => '#', 'label' => 'Facilities'])
+                        @include('components.properties.in-page-link', ['section' => '#', 'label' => 'House rules'])
+                        @include('components.properties.in-page-link', ['section' => '#', 'label' => 'Guest reviews (474)'])
+                    </div> <!-- End in-page navigation -->
+                    <div id="property-info" class="flex justify-between space-x-4">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span
+                                    class="px-3 pt-1 pb-0.5 bg-blue-400 text-white text-xs rounded-sm">Guest house</span>
+                                <div class="flex">
+                                    @include('icons.star', ['attributes' => 'h-5 w-5 text-yellow-500', 'fill' => '#ffff00'])
+                                    @include('icons.star', ['attributes' => 'h-5 w-5 text-yellow-500', 'fill' => '#ffff00'])
+                                    @include('icons.star', ['attributes' => 'h-5 w-5 text-yellow-500', 'fill' => '#ffff00'])
+                                    @include('icons.star', ['attributes' => 'h-5 w-5 text-yellow-500', 'fill' => '#ffff00'])
+                                </div>
                             </div>
-                            <div class="flex space-x-6">
-                                @include('admin.components.form.select', [
-                                   'label' => 'Property Type',
-                                   'placeholder' => 'Select propery type'
-                                ])
-                                @include('admin.components.form.select', [
-                                    'label' => 'Number of stars the property has',
-                                    'placeholder' => 'Select number of stars'
-                                ])
-                            </div>
-                            <div class="flex space-x-6">
-                                @include('admin.components.form.input', [
-                                    'label' => 'E-Mail',
-                                    'placeholder' => 'Enter the contact e-mail of your property',
-                                    'name' => 'email',
-                                    'type' => 'email'
-                                ])
-                                @include('admin.components.form.input', [
-                                   'label' => 'Phone Number',
-                                   'placeholder' => 'Enter the contact phone for your property',
-                                   'name' => 'phone'
-                               ])
+                            <h2 class="text-4xl font-bold mb-1">Property name</h2>
+                            <div class="flex items-center space-x-2">
+                        <span class="text-blue-600">
+                            @include('icons.location-pin', ['attributes' => 'h-6 w-6'])
+                        </span>
+                                <p>
+                                    18 Jane Sandanski, 6000 Ohrid
+                                </p>
+                                <span>&mdash;</span>
+                                <a href="#" class="text-blue-600 hover:text-blue-900 transition font-semibold">
+                                    Show location
+                                </a>
                             </div>
                         </div>
-                        <div class="w-1/3 flex space-x-6">
-                            <div class="h-full w-full flex items-center justify-center rounded-xl border-dashed border-2">
-                                Upload main image
+                        <div class="flex flex-col space-y-4">
+                            <div class="flex my-auto items-center justify-end space-x-5">
+                                <span class="text-gray-800 hover:text-red-600 transition cursor-pointer">
+                                    @include('icons.heart', ['attributes' => 'h-8 w-8', 'fill' => 'none'])
+                                </span>
+                                <button
+                                    class="bg-blue-600 hover:bg-blue-900 font-semibold text-lg transition text-white px-4 py-2 rounded-md">
+                                    Reserve
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="w-full flex space-x-6">
-                        <div class="w-5/12">
-                            @include('admin.components.form.input', [
-                                    'label' => 'Street Address',
-                                    'placeholder' => 'Enter the street address of your property',
-                                    'name' => 'address'
-                                ])
+                    </div> <!-- End property info -->
+                    <div id="photo-gallery" class="grid grid-flow-row-dense grid-cols-5">
+                        <div class="col-span-2 row-span-2 aspect-2/1 pr-3 pb-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                        <div class="w-3/12">
-                            @include('admin.components.form.input', [
-                                    'label' => 'City',
-                                    'placeholder' => 'Enter the city of your property',
-                                    'name' => 'city'
-                                ])
+                        <div class="col-span-3 row-span-4 aspect-3/2 pb-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                        <div class="w-1/12">
-                            @include('admin.components.form.input', [
-                                    'label' => 'Zip Code',
-                                    'placeholder' => 'Zip Code',
-                                    'name' => 'zip'
-                                ])
+                        <div class="col-span-2 row-span-2 aspect-2/1 pr-3 pb-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                        <div class="w-3/12">
-                            @include('admin.components.form.select', [
-                                    'label' => 'Country',
-                                    'placeholder' => 'Select country'
-                                ])
+                        <div class="col-span-1 row-span-1 pr-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                    </div>
-                    <div class="w-full flex space-x-6">
-                        @include('admin.components.form.textarea', [
-                            'label' => 'Description',
-                            'placeholder' => 'Describe your property',
-                            'name' => 'description',
-                            'rows' => 6
-                        ])
-                    </div>
-                    <div class="w-full flex space-x-6">
-                        <div class="w-1/2">
-                            @include('admin.components.form.checkbox', [
-                                'label' => 'Payment Methods'
-                            ])
+                        <div class="col-span-1 row-span-1 pr-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                        <div class="w-1/2">
-                            @include('admin.components.form.checkbox', [
-                                'label' => 'Features in the Property'
-                            ])
+                        <div class="col-span-1 row-span-1 pr-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                    </div>
-                    <div class="w-full flex space-x-6">
-                        <div class="w-1/2">
-                            @include('admin.components.form.textarea', [
-                                'label' => 'Rules in the property',
-                                'placeholder' => 'Describe your rules',
-                                'name' => 'rules',
-                                'rows' => 5
-                            ])
+                        <div class="col-span-1 row-span-1 pr-3">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                        <div class="w-1/2">
-                            @include('admin.components.form.textarea', [
-                                'label' => 'Cancellation Policy',
-                                'placeholder' => 'Describe your cancellation policy',
-                                'name' => 'cancellation_policy',
-                                'rows' => 5
-                            ])
+                        <div class="relative col-span-1 row-span-1">
+                            <div
+                                class="absolute cursor-pointer font-semibold flex items-center text-2xl justify-center inset-0 text-white bg-gray-600 bg-opacity-50 hover:bg-opacity-80 transition">
+                                +45 Photos
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6"
+                                 class="object-cover w-full h-full">
                         </div>
-                    </div>
-                    <div class="w-full flex space-x-6">
-                        <div class="h-52 w-full flex items-center justify-center rounded-xl border-dashed border-2">
-                            Upload more images
+                    </div> <!-- End photo gallery -->
+                    <div id="description" class="flex justify-between content-start items-start">
+                        <div class="w-3/5">
+                            <p class="mb-3">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at, corporis dignissimos
+                                dolores error id nisi provident veritatis voluptatum. Doloremque dolores ea enim minus
+                                nesciunt porro quasi quis recusandae saepe, vero? Assumenda consectetur doloremque,
+                                ipsum nesciunt reiciendis rerum sunt suscipit voluptas. Eaque, fugiat vitae. A
+                                architecto, ducimus ea error facere hic, impedit ipsa iusto labore laudantium nostrum
+                                numquam obcaecati quo repellat rerum tenetur veniam voluptas! Adipisci aspernatur
+                                consequuntur, doloremque ea eum expedita iusto magnam, nobis non numquam sequi
+                                veritatis. Aliquid aperiam assumenda, beatae doloribus earum enim error id illo illum
+                                inventore magni neque, omnis perspiciatis placeat sed sequi voluptatem, voluptatum!
+                            </p>
+                            <p class="mb-3">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam fuga fugiat
+                                minus omnis perferendis totam, voluptates! Ad dolor est ex impedit molestiae quia
+                                ratione tenetur totam! Ab accusamus amet et excepturi incidunt labore maxime modi nisi
+                                nostrum quam quasi qui, temporibus velit! Ab adipisci consequuntur doloremque inventore
+                                natus provident ratione?
+                            </p>
+                            <p class="mb-3">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at, corporis dignissimos
+                                dolores error id nisi provident veritatis voluptatum. Doloremque dolores ea enim minus
+                                nesciunt porro quasi quis recusandae saepe, vero?
+                            </p>
+                            <div class="my-8">
+                                <h3 class="font-semibold text-lg mb-2">Most popular facilities</h3>
+                                <div class="flex space-x-6">
+                                    <div class="flex items-center space-x-1">
+                                        @include('icons.wifi', ['attributes' => 'w-6 h-6'])
+                                        <p>Free parking</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        @include('icons.wifi', ['attributes' => 'w-6 h-6'])
+                                        <p>Free WiFi</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        @include('icons.wifi', ['attributes' => 'w-6 h-6'])
+                                        <p>Family rooms</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        @include('icons.wifi', ['attributes' => 'w-6 h-6'])
+                                        <p>Non-smoking rooms</p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="flex justify-end space-x-4">
-                        <button class="py-3 px-6 rounded bg-orange-600 hover:bg-orange-800 transition text-white">Save as Draft</button>
-                        <button class="py-3 px-6 rounded bg-blue-600 hover:bg-blue-800 transition text-white">Create Property</button>
-                    </div>
-                </form>
+                        <div class="w-1/3 bg-blue-100 p-6">
+                            <h3 class="font-semibold text-xl">Property highlights</h3>
+                            <div class="flex justify-start items-start mt-4 mb-2">
+                                <span class="flex mr-2">
+                                    @include('icons.heart', ['attributes' => 'w-6 h-6', 'fill' => '#000000'])
+                                </span>
+                                Situated in the best rated area in Ohrid, this property has an excellent location score
+                                of 9.7
+                            </div>
+                            <div class="flex justify-start items-start">
+                                <span class="flex mr-2">
+                                    @include('icons.wifi', ['attributes' => 'w-6 h-6'])
+                                </span>
+                                Free private parking available on-site
+                            </div>
+                            <div class="space-y-2 mt-6 mb-3">
+                                <button
+                                    class="bg-blue-600 hover:bg-blue-900 transition text-white font-semibold text-lg w-full h-12">
+                                    Reserve
+                                </button>
+                                <button
+                                    class="bg-white bg-opacity-0 hover:bg-opacity-70 border border-2 border-blue-600 transition text-blue-600 font-semibold text-lg w-full h-12">
+                                    Save the property
+                                </button>
+                            </div>
+                            <span class="block text-center w-full text-sm text-gray-600">Saved to 916 lists</span>
+                        </div>
+                    </div><!-- End description -->
+                    <div id="rooms" class="space-y-4">
+                        <h2 class="text-2xl font-bold">Availability</h2>
+                        <div class="w-full h-20 bg-blue-100"> Filter</div>
+                        <div class="mb-8">
+                            @include('components.properties.rooms-table')
+                        </div>
+                    </div><!-- End rooms -->
+                    <div class="h-6"></div><!-- separator -->
+                    <div id="reviews" class="" x-data="{ reviewModal:false }">
+                        <h2 class="text-2xl font-bold mb-3">Guest reviews</h2>
+                        <div class="flex flex-row items-baseline space-x-3">
+                            <div class="bg-blue-600 text-white font-bold text-xl p-3 rounded-xl">9.6</div>
+                            <span class="font-bold text-lg -mb-1">Exceptional</span>
+                            <span class="text-sm">474 reviews</span>
+                            <a href="#" class="text-sm text-blue-600 hover:underline">Read all reviews</a>
+                        </div>
+                        <h3 class="text-lg font-bold mt-6 mb-2">Categories</h3>
+                        <div class="grid grid-cols-3 gap-x-12 gap-y-4 mb-4">
+                            @include('components.properties.progress-bar', ['label' => 'Staff', 'progress' => 9.7])
+                            @include('components.properties.progress-bar', ['label' => 'Facilities', 'progress' => 4.5])
+                            @include('components.properties.progress-bar', ['label' => 'Cleanliness', 'progress' => 3.7])
+                            @include('components.properties.progress-bar', ['label' => 'Comfort', 'progress' => 2.5])
+                            @include('components.properties.progress-bar', ['label' => 'Value for money', 'progress' => 1.0])
+                            @include('components.properties.progress-bar', ['label' => 'Location', 'progress' => 7.6])
+                        </div>
+                        <h3 class="text-lg font-bold mt-8 mb-3">Reviews</h3>
+                        <div class="grid grid-cols-3 gap-8 mb-6">
+                            @include('components.properties.review')
+                            @include('components.properties.review')
+                            @include('components.properties.review')
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="border border-2 border-blue-600 bg-white hover:bg-blue-50 transition rounded text-blue-600 font-semibold text-lg px-4 py-2">
+                                Read all reviews
+                            </button>
+                        </div>
+                        <div x-show="reviewModal">
+                            @include('components.properties.review-modal')
+                        </div>
+                    </div><!-- End reviews -->
+                    <div id="rules" class=''>
+                        <h2 class="text-2xl font-bold mb-3">House rules</h2>
+                        @include('components.properties.rules-table')
+                    </div><!-- End rules -->
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 @endsection

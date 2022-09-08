@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="flex flex-col h-full space-y-16">
-        <div class="w-full h-1/2 border border-dashed border-4 border-gray-600 rounded-xl"></div>
-        <div class="flex h-1/4 w-full space-x-6">
+        <div class="w-full h-96 border border-dashed border-4 border-gray-600 rounded-xl"></div>
+        <div class="flex h-48 w-full space-x-6">
             <div class="w-1/3 bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="w-full h-full flex flex-col items-stretch">
+                <div class="w-full h-full flex flex-col items-stretch space-y-5">
                     <div class="w-full h-full flex justify-between px-10">
                         <div class="h-full flex items-center space-x-6">
                             <div class="text-gray-600">
@@ -23,12 +23,12 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="#" class="text-lg text-blue-600 font-semibold hover:text-gray-800 transition">View Reports</a>
+                        <a href="{{ route('admin.properties.index') }}" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition">View Reports</a>
                     </div>
                 </div>
             </div>
             <div class="w-1/3 bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="w-full h-full flex flex-col items-stretch">
+                <div class="w-full h-full flex flex-col items-stretch space-y-5">
                     <div class="w-full h-full flex justify-between px-10">
                         <div class="h-full flex items-center space-x-6">
                             <div class="text-gray-600">
@@ -46,12 +46,12 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="#" class="text-lg text-blue-600 font-semibold hover:text-gray-800 transition">View Properties</a>
+                        <a href="#" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition">View Properties</a>
                     </div>
                 </div>
             </div>
             <div class="w-1/3 bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="w-full h-full flex flex-col items-stretch">
+                <div class="w-full h-full flex flex-col items-stretch space-y-5">
                     <div class="w-full h-full flex justify-between px-10">
                         <div class="h-full flex items-center space-x-6">
                             <div class="text-gray-600">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="#" class="text-lg text-blue-600 font-semibold hover:text-gray-800 transition">View Notifications</a>
+                        <a href="#" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition">View Notifications</a>
                     </div>
                 </div>
             </div>
