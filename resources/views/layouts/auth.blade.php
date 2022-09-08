@@ -8,7 +8,7 @@
                      alt="Your Company">
                 <div class="flex flex-col space-y-2 mt-6">
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.dashboard.index',
+                        'route' => 'admin.dashboard',
                         'icon' => 'dashboard',
                         'label' => 'Dashboard'])
                     @include('admin.components.navigation.navigation-link', [
@@ -24,7 +24,7 @@
                         'icon' => 'document',
                         'label' => 'Reports'])
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => '',
+                        'route' => 'admin.notifications',
                         'icon' => 'bell',
                         'label' => 'Notifications'])
                 </div>

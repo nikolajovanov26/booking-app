@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('home');
 Route::view('/properties', 'properties.index')->name('properties.index');
 Route::view('/properties/1', 'properties.show')->name('properties.show');
-Route::view('/admin/dashboard', 'admin.dashboard.index')->name('admin.dashboard.index');
+Route::view('/admin/dashboard', 'admin.dashboard')->name('admin.dashboard');
 Route::view('/admin/properties', 'admin.properties.index')->name('admin.properties.index');
 Route::view('/admin/properties/1/show', 'admin.properties.show')->name('admin.properties.show');
 Route::view('/admin/properties/create', 'admin.properties.create')->name('admin.properties.create');
@@ -32,6 +32,7 @@ Route::view('/admin/properties/1/edit', 'admin.properties.edit')->name('admin.pr
 Route::view('/admin/properties/1/rooms', 'admin.properties.rooms.index')->name('admin.properties.rooms.index');
 Route::view('/admin/properties/1/rooms/create', 'admin.properties.rooms.create')->name('admin.properties.rooms.create');
 Route::view('/admin/properties/1/rooms/1/edit', 'admin.properties.rooms.edit')->name('admin.properties.rooms.edit');
+Route::view('/admin/notifications', 'admin.notifications')->name('admin.notifications');
 
 
 
