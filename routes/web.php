@@ -37,6 +37,7 @@ Route::view('/admin/transactions', 'admin.transactions')->name('admin.transactio
 Route::view('/admin/reviews', 'admin.reviews')->name('admin.reviews');
 Route::view('/admin/favorites', 'admin.favorites')->name('admin.favorites');
 Route::view('/admin/settings', 'admin.settings')->name('admin.settings');
+Route::view('/admin/my-reservations', 'admin.my-reservations')->name('admin.my-reservations');
 
 
 

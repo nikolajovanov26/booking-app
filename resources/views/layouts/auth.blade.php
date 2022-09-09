@@ -31,13 +31,17 @@
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
                 <div class="flex flex-col space-y-2 mt-6">
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.settings',
-                        'icon' => 'settings',
-                        'label' => 'Settings'])
+                        'route' => 'admin.my-reservations',
+                        'icon' => 'globe',
+                        'label' => 'My Reservations'])
                     @include('admin.components.navigation.navigation-link', [
                         'route' => 'admin.favorites',
                         'icon' => 'heart',
                         'label' => 'Favorites'])
+                    @include('admin.components.navigation.navigation-link', [
+                        'route' => 'admin.settings',
+                        'icon' => 'settings',
+                        'label' => 'Settings'])
                     <a href="{{ route('home') }}"
                        class="py-2 px-3 flex items-center text-sm space-x-2 text-white opacity-70 hover:opacity-100 hover:-translate-x-2 transition">
                         <span>@include('icons.arrow-left-long', ['attributes' => 'w-6 h-6'])</span>
