@@ -31,7 +31,7 @@
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
                 <div class="flex flex-col space-y-2 mt-6">
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => '',
+                        'route' => 'admin.settings',
                         'icon' => 'settings',
                         'label' => 'Settings'])
                     @include('admin.components.navigation.navigation-link', [

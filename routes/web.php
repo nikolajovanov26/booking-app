@@ -36,6 +36,7 @@ Route::view('/admin/notifications', 'admin.notifications')->name('admin.notifica
 Route::view('/admin/transactions', 'admin.transactions')->name('admin.transactions');
 Route::view('/admin/reviews', 'admin.reviews')->name('admin.reviews');
 Route::view('/admin/favorites', 'admin.favorites')->name('admin.favorites');
+Route::view('/admin/settings', 'admin.settings')->name('admin.settings');
 
 
 

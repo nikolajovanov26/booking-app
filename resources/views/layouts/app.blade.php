@@ -15,7 +15,6 @@
                                 @include('components.navigation.link', ['label' => 'Home', 'route' => 'home'])
                                 @include('components.navigation.link', ['label' => 'Index', 'route' => 'properties.index'])
                                 @include('components.navigation.link', ['label' => 'Show', 'route' => 'properties.show'])
-                                @include('components.navigation.link', ['label' => 'Reports', 'route' => '#'])
                                 @auth
                                     @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
                                 @endauth
@@ -96,8 +95,8 @@
                                         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
                                         tabindex="-1">
-                                        @include('components.navigation.dropdown-link', ['label' => 'Your Profile', 'route' => 'home'])
-                                        @include('components.navigation.dropdown-link', ['label' => 'Settings', 'route' => '#'])
+                                        @include('components.navigation.dropdown-link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
+                                        @include('components.navigation.dropdown-link', ['label' => 'Settings', 'route' => 'admin.settings'])
                                         @include('components.navigation.dropdown-link', ['label' => 'Sign out', 'route' => 'logout'])
                                     </div>
                                 </div>
