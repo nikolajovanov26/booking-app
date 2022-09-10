@@ -33,12 +33,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function favorites()
+    {
+        return $this->belongsToMany(Property::class, 'favorites');
+    }
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
