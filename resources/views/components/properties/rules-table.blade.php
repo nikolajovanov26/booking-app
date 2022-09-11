@@ -8,7 +8,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            13:00 - 00:00
+            {{ $property->check_in }}
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">
@@ -19,7 +19,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            13:00 - 00:00
+            {{ $property->check_out }}
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">
@@ -30,8 +30,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            Cancellation and prepayment policies vary according to accommodation type. Please check what conditions may
-            apply to each option when making your selection.
+            {{ $property->cancalation_policy }}
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">

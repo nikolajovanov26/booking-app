@@ -23,15 +23,14 @@ return new class extends Migration {
             $table->string('main_photo')->nullable();
             $table->integer('stars');
             $table->string('email');
-            $table->string('phone_num');
+            $table->string('phone_number');
             $table->string('address');
             $table->string('city');
             $table->integer('zip_code');
             $table->boolean('pets_allowed');
-            $table->time('check-in');
-            $table->time('check-out');
+            $table->time('check_in');
+            $table->time('check_out');
             $table->text('description');
-            $table->text('rules');
             $table->text('cancellation_policy');
             $table->timestamps();
         });

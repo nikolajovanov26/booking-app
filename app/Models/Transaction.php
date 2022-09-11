@@ -11,16 +11,16 @@ class Transaction extends Model
 
     public function customer()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function owner()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function status()
     {
-        return $this->belongsToMany(TransactionStatus::class);
+        return $this->belongsTo(TransactionStatus::class);
     }
 }

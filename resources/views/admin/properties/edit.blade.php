@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-white rounded-xl shadow-2xl">
         <div class="bg-gradient-to-r rounded-t-xl from-blue-grad-dark to-blue-grad-light px-12 py-6">
-            <h1 class="font-bold text-white text-3xl">Edit Property</h1>
+            <h1 class="font-bold text-white text-3xl">Edit '{{ ucwords($property->name) }}'</h1>
         </div>
         <div class="px-12 py-8 w-full">
             <div>
@@ -12,11 +12,13 @@
                         <div class="w-2/3 flex flex-col space-y-10">
                             <div class="flex space-x-6">
                                 @include('admin.components.form.input', [
-                                    'label' => 'Property Title',
+                                    'value' => ucwords($property->name),
+                                    'label' => 'Property Name',
                                     'placeholder' => 'Enter the name of your property',
                                     'name' => 'name'
                                 ])
                                 @include('admin.components.form.input', [
+                                    'value' => $property->slug,
                                    'label' => 'Slug',
                                    'placeholder' => 'Enter slug for your property',
                                    'name' => 'slug'
@@ -24,25 +26,38 @@
                             </div>
                             <div class="flex space-x-6">
                                 @include('admin.components.form.select', [
+                                   'current' => $property->type->label,
+                                   'items' => $types,
                                    'label' => 'Property Type',
                                    'placeholder' => 'Select property type'
                                 ])
                                 @include('admin.components.form.select', [
+                                    'current' => $property->stars,
+                                    'items' => array(
+                                        ['label' => '0'],
+                                        ['label' => '1'],
+                                        ['label' => '2'],
+                                        ['label' => '3'],
+                                        ['label' => '4'],
+                                        ['label' => '5']
+                                    ),
                                     'label' => 'Number of stars the property has',
                                     'placeholder' => 'Select number of stars'
                                 ])
                             </div>
                             <div class="flex space-x-6">
                                 @include('admin.components.form.input', [
+                                    'value' => $property->email,
                                     'label' => 'E-Mail',
                                     'placeholder' => 'Enter the contact e-mail of your property',
                                     'name' => 'email',
                                     'type' => 'email'
                                 ])
                                 @include('admin.components.form.input', [
-                                   'label' => 'Phone Number',
-                                   'placeholder' => 'Enter the contact phone for your property',
-                                   'name' => 'phone'
+                                    'value' => $property->phone_numer,
+                                    'label' => 'Phone Number',
+                                    'placeholder' => 'Enter the contact phone for your property',
+                                    'name' => 'phone'
                                ])
                             </div>
                         </div>
@@ -56,6 +71,7 @@
                     <div class="w-full flex space-x-6">
                         <div class="w-5/12">
                             @include('admin.components.form.input', [
+                                'value' => $property->address,
                                 'label' => 'Street Address',
                                 'placeholder' => 'Enter the street address of your property',
                                 'name' => 'address'
@@ -63,6 +79,7 @@
                         </div>
                         <div class="w-3/12">
                             @include('admin.components.form.input', [
+                                'value' => $property->city,
                                 'label' => 'City',
                                 'placeholder' => 'Enter the city of your property',
                                 'name' => 'city'
@@ -70,6 +87,7 @@
                         </div>
                         <div class="w-1/12">
                             @include('admin.components.form.input', [
+                                'value' => $property->zip_code,
                                 'label' => 'Zip Code',
                                 'placeholder' => 'Zip Code',
                                 'name' => 'zip'
@@ -77,6 +95,8 @@
                         </div>
                         <div class="w-3/12">
                             @include('admin.components.form.select', [
+                                'current' => $property->country->label,
+                                'items' => $countries,
                                 'label' => 'Country',
                                 'placeholder' => 'Select country'
                             ])
@@ -84,6 +104,7 @@
                     </div>
                     <div class="w-full flex space-x-6">
                         @include('admin.components.form.textarea', [
+                            'value' => $property->description,
                             'label' => 'Description',
                             'placeholder' => 'Describe your property',
                             'name' => 'description',
@@ -92,41 +113,54 @@
                     </div>
                     <div class="w-full flex space-x-6">
                         @include('admin.components.form.input', [
+                            'value' => $property->check_in,
                             'label' => 'Check-In',
                             'placeholder' => 'Check-In',
                             'name' => 'checkin',
                             'type' => 'time'
                         ])
                         @include('admin.components.form.input', [
+                            'value' => $property->check_out,
                             'label' => 'Check-Out',
                             'placeholder' => 'Check-Out',
                             'name' => 'checkout',
                             'type' => 'time'
                         ])
                         @include('admin.components.form.checkbox', [
-                            'label' => 'Payment Methods'
+                            'name' => 'pets',
+                            'value' => false,
+                            'items' => array(
+                                ['label' => 'Accept pets',
+                                'explanation' => 'Pets are allowed inside the property'],
+                            ),
+                            'label' => 'Pet Friendly'
                         ])
                     </div>
                     <div class="w-full flex space-x-6">
                         @include('admin.components.form.checkbox', [
+                            'name' => 'pets',
+                            'value' => true,
+                            'items' => array(
+                                ['label' => 'Accept pets',
+                                'explanation' => 'Pets are allowed inside the property'],
+                            ),
                             'label' => 'Payment Methods'
                         ])
                         @include('admin.components.form.checkbox', [
+                            'name' => 'pets',
+                            'value' => false,
+                            'property' => $property,
+                            'items' => $features,
                             'label' => 'Features in the Property'
                         ])
                     </div>
                     <div class="w-full flex space-x-6">
                         @include('admin.components.form.textarea', [
-                            'label' => 'Rules in the property',
-                            'placeholder' => 'Describe your rules',
-                            'name' => 'rules',
-                            'rows' => 5
-                        ])
-                        @include('admin.components.form.textarea', [
+                            'value' => $property->cancellation_policy,
                             'label' => 'Cancellation Policy',
                             'placeholder' => 'Describe your cancellation policy',
                             'name' => 'cancellation_policy',
-                            'rows' => 5
+                            'rows' => 4
                         ])
                     </div>
                     <div class="w-full flex space-x-6">

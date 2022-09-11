@@ -14,7 +14,6 @@
                             <div class="ml-10 flex items-baseline space-x-4">
                                 @include('components.navigation.link', ['label' => 'Home', 'route' => 'home'])
                                 @include('components.navigation.link', ['label' => 'Index', 'route' => 'properties.index'])
-                                @include('components.navigation.link', ['label' => 'Show', 'route' => 'properties.show'])
                                 @auth
                                     @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
                                 @endauth
@@ -39,33 +38,12 @@
                                         @click.outside="notificationsDropdow = false"
                                         x-show="notificationsDropdown"
                                         class="z-10 flex flex-col absolute bg-white overflow-hidden -left-80 top-10 w-96 shadow-lg rounded-lg">
-                                        <div class="px-3 py-3 border-b-2 border-gray-100 hover:bg-blue-100 transition cursor-default">
-                                            <h3 class="font-semibold">Notification title</h3>
-                                            <p class="line-clamp-2 text-sm">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at debitis
-                                                laboriosam modi nam nobis tempore. Aperiam architecto dolorum hic
-                                                impedit laborum quis quos vero. Culpa repudiandae similique sint
-                                                tenetur.
-                                            </p>
-                                        </div>
-                                        <div class="px-3 py-3 border-b-2 border-gray-100 hover:bg-blue-100 transition cursor-default">
-                                            <h3 class="font-semibold">Notification title</h3>
-                                            <p class="line-clamp-2 text-sm">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at debitis
-                                                laboriosam modi nam nobis tempore. Aperiam architecto dolorum hic
-                                                impedit laborum quis quos vero. Culpa repudiandae similique sint
-                                                tenetur.
-                                            </p>
-                                        </div>
-                                        <div class="px-3 py-3 hover:bg-blue-100 transition">
-                                            <h3 class="font-semibold">Notification title</h3>
-                                            <p class="line-clamp-2 text-sm cursor-default">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at debitis
-                                                laboriosam modi nam nobis tempore. Aperiam architecto dolorum hic
-                                                impedit laborum quis quos vero. Culpa repudiandae similique sint
-                                                tenetur.
-                                            </p>
-                                        </div>
+                                        @foreach(Auth::user()->unreadNotifications()->take(3)->get() as $notification)
+                                            <div class="px-3 py-3 border-b-2 border-gray-100 hover:bg-blue-100 transition cursor-default">
+                                                <h3 class="font-semibold">{{ $notification->heading }}</h3>
+                                                <p class="line-clamp-2 text-sm">{{ $notification->content }}</p>
+                                            </div>
+                                        @endforeach
                                         <a href="{{ route('admin.notifications') }}"
                                                 class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
                                         >View more</a>
@@ -103,11 +81,11 @@
                             @else
                                 <div class="ml-10 flex items-baseline space-x-4">
                                     @if (Route::has('login'))
-                                        @include('components.navigation.link', ['label' => 'Log in', 'route' => route('login')])
+                                        @include('components.navigation.link', ['label' => 'Log in', 'route' => 'login'])
                                     @endif
 
                                     @if (Route::has('register'))
-                                        @include('components.navigation.link', ['label' => 'Register', 'route' => route('register')])
+                                        @include('components.navigation.link', ['label' => 'Register', 'route' => 'register'])
                                     @endif
                                 </div>
                             @endauth

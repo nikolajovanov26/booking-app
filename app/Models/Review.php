@@ -11,11 +11,11 @@ class Review extends Model
 
     public function property()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

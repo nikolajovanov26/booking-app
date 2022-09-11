@@ -32,15 +32,14 @@ class PropertyFactory extends Factory
             'slug' => Str::slug($name),
             'stars' => $this->faker->numberBetween(0, 5),
             'email' => $this->faker->email,
-            'phone_num' => $this->faker->phoneNumber,
+            'phone_number' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
             'city' => $this->faker->city,
             'zip_code' => $this->faker->numerify,
             'pets_allowed' => $this->faker->boolean,
-            'check-in' => $this->faker->time('H:i'),
-            'check-out' => $this->faker->time('H:i'),
+            'check_in' => $this->faker->time('H:i'),
+            'check_out' => $this->faker->time('H:i'),
             'description' => $this->faker->paragraphs(4, true),
-            'rules' => $this->faker->paragraphs(4, true),
             'cancellation_policy' => $this->faker->paragraphs(4, true),
         ];
     }

@@ -31,11 +31,11 @@
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
                 <div class="flex flex-col space-y-2 mt-6">
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.my-reservations',
+                        'route' => 'admin.bookings',
                         'icon' => 'globe',
-                        'label' => 'My Reservations'])
+                        'label' => 'My Bookings'])
                     @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.favorites',
+                        'route' => 'admin.properties.favorite',
                         'icon' => 'heart',
                         'label' => 'Favorites'])
                     @include('admin.components.navigation.navigation-link', [
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="w-4/5 bg-gray-100  min-h-screen">
-            <nav class="bg-white shadow-lg sticky top-0">
+            <nav class="bg-white shadow-lg sticky top-0 z-10">
                 <div class="mx-auto px-8">
                     <div class="flex h-16 items-center justify-between">
                         <div></div>

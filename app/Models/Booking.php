@@ -11,21 +11,21 @@ class Booking extends Model
 
     public function property()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function room()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsTo(Room::class);
     }
 
     public function status()
     {
-        return $this->belongsToMany(BookingStatus::class);
+        return $this->belongsTo(BookingStatus::class);
     }
 
     public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -12,7 +12,7 @@ class EditProfileFirstName extends Component implements EditProfileField
 
     public function render()
     {
-        return view('livewire.edit-profile-first-name');
+        return view('livewire.profile.edit-profile-first-name');
     }
 
     public function update()
@@ -20,8 +20,8 @@ class EditProfileFirstName extends Component implements EditProfileField
         // TODO: Implement update() method.
     }
 
-    public function mount()
+    public function mount(string $value)
     {
-        $this->value = Auth::user()->name;
+        $this->value = $value;
     }
 }

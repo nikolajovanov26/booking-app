@@ -12,15 +12,22 @@
                                 @include('icons.cash', ['attributes' => 'w-10 h-10'])
                             </div>
                             <div class="flex flex-col">
-                                <p class="text-gray-600 text-xl">Account Balance</p>
-                                <span class="text-gray-800 text-xl font-semibold">$30,669.45</span>
+                                <p class="text-gray-600 text-xl">Monthly Earnings</p>
+                                <span class="text-gray-800 text-xl font-semibold">{{ $earnings }} &euro;</span>
                             </div>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <span
-                                class="text-green-800">@include('icons.trending-up', ['attributes' => 'w-12 h-12'])</span>
-                            <span class="text-green-800 font-semibold text-lg">+ 3.8%</span>
-                            <span class="text-gray-600 text-sm">since last month</span>
+                            @if($earningsCompare >= 0)
+                                <span
+                                    class="text-green-800">@include('icons.trending-up', ['attributes' => 'w-12 h-12'])</span>
+                                <span class="text-green-800 font-semibold text-lg">+ {{ abs($earningsCompare) }}%</span>
+                                <span class="text-gray-600 text-sm">since last month</span>
+                            @else
+                                <span
+                                    class="text-red-800">@include('icons.trending-down', ['attributes' => 'w-12 h-12'])</span>
+                                <span class="text-red-800 font-semibold text-lg">- {{ abs($earningsCompare) }}%</span>
+                                <span class="text-gray-600 text-sm">since last month</span>
+                            @endif
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
@@ -38,15 +45,22 @@
                                 @include('icons.buildings', ['attributes' => 'w-10 h-10'])
                             </div>
                             <div class="flex flex-col">
-                                <p class="text-gray-600 text-xl">Reservations</p>
-                                <span class="text-gray-800 text-xl font-semibold">21</span>
+                                <p class="text-gray-600 text-xl">Monthly Reservations</p>
+                                <span class="text-gray-800 text-xl font-semibold">{{ $reservations }}</span>
                             </div>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <span
-                                class="text-red-800">@include('icons.trending-down', ['attributes' => 'w-12 h-12'])</span>
-                            <span class="text-red-800 font-semibold text-lg">- 1.8%</span>
-                            <span class="text-gray-600 text-sm">since last month</span>
+                            @if($reservationsCompare >= 0)
+                                <span
+                                    class="text-green-800">@include('icons.trending-up', ['attributes' => 'w-12 h-12'])</span>
+                                <span class="text-green-800 font-semibold text-lg">+ {{ abs($reservationsCompare) }}%</span>
+                                <span class="text-gray-600 text-sm">since last month</span>
+                            @else
+                                <span
+                                    class="text-red-800">@include('icons.trending-down', ['attributes' => 'w-12 h-12'])</span>
+                                <span class="text-red-800 font-semibold text-lg">- {{ abs($reservationsCompare) }}%</span>
+                                <span class="text-gray-600 text-sm">since last month</span>
+                            @endif
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
@@ -63,15 +77,22 @@
                                 @include('icons.stars', ['attributes' => 'w-10 h-10'])
                             </div>
                             <div class="flex flex-col">
-                                <p class="text-gray-600 text-xl">Client Reviews</p>
-                                <span class="text-gray-800 text-xl font-semibold">24</span>
+                                <p class="text-gray-600 text-xl">Monthly Reviews</p>
+                                <span class="text-gray-800 text-xl font-semibold">{{ $reviews }}</span>
                             </div>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <span
-                                class="text-green-800">@include('icons.trending-up', ['attributes' => 'w-12 h-12'])</span>
-                            <span class="text-green-800 font-semibold text-lg">+ 12.8%</span>
-                            <span class="text-gray-600 text-sm">since last month</span>
+                            @if($reviewsCompare >= 0)
+                                <span
+                                    class="text-green-800">@include('icons.trending-up', ['attributes' => 'w-12 h-12'])</span>
+                                <span class="text-green-800 font-semibold text-lg">+ {{ abs($reviewsCompare) }}%</span>
+                                <span class="text-gray-600 text-sm">since last month</span>
+                            @else
+                                <span
+                                    class="text-red-800">@include('icons.trending-down', ['attributes' => 'w-12 h-12'])</span>
+                                <span class="text-red-800 font-semibold text-lg">- {{ abs($reviewsCompare) }}%</span>
+                                <span class="text-gray-600 text-sm">since last month</span>
+                            @endif
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">

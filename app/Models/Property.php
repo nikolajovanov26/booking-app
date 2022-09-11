@@ -11,7 +11,7 @@ class Property extends Model
 
     public function country()
     {
-        return $this->belongsToMany(Country::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function favorites()
@@ -26,16 +26,26 @@ class Property extends Model
 
     public function owner()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
     }
 
     public function status()
     {
-        return $this->belongsToMany(PropertyStatus::class);
+        return $this->belongsTo(PropertyStatus::class, 'property_status_id');
     }
 
     public function type()
     {
-        return $this->belongsToMany(PropertyType::class);
+        return $this->belongsTo(PropertyType::class, 'property_type_id');
     }
 }

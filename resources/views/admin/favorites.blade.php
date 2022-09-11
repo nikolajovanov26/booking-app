@@ -5,6 +5,10 @@
         <div class="py-3 bg-blue-100 mb-6">
             Filter
         </div>
-        @livewire('favorite-property-grid')
+        @if($properties->count() > 0)
+            @livewire('favorite-property-grid', ['properties' => $properties])
+        @else
+            <p class="text-center text-2xl mt-5">You have no favorite properties &#128148;</p>
+        @endif
     </div>
 @endsection

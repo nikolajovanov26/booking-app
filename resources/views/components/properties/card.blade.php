@@ -7,17 +7,15 @@
     </div>
     <div class="w-8/12">
         <div class="flex items-center space-x-3">
-            <h2 class="text-2xl font-semibold">Lorem ipsum dolor sit amet</h2>
+            <h2 class="text-2xl font-semibold capitalize">{{ $property->name }}</h2>
             <div class="flex">
-                @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => '#ffff00'])
-                @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => '#ffff00'])
-                @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => '#ffff00'])
-                @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => '#ffff00'])
-                @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => 'none'])
+                @for($i = 0; $i < $property->stars; $i++)
+                    @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => '#ffff00'])
+                @endfor
             </div>
         </div>
         <div class="flex text-sm text-gray-800 my-2">
-            <p>City</p>
+            <p>{{ $property->city }}</p>
             <span class="mx-2">&bull;</span>
             <p>Show on map</p>
             <span class="mx-2">&bull;</span>
@@ -28,21 +26,30 @@
         </div>
         <div class="flex items-center space-x-2 my-2">
             @include('icons.building', ['attributes' => 'w-6 h-6'])
-            <p>900 m  from Skopje</p>
+            <p>900 m from Skopje</p>
         </div>
-        <p class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem in molestiae molestias placeat porro soluta tempore? Aliquid dolores, enim, excepturi incidunt inventore ipsam iste labore nostrum, pariatur placeat quaerat quidem sed voluptas! A ab illum ipsum mollitia nisi reprehenderit veniam. Commodi consequatur debitis dolor iusto quos tempore veritatis vitae! Adipisci architecto asperiores aspernatur consequuntur debitis dicta dolor dolores doloribus earum eos error esse eum exercitationem expedita hic, id labore magnam molestiae molestias mollitia necessitatibus nisi non obcaecati quam quasi quibusdam recusandae sequi, sint sit sunt tenetur velit vero voluptate. Culpa cumque doloribus exercitationem molestiae nesciunt rem tempora. Assumenda, at cupiditate dolore dolorem ducimus enim est ex exercitationem fugit id illo laboriosam magnam maiores modi nam, non, officia provident quaerat qui quos reiciendis sed sint voluptatem! Adipisci dolorem, earum eligendi necessitatibus possimus quidem vero. Accusantium architecto asperiores beatae commodi consequuntur cumque, deleniti dolor dolore doloribus error esse excepturi harum hic id illum impedit in iusto maxime minima modi mollitia nulla odit officia quas quo reiciendis rem sapiente sed sequi similique sit tempore ut veritatis. Ducimus, eaque earum est ex laboriosam nisi nobis odit officiis, possimus quas quisquam suscipit temporibus. Adipisci autem distinctio dolorum eos eum exercitationem magni nam quisquam quos reiciendis.</p>
+        <p class="line-clamp-3">{{ $property->description }}</p>
     </div>
-    <div class="flex flex-col justify-items-end w-2/12">
-        <div class="flex flex-row justify-end items-center space-x-3">
-            <div class="flex flex-col text-right">
-                <span class="font-bold text-xl -mb-1">Exceptional</span>
-                <span class="text-sm">474 reviews</span>
+    <div class="flex flex-col items-stretch place-content-between justify-items-end w-2/12">
+        <div class="flex flex-col justify-end">
+            <div class="flex flex-row justify-end items-e space-x-3">
+                <div class="flex flex-col text-right">
+                    <span class="font-bold text-xl -mb-1">{{ ratingString($property->reviews()->avg('rating')) }}</span>
+                    <span class="text-sm">{{ $property->reviews()->count() }} reviews</span>
+                </div>
+                <div class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews()->avg('rating'), 1) }}</div>
             </div>
-            <div class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">9.6</div>
+            <span class="text-right mt-2 mb-7">Location 9.7</span>
         </div>
-        <span class="text-right mt-2 mb-6">Location 9.7</span>
-        <div class="flex justify-end">
-            <button class="bg-blue-600 hover:bg-blue-700 transition-all text-white rounded-md w-fit px-4 py-2">Show prices</button>
+        <div class="flex flex-col justify-end">
+            <div class="flex justify-end items-baseline space-x-2">
+                <span>From</span>
+                <span class="text-right text-2xl font-bold text-blue-800 my-2">{{ number_format($property->rooms()->min('price'), 2) }}&euro;</span>
+            </div>
+            <div class="flex justify-end">
+                <a href="{{ route('properties.show', ['property' => $property->slug]) }}" class="bg-blue-600 hover:bg-blue-700 transition-all text-white rounded-md w-fit px-4 py-2">View Property
+                </a>
+            </div>
         </div>
     </div>
 </div>

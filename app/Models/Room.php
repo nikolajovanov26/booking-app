@@ -16,16 +16,16 @@ class Room extends Model
 
     public function status()
     {
-        return $this->belongsToMany(RoomStatus::class);
+        return $this->belongsTo(RoomStatus::class, 'room_status_id');
     }
 
     public function type()
     {
-        return $this->belongsToMany(RoomType::class);
+        return $this->belongsTo(RoomType::class, 'room_type_id');
     }
 
     public function view()
     {
-        return $this->belongsToMany(RoomView::class);
+        return $this->belongsTo(RoomView::class, 'room_view_id');
     }
 }

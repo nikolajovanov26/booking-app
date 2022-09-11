@@ -11,11 +11,16 @@ class Profile extends Model
 
     public function country()
     {
-        return $this->belongsToMany(Country::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function user()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsTo(Property::class);
+    }
+
+    public function fullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

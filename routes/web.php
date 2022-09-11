@@ -1,7 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
+use App\Http\Controllers\Admin\RoomController as AdminRoomController;
+use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -21,27 +30,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
-Route::view('/properties', 'properties.index')->name('properties.index');
-Route::view('/properties/1', 'properties.show')->name('properties.show');
-Route::view('/admin/dashboard', 'admin.dashboard')->name('admin.dashboard');
-Route::view('/admin/properties', 'admin.properties.index')->name('admin.properties.index');
-Route::view('/admin/properties/1/show', 'admin.properties.show')->name('admin.properties.show');
-Route::view('/admin/properties/create', 'admin.properties.create')->name('admin.properties.create');
-Route::view('/admin/properties/1/edit', 'admin.properties.edit')->name('admin.properties.edit');
-Route::view('/admin/properties/1/rooms', 'admin.properties.rooms.index')->name('admin.properties.rooms.index');
-Route::view('/admin/properties/1/rooms/create', 'admin.properties.rooms.create')->name('admin.properties.rooms.create');
-Route::view('/admin/properties/1/rooms/1/edit', 'admin.properties.rooms.edit')->name('admin.properties.rooms.edit');
-Route::view('/admin/notifications', 'admin.notifications')->name('admin.notifications');
-Route::view('/admin/transactions', 'admin.transactions')->name('admin.transactions');
-Route::view('/admin/reviews', 'admin.reviews')->name('admin.reviews');
-Route::view('/admin/favorites', 'admin.favorites')->name('admin.favorites');
-Route::view('/admin/settings', 'admin.settings')->name('admin.settings');
-Route::view('/admin/my-reservations', 'admin.my-reservations')->name('admin.my-reservations');
+Route::get('/', [PropertyController::class, 'index'])->name('home');
 
 
 
 
+
+Route::controller(PropertyController::class)->name('properties.')->prefix('properties')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{property:slug}', 'show')->name('show');
+});
+
+Route::prefix('admin/')->name('admin.')->group(function () {
+    Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+
+    Route::get('properties/favorite', [AdminPropertyController::class, 'favorite'])->name('properties.favorite');
+    Route::resource('properties', AdminPropertyController::class);
+    Route::resource('properties/{property}/rooms', AdminRoomController::class)->except('show');
+
+
+
+    Route::get('notifications', [AdminNotificationController::class, 'index'])->name('notifications');
+    Route::get('transactions', [AdminTransactionController::class, 'index'])->name('transactions');
+    Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews');
+    Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings');
+
+    Route::get('/settings', [AdminProfileController::class, 'edit'])->name('settings');
+
+});
 
 /*
  * Auth Routes
