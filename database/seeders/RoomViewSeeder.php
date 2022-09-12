@@ -30,7 +30,7 @@ class RoomViewSeeder extends Seeder
             ],
             [
                 'name' => 'city',
-                'label' => 'City',
+                'label' => 'City View',
             ]
         ];
 

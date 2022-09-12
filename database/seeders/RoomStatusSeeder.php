@@ -24,6 +24,10 @@ class RoomStatusSeeder extends Seeder
                 'label' => 'Booked',
             ],
             [
+                'name' => 'temporary-closed',
+                'label' => 'Temporary Closed',
+            ],
+            [
                 'name' => 'draft',
                 'label' => 'Draft',
             ]

@@ -9,10 +9,10 @@
                     <div class="w-full h-full flex justify-between px-10">
                         <div class="h-full flex items-center space-x-6">
                             <div class="text-gray-600">
-                                @include('icons.cash', ['attributes' => 'w-10 h-10'])
+                                @include('icons.group', ['attributes' => 'w-10 h-10'])
                             </div>
                             <div class="flex flex-col">
-                                <p class="text-gray-600 text-xl">Monthly Earnings</p>
+                                <p class="text-gray-600 text-xl">New Users This Month</p>
                                 <span class="text-gray-800 text-xl font-semibold">{{ $earnings }} &euro;</span>
                             </div>
                         </div>
@@ -31,9 +31,9 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="{{ route('admin.transactions') }}"
+                        <a href="{{ route('admin.users') }}"
                            class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition"
-                        >View Transactions</a>
+                        >View Users</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                 @include('icons.buildings', ['attributes' => 'w-10 h-10'])
                             </div>
                             <div class="flex flex-col">
-                                <p class="text-gray-600 text-xl">Monthly Reservations</p>
+                                <p class="text-gray-600 text-xl">New Properties This Month</p>
                                 <span class="text-gray-800 text-xl font-semibold">{{ $reservations }}</span>
                             </div>
                         </div>
@@ -74,10 +74,10 @@
                     <div class="w-full h-full flex justify-between px-10">
                         <div class="h-full flex items-center space-x-6">
                             <div class="text-gray-600">
-                                @include('icons.stars', ['attributes' => 'w-10 h-10'])
+                                @include('icons.booking2', ['attributes' => 'w-10 h-10'])
                             </div>
                             <div class="flex flex-col">
-                                <p class="text-gray-600 text-xl">Monthly Reviews</p>
+                                <p class="text-gray-600 text-xl">New Bookings This Month</p>
                                 <span class="text-gray-800 text-xl font-semibold">{{ $reviews }}</span>
                             </div>
                         </div>
@@ -96,8 +96,8 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="{{ route('admin.reviews') }}" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition"
-                        >View Reviews</a>
+                        <a href="{{ route('admin.bookings') }}" class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition"
+                        >View Bookings</a>
                     </div>
                 </div>
             </div>

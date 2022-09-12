@@ -1,7 +1,11 @@
 <div class="flex bg-white rounded-xl drop-shadow-sm hover:drop-shadow-xl transition-all space-x-4 px-6 py-4">
     <div class="relative w-2/12">
         <div class="absolute top-2 right-2 text-white hover:text-red-600 transition-all">
-            @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff000033'])
+            @if(Auth::user()?->favorites()->get()->contains($property))
+                @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff0000'])
+            @else
+                @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff000033'])
+            @endif
         </div>
         <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6" alt="" class="rounded-xl">
     </div>

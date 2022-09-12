@@ -37,8 +37,10 @@ class PropertyFactory extends Factory
             'city' => $this->faker->city,
             'zip_code' => $this->faker->numerify,
             'pets_allowed' => $this->faker->boolean,
-            'check_in' => $this->faker->time('H:i'),
-            'check_out' => $this->faker->time('H:i'),
+            'check_in_from' => $this->faker->time('H:i'),
+            'check_in_to' => $this->faker->time('H:i'),
+            'check_out_from' => $this->faker->time('H:i'),
+            'check_out_to' => $this->faker->time('H:i'),
             'description' => $this->faker->paragraphs(4, true),
             'cancellation_policy' => $this->faker->paragraphs(4, true),
         ];

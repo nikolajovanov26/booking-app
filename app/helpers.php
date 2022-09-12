@@ -25,3 +25,36 @@ if (!function_exists('ratingString')) {
         }
     }
 }
+
+if (!function_exists('isAdmin')) {
+    function isAdmin(): bool
+    {
+        if(Auth::user()?->role->name == 'admin') {
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('isOwner')) {
+    function isOwner(): bool
+    {
+        if(Auth::user()?->role->name == 'owner') {
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('isUser')) {
+    function isUser(): bool
+    {
+        if(Auth::user()?->role->name == 'user') {
+            return true;
+        }
+
+        return false;
+    }
+}

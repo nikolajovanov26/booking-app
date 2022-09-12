@@ -102,16 +102,40 @@
                     </div>
                     <div class="w-full flex space-x-6">
                         @include('admin.components.form.input', [
-                            'label' => 'Check-In',
-                            'placeholder' => 'Check-In',
-                            'name' => 'checkin',
+                            'label' => 'Check-In From',
+                            'placeholder' => 'Check-In From',
+                            'name' => 'check_in_from',
                             'type' => 'time'
                         ])
                         @include('admin.components.form.input', [
-                            'label' => 'Check-Out',
-                            'placeholder' => 'Check-Out',
-                            'name' => 'checkout',
+                            'label' => 'Check-In To',
+                            'placeholder' => 'Check-In To',
+                            'name' => 'check_in_to',
                             'type' => 'time'
+                        ])
+                        @include('admin.components.form.input', [
+                            'label' => 'Check-Out From',
+                            'placeholder' => 'Check-Out From',
+                            'name' => 'check_out_from',
+                            'type' => 'time'
+                        ])
+                        @include('admin.components.form.input', [
+                            'label' => 'Check-Out To',
+                            'placeholder' => 'Check-Out To',
+                            'name' => 'check_out_to',
+                            'type' => 'time'
+                        ])
+                    </div>
+                    <div class="w-full flex items-start space-x-6">
+                        @include('admin.components.form.checkbox', [
+                            'name' => 'features',
+                            'items' => $features,
+                            'label' => 'Features in the Property'
+                        ])
+                        @include('admin.components.form.checkbox', [
+                            'name' => 'paymentMethods',
+                            'items' => $payment_methods,
+                            'label' => 'Payment Methods'
                         ])
                         @include('admin.components.form.checkbox', [
                             'name' => 'pets',
@@ -120,21 +144,6 @@
                                 'explanation' => 'Pets are allowed inside the property'],
                             ),
                             'label' => 'Pet Friendly'
-                        ])
-                    </div>
-                    <div class="w-full flex space-x-6">
-                        @include('admin.components.form.checkbox', [
-                            'name' => 'pets',
-                            'items' => array(
-                                ['label' => 'Accept pets',
-                                'explanation' => 'Pets are allowed inside the property'],
-                            ),
-                            'label' => 'Payment Methods'
-                        ])
-                        @include('admin.components.form.checkbox', [
-                            'name' => 'pets',
-                            'items' => $features,
-                            'label' => 'Features in the Property'
                         ])
                     </div>
                     <div class="w-full flex space-x-6">

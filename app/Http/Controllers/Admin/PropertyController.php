@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Feature;
+use App\Models\PaymentMethod;
 use App\Models\Property;
 use App\Models\PropertyType;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,8 @@ class PropertyController extends Controller
         return view('admin.properties.create', [
             'types' => PropertyType::all(),
             'countries' => Country::all()->sortBy('label'),
-            'features' => Feature::all()
+            'features' => Feature::all(),
+            'payment_methods' => PaymentMethod::all()
         ]);
     }
 
@@ -45,7 +47,8 @@ class PropertyController extends Controller
             'property' => $property,
             'types' => PropertyType::all(),
             'countries' => Country::all()->sortBy('label'),
-            'features' => Feature::all()
+            'features' => Feature::all(),
+            'payment_methods' => PaymentMethod::all()
         ]);
     }
 
@@ -57,12 +60,5 @@ class PropertyController extends Controller
     public function destroy(Property $property)
     {
         //
-    }
-
-    public function favorite()
-    {
-        return view('admin.favorites', [
-            'properties' => Auth::user()->favorites()->get()
-        ]);
     }
 }

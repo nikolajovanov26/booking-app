@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
@@ -10,7 +10,7 @@ class NotificationController extends Controller
 {
     public function index()
     {
-        return view('admin.notifications', [
+        return view('dashboard.notifications', [
             'notifications' => Notification::where('user_id', Auth::user()->id)->get()
         ]);
     }

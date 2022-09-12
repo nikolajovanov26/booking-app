@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -17,6 +18,13 @@ class PropertyController extends Controller
     {
         return view('properties.show', [
             'property' => $property
+        ]);
+    }
+
+    public function favorite()
+    {
+        return view('properties.favorite', [
+            'properties' => Auth::user()->favorites()->paginate(10)
         ]);
     }
 }

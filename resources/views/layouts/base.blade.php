@@ -26,5 +26,7 @@
 
     <body class="min-h-screen">
         @yield('body')
+
+        @include('components.flash-message')
     </body>
 </html>

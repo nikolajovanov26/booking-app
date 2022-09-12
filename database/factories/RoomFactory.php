@@ -22,7 +22,7 @@ class RoomFactory extends Factory
     {
         return [
             'property_id' => Property::all()->random()->id,
-            'room_status_id' => RoomStatus::all()->random()->id,
+            'room_status_id' => RoomStatus::firstWhere('name', 'active')->id,
             'room_type_id' => RoomType::all()->random()->id,
             'room_view_id' => RoomView::all()->random()->id,
             'number_of_rooms' => $this->faker->numberBetween(1, 5),

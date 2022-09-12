@@ -21,6 +21,10 @@ class RoleSeeder extends Seeder
                 'label' => 'Admin',
             ],
             [
+                'name' => 'owner',
+                'label' => 'Property Owner',
+            ],
+            [
                 'name' => 'user',
                 'label' => 'User',
             ]

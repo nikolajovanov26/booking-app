@@ -29,6 +29,11 @@ class Property extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function paymentMethods()
+    {
+        return $this->belongsToMany(PaymentMethod::class);
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);

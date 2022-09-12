@@ -7,41 +7,103 @@
                 <img class="h-14 w-14 pl-3" src="https://tailwindui.com/img/logos/mark.svg?color=white"
                      alt="Your Company">
                 <div class="flex flex-col space-y-2 mt-6">
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.dashboard',
-                        'icon' => 'dashboard',
-                        'label' => 'Dashboard'])
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.properties.index',
-                        'icon' => 'house',
-                        'label' => 'Properties'])
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.reviews',
-                        'icon' => 'star',
-                        'label' => 'Reviews'])
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.transactions',
-                        'icon' => 'document',
-                        'label' => 'Transactions'])
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.notifications',
-                        'icon' => 'bell',
-                        'label' => 'Notifications'])
+                    @if(isAdmin())
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.dashboard',
+                            'icon' => 'dashboard',
+                            'label' => 'Dashboard'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.bookings',
+                            'icon' => 'booking',
+                            'label' => 'Bookings'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.countries',
+                            'icon' => 'globe',
+                            'label' => 'Countries'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.features',
+                            'icon' => 'features',
+                            'label' => 'Features'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.paymentMethods',
+                            'icon' => 'cash',
+                            'label' => 'Payment Methods'])
+
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.properties.index',
+                            'icon' => 'house',
+                            'label' => 'Properties'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.propertyTypes',
+                            'icon' => 'features',
+                            'label' => 'Property Types'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.reviews',
+                            'icon' => 'star',
+                            'label' => 'Reviews'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.roomTypes',
+                            'icon' => 'hotel',
+                            'label' => 'Room Types'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.roomViews',
+                            'icon' => 'stars',
+                            'label' => 'Room Views'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.transactions',
+                            'icon' => 'document',
+                            'label' => 'Transactions'])
+                        @include('admin.components.navigation.navigation-link', [
+                            'route' => 'admin.users',
+                            'icon' => 'users',
+                            'label' => 'Users'])
+                    @endif
+
+                    @if(isOwner())
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.index',
+                            'icon' => 'dashboard',
+                            'label' => 'Dashboard'])
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.properties.index',
+                            'icon' => 'house',
+                            'label' => 'Properties'])
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.reviews',
+                            'icon' => 'star',
+                            'label' => 'Reviews'])
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.transactions',
+                            'icon' => 'document',
+                            'label' => 'Transactions'])
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.notifications',
+                            'icon' => 'bell',
+                            'label' => 'Notifications'])
+                    @endif
                 </div>
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
                 <div class="flex flex-col space-y-2 mt-6">
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.bookings',
-                        'icon' => 'globe',
-                        'label' => 'My Bookings'])
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.properties.favorite',
-                        'icon' => 'heart',
-                        'label' => 'Favorites'])
-                    @include('admin.components.navigation.navigation-link', [
-                        'route' => 'admin.settings',
-                        'icon' => 'settings',
-                        'label' => 'Settings'])
+                    @if(isAdmin())
+                        @include('admin.components.navigation.navigation-link', [
+                             'route' => 'admin.settings',
+                             'icon' => 'settings',
+                             'label' => 'Settings'])
+                    @endif
+                    @if(isOwner())
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.settings',
+                            'icon' => 'settings',
+                            'label' => 'Settings'])
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.bookings',
+                            'icon' => 'globe',
+                            'label' => 'My Bookings'])
+                        @include('dashboard.components.navigation.navigation-link', [
+                            'route' => 'dashboard.properties.favorite',
+                            'icon' => 'heart',
+                            'label' => 'Favorites'])
+                    @endif
                     <a href="{{ route('home') }}"
                        class="py-2 px-3 flex items-center text-sm space-x-2 text-white opacity-70 hover:opacity-100 hover:-translate-x-2 transition">
                         <span>@include('icons.arrow-left-long', ['attributes' => 'w-6 h-6'])</span>
@@ -61,7 +123,7 @@
                                 @click.outside="profileDropdown = false"
                                 class="relative ml-3">
                                 <div class="flex items-center space-x-4">
-                                    <p>{{ Auth()->user()->name }}</p>
+                                    <p>{{ Auth()->user()->profile->fullName() }}</p>
                                     <button
                                         @click="profileDropdown = !profileDropdown"
                                         type="button"

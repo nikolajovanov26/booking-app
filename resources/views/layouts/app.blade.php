@@ -13,16 +13,24 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 @include('components.navigation.link', ['label' => 'Home', 'route' => 'home'])
-                                @include('components.navigation.link', ['label' => 'Index', 'route' => 'properties.index'])
-                                @auth
+                                @if(isAdmin())
                                     @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
-                                @endauth
+                                @elseif(isOwner())
+                                    @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'dashboard.index'])
+                                @endif
+                                @if(isUser())
+                                    @include('components.navigation.link', ['label' => 'Favorite Properties', 'route' => 'properties.favorite'])
+                                    @include('components.navigation.link', ['label' => 'My Bookings', 'route' => 'bookings.index'])
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
                             @auth()
+                                @if(isUser())
+                                    @include('components.navigation.link', ['label' => 'Become a Property Owner', 'route' => 'becomeOwner'])
+                                @endif
                                 <div class="relative"
                                      x-data="{ notificationsDropdown: false }">
 
@@ -44,9 +52,15 @@
                                                 <p class="line-clamp-2 text-sm">{{ $notification->content }}</p>
                                             </div>
                                         @endforeach
-                                        <a href="{{ route('admin.notifications') }}"
+                                        @if(isUser())
+                                            <a href="{{ route('notifications.index') }}"
+                                                    class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
+                                            >View more</a>
+                                        @else
+                                            <a href="{{ route('dashboard.notifications') }}"
                                                 class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
-                                        >View more</a>
+                                            >View more</a>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -73,8 +87,13 @@
                                         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
                                         tabindex="-1">
-                                        @include('components.navigation.dropdown-link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
-                                        @include('components.navigation.dropdown-link', ['label' => 'Settings', 'route' => 'admin.settings'])
+                                        @if(isAdmin())
+                                            @include('components.navigation.dropdown-link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
+                                            @include('components.navigation.dropdown-link', ['label' => 'Settings', 'route' => 'admin.settings'])
+                                        @elseif(isOwner())
+                                            @include('components.navigation.dropdown-link', ['label' => 'Dashboard', 'route' => 'dashboard.index'])
+                                            @include('components.navigation.dropdown-link', ['label' => 'Settings', 'route' => 'dashboard.settings'])
+                                        @endif
                                         @include('components.navigation.dropdown-link', ['label' => 'Sign out', 'route' => 'logout'])
                                     </div>
                                 </div>

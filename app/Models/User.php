@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
+
     public function unreadNotifications()
     {
         return Notification::where('user_id', $this->id)

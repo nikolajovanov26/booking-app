@@ -21,6 +21,10 @@ class PropertyStatusSeeder extends Seeder
                 'label' => 'Active',
             ],
             [
+                'name' => 'temporary-closed',
+                'label' => 'Temporary Closed',
+            ],
+            [
                 'name' => 'draft',
                 'label' => 'Draft',
             ]

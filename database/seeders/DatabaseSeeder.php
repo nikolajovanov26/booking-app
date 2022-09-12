@@ -30,7 +30,9 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             NotificationSeeder::class,
             TransactionStatusSeeder::class,
-            BookingStatusSeeder::class
+            BookingStatusSeeder::class,
+            PaymentMethodSeeder::class,
+            PaymentPropertySeeder::class
         ]);
     }
 }

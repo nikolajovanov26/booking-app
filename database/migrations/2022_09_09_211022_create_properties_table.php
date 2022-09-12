@@ -28,8 +28,10 @@ return new class extends Migration {
             $table->string('city');
             $table->integer('zip_code');
             $table->boolean('pets_allowed');
-            $table->time('check_in');
-            $table->time('check_out');
+            $table->time('check_in_from');
+            $table->time('check_in_to');
+            $table->time('check_out_from');
+            $table->time('check_out_to');
             $table->text('description');
             $table->text('cancellation_policy');
             $table->timestamps();
