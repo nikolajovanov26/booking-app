@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/become-owner', BecomeOwnerController::class)->name('becomeOwner');
+    Route::post('/favorite/{property}', [PropertyController::class, 'toggleFavorite'])->name('toggleFavorite');
 });
 
 /*
