@@ -9,6 +9,11 @@ class PropertyType extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'label'
+    ];
+
     public function properties()
     {
         return $this->hasMany(Property::class);

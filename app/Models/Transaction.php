@@ -19,7 +19,17 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function status()
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function transactionStatus()
     {
         return $this->belongsTo(TransactionStatus::class);
     }

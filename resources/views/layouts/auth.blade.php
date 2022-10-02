@@ -77,7 +77,7 @@
                             'icon' => 'document',
                             'label' => 'Transactions'])
                         @include('dashboard.components.navigation.navigation-link', [
-                            'route' => 'dashboard.notifications',
+                            'route' => 'dashboard.notifications.index',
                             'icon' => 'bell',
                             'label' => 'Notifications'])
                     @endif

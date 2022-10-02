@@ -10,36 +10,30 @@
                 <table class="text-left w-full">
                     <thead class="bg-gray-800 text-white text-lg">
                     <tr>
-                        <th class="w-2/12 p-4">Property</th>
-                        <th class="w-2/12 p-4">Room</th>
-                        <th class="w-2/12 p-4">Location</th>
-                        <th class="w-1/12 p-4">Price</th>
-                        <th class="w-1/12 p-4">Status</th>
-                        <th class="w-1/12 p-4">Date From</th>
-                        <th class="w-1/12 p-4">Date To</th>
-                        <th class="w-2/12 p-4"></th>
+                        <th class="p-4">Customer</th>
+                        <th class="p-4">Property</th>
+                        <th class="p-4">Room</th>
+                        <th class="p-4">Location</th>
+                        <th class="p-4">Price</th>
+                        <th class="p-4">Status</th>
+                        <th class="p-4 text-center">Date From</th>
+                        <th class="p-4 text-center">Date To</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($bookings as $booking)
                         <tr class="hover:bg-gray-100 transition">
-                            <td class="px-6 py-4">Hotel Internacional</td>
-                            <td class="px-6 py-4">Single Room</td>
-                            <td class="px-6 py-4">Veles 1400, Macedonia</td>
-                            <td class="px-6 py-4">30 &euro;</td>
+                            <td class="px-6 py-4">{{ ucwords($booking->user->profile->fullName()) }}</td>
+                            <td class="px-6 py-4">{{ ucwords($booking->property->name) }}</td>
+                            <td class="px-6 py-4">{{ $booking->room->type->label }}</td>
+                            <td class="px-6 py-4 line-clamp-1">{{ $booking->property->city }}, {{ $booking->property->country->label }}</td>
+                            <td class="px-6 py-4">{{ $booking->price }} &euro;</td>
                             <td class="px-6 py-4">
                                 <span
                                     class="bg-green-600 tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">paid</span>
                             </td>
-                            <td class="px-6 py-4">14.09.2022</td>
-                            <td class="px-6 py-4">16.09.2022</td>
-                            <td class="flex items-center justify-end px-6 py-4 text-right space-x-4">
-                                <a href="{{ route('properties.show', ['property', $booking->property->slug]) }}"
-                                   class="text-blue-600 hover:text-blue-900 transition">Preview</a>
-                                <button class="bg-red-700 hover:bg-red-900 transition text-white rounded px-3 py-2">
-                                    Cancel
-                                </button>
-                            </td>
+                            <td class="px-6 py-4 text-center">{{ $booking->date_from }}</td>
+                            <td class="px-6 py-4 text-center">{{ $booking->date_to }}</td>
                         </tr>
                     @endforeach
                     </tbody>

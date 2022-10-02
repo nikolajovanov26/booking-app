@@ -2,25 +2,34 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class EditUserEmail extends Component implements EditProfileField
+class EditUserEmail extends Component
 {
     public $show = false;
-    public $value;
+    public $name;
 
     public function render()
     {
         return view('livewire.profile.edit-user-email');
     }
 
-    public function update()
+    public function mount()
     {
-        // TODO: Implement update() method.
+        $this->name = Auth::user()->email;
     }
 
-    public function mount(string $value)
+    public function update()
     {
-        $this->value = $value;
+        $this->validate([
+            'name' => 'required|email'
+        ]);
+
+        Auth::user()->email = $this->name;
+        Auth::user()->save();
+
+        $this->show = false;
+        $this->mount();
     }
 }

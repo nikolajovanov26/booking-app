@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class EditProfilePicture extends Component implements EditProfileField
+class EditProfilePicture extends Component
 {
     public $show = false;
     public $value;
@@ -14,13 +14,15 @@ class EditProfilePicture extends Component implements EditProfileField
         return view('livewire.profile.edit-profile-picture');
     }
 
+    public function mount()
+    {
+        // TODO: Implement mount() method.
+    }
+
     public function update()
     {
         // TODO: Implement update() method.
     }
 
-    public function mount(string $value)
-    {
-        $this->value = $value;
-    }
+
 }

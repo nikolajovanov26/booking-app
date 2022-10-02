@@ -9,6 +9,13 @@ class Feature extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'label',
+        'explanation',
+        'icon'
+    ];
+
     public function properties()
     {
         return $this->belongsToMany(Property::class);

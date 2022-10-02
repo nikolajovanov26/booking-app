@@ -53,6 +53,12 @@ class ChartRepository
             $i++;
         }
 
+        while ($z <= Carbon::now()->format('m')) {
+            $labels[] = DateTime::createFromFormat('!m', $z . '')->format('M');
+            $values[] = 0;
+            $z++;
+        }
+
         $bookingChart = new DashboardChart();
         $bookingChart->labels($labels);
         $bookingChart->dataset('Bookings', 'line', $values)->backgroundColor('rgb(76, 161, 175, 0.5)');
@@ -96,6 +102,12 @@ class ChartRepository
                 $z = 1;
             }
             $i++;
+        }
+
+        while ($z <= Carbon::now()->format('m')) {
+            $labels[] = DateTime::createFromFormat('!m', $z . '')->format('M');
+            $values[] = 0;
+            $z++;
         }
 
         $earningChart = new DashboardChart();
@@ -142,6 +154,12 @@ class ChartRepository
                 $z = 1;
             }
             $i++;
+        }
+
+        while ($z <= Carbon::now()->format('m')) {
+            $labels[] = DateTime::createFromFormat('!m', $z . '')->format('M');
+            $values[] = 0;
+            $z++;
         }
 
         $reviewChart = new DashboardChart();

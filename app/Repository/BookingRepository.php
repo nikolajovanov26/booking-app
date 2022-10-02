@@ -33,6 +33,10 @@ class BookingRepository
             return 100.0;
         }
 
+        if($this->lastMonthNewBookings() != 0 && $this->currentMonthNewBookings() == 0) {
+            return -100.0;
+        }
+
         if ($this->currentMonthNewBookings() > $this->lastMonthNewBookings()) {
             $value = $this->currentMonthNewBookings() - $this->lastMonthNewBookings();
             return (float)$value / $this->lastMonthNewBookings() * 100;

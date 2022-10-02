@@ -9,6 +9,29 @@ class Property extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'property_status_id',
+        'property_type_id',
+        'country_id',
+        'name',
+        'slug',
+        'main_photo',
+        'stars',
+        'email',
+        'phone_number',
+        'address',
+        'city',
+        'zip_code',
+        'pets_allowed',
+        'check_in_from',
+        'check_in_to',
+        'check_out_from',
+        'check_out_to',
+        'description',
+        'cancellation_policy',
+    ];
+
     public function country()
     {
         return $this->belongsTo(Country::class);
@@ -44,12 +67,12 @@ class Property extends Model
         return $this->hasMany(Room::class);
     }
 
-    public function status()
+    public function propertyStatus()
     {
-        return $this->belongsTo(PropertyStatus::class, 'property_status_id');
+        return $this->belongsTo(PropertyStatus::class);
     }
 
-    public function type()
+    public function propertyType()
     {
         return $this->belongsTo(PropertyType::class, 'property_type_id');
     }

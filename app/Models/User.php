@@ -34,6 +34,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $with = [
+        'profile'
+    ];
+
     public function favorites()
     {
         return $this->belongsToMany(Property::class, 'favorites');

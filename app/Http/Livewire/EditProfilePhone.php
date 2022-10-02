@@ -2,22 +2,34 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class EditProfilePhone extends Component implements EditProfileField
+class EditProfilePhone extends Component
 {
+    public $show = false;
+    public $name;
+
     public function render()
     {
         return view('livewire.profile.edit-profile-phone');
     }
 
-    public function update()
+    public function mount()
     {
-        // TODO: Implement update() method.
+        $this->name = Auth::user()->profile->phone_number;
     }
 
-    public function mount(string $value)
+    public function update()
     {
-        $this->value = $value;
+        $this->validate([
+            'name' => 'string'
+        ]);
+
+        Auth::user()->profile->phone_number = $this->name;
+        Auth::user()->profile->save();
+
+        $this->show = false;
+        $this->mount();
     }
 }

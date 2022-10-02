@@ -33,6 +33,10 @@ class ReviewRepository
             return 100.0;
         }
 
+        if($this->lastMonthNewReviews() != 0 && $this->currentMonthNewReviews() == 0) {
+            return -100.0;
+        }
+
         if ($this->currentMonthNewReviews() > $this->lastMonthNewReviews()) {
             $value = $this->currentMonthNewReviews() - $this->lastMonthNewReviews();
             return (float)$value / $this->lastMonthNewReviews() * 100;

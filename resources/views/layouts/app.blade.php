@@ -57,7 +57,7 @@
                                                     class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
                                             >View more</a>
                                         @else
-                                            <a href="{{ route('dashboard.notifications') }}"
+                                            <a href="{{ route('dashboard.notifications.index') }}"
                                                 class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
                                             >View more</a>
                                         @endif

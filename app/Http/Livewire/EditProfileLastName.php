@@ -2,25 +2,34 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class EditProfileLastName extends Component implements EditProfileField
+class EditProfileLastName extends Component
 {
     public $show = false;
-    public $value;
+    public $name;
 
     public function render()
     {
         return view('livewire.profile.edit-profile-last-name');
     }
 
-    public function mount(string $value)
+    public function mount()
     {
-        $this->value = $value;
+        $this->name = Auth::user()->profile->last_name;
     }
 
     public function update()
     {
-        // TODO: Implement update() method.
+        $this->validate([
+            'name' => 'string'
+        ]);
+
+        Auth::user()->profile->last_name = $this->name;
+        Auth::user()->profile->save();
+
+        $this->show = false;
+        $this->mount();
     }
 }

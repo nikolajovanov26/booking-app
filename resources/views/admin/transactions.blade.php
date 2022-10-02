@@ -1,49 +1,35 @@
 @extends('layouts.auth')
 
 @section('content')
-    <div class="flex flex-col w-full space-y-8">
-        @if($transactions->count() > 0)
-            <div class="py-3 bg-blue-100 mb-6">
-                Filter
-            </div>
-            <table class="bg-white w-full rounded overflow-hidden shadow-lg">
-                <thead class="bg-gray-700 text-white text-left">
-                <tr>
-                    <th class="w-1/12 p-4">#</th>
-                    <th class="w-2/12 p-4">User</th>
-                    <th class="w-2/12 p-4">Property</th>
-                    <th class="w-2/12 p-4">Room</th>
-                    <th class="w-1/12 p-4">Amount</th>
-                    <th class="w-1/12 p-4">Date</th>
-                    <th class="w-1/12 p-4">Status</th>
-                </tr>
-                </thead>
-                <tbody class="text-left">
-                @foreach($transactions as $transaction)
-                    <tr class="hover:bg-gray-100 transition">
-                        <td class="w-1/12 p-4">2135</td>
-                        <td class="w-2/12 p-4">
-                            <a href="" class="text-blue-700 hover:underline hover:text-blue-900 transition">Nikola
-                                Jovanov</a>
-                        </td>
-                        <td class="w-2/12 p-4">
-                            <a href="{{ route('properties.show', ['property' => 1]) }}"
-                               class="text-blue-700 hover:underline hover:text-blue-900 transition">Hotel
-                                Internacional</a>
-                        </td>
-                        <td class="w-2/12 p-4">Single Room</td>
-                        <td class="w-1/12 p-4">30 &euro;</td>
-                        <td class="w-1/12 p-4">04.12.2022</td>
-                        <td class="w-1/12 p-4">
-                            <span
-                                class="bg-orange-600 text-center tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">Pending</span>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        @else
-            <p class="text-center text-2xl mt-5">No transactions have been made &#128532;</p>
-        @endif
+    <div x-data="">
+        <div class="flex flex-col w-full space-y-8">
+            @if($transactions->count() > 0)
+                <div class="py-3 bg-blue-100 mb-6">
+                    Filter
+                </div>
+                <div class="bg-white w-full rounded shadow-lg">
+                    <div class="bg-gray-700 w-full text-white text-left">
+                        <div class="flex  w-full">
+                            <div class="p-4">#</div>
+                            <div class="w-1/12 p-4">Owner</div>
+                            <div class="w-1/12 p-4">Customer</div>
+                            <div class="w-2/12 p-4">Property</div>
+                            <div class="w-1/12 p-4 text-center">Amount</div>
+                            <div class="w-2/12 p-4 text-center">Date</div>
+                            <div class="w-3/12 p-4 text-center">Status</div>
+                            <div class="w-2/12 p-4"></div>
+                        </div>
+                    </div>
+                    <div class="text-left">
+                        @foreach($transactions as $transaction)
+                            @livewire('admin.transaction-item', ['transaction' => $transaction, 'statuses' => $statuses])
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                <p class="text-center text-2xl mt-5">No transactions have been made &#128532;</p>
+            @endif
+        </div>
     </div>
+
 @endsection

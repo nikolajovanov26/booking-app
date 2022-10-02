@@ -89,10 +89,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/', DashboardController::class)->name('index');
 
         Route::get('properties/favorite', [DashboardPropertyController::class, 'favorite'])->name('properties.favorite');
-        Route::resource('properties', DashboardPropertyController::class);
         Route::resource('properties/{property}/rooms', DashboardRoomController::class)->except('show');
+        Route::resource('properties', DashboardPropertyController::class);
 
-        Route::get('notifications', [DashboardNotificationController::class, 'index'])->name('notifications');
+        Route::controller(DashboardNotificationController::class)->name('notifications.')->prefix('notifications')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::put('/{notification}', 'toggleRead')->name('toggleRead');
+            Route::delete('/{notification}', 'delete')->name('delete');
+        });
+
         Route::get('transactions', [DashboardTransactionController::class, 'index'])->name('transactions');
         Route::get('reviews', [DashboardReviewController::class, 'index'])->name('reviews');
         Route::get('bookings', [DashboardBookingController::class, 'index'])->name('bookings');

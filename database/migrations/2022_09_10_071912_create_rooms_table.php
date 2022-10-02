@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->foreignId('room_status_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('room_type_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('room_view_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->integer('number_of_rooms');
             $table->integer('number_of_persons');
             $table->integer('size');
             $table->float('price');

@@ -6,7 +6,7 @@
             Filter
         </div>
         @if($properties->count() > 0)
-            @livewire('favorite-property-grid', ['properties' => $properties])
+            @livewire('favorite-property-grid')
         @else
             <p class="text-center text-2xl mt-5">You have no favorite properties &#128148;</p>
         @endif

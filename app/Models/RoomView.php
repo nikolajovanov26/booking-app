@@ -9,6 +9,11 @@ class RoomView extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'label'
+    ];
+
     public function rooms()
     {
         return $this->hasMany(Room::class);

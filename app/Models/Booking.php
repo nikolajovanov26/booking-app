@@ -9,6 +9,11 @@ class Booking extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'date_from' => 'date',
+        'date_to' => 'date'
+    ];
+
     public function property()
     {
         return $this->belongsTo(Property::class);
@@ -19,7 +24,7 @@ class Booking extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public function status()
+    public function bookingStatus()
     {
         return $this->belongsTo(BookingStatus::class);
     }

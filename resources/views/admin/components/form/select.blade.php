@@ -1,4 +1,4 @@
-<div x-data='{dropdown: false, selected: "{{ $current ?? $placeholder }}", num: 0}'
+<div x-data='{ dropdown: false, selected: "{{ $current ?? $placeholder }}" }'
     class="w-full border border-blue-grad-dark/25 focus-within:border-blue-grad-dark focus-within:shadow-xl hover:border-blue-grad-dark/75 hover:shadow-lg transition rounded flex flex-col px-3 pt-1.5 pb-2 space-y-1">
     <label class="text-sm text-blue-800 font-semibold">{{ $label }}</label>
     <input type="hidden" name="terms" x-model="selected" />

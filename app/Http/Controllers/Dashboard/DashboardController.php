@@ -10,10 +10,10 @@ use App\Repository\TransactionRepository;
 
 class DashboardController extends Controller
 {
-    public ChartRepository $chartRepository;
-    public TransactionRepository $transactionRepository;
-    public BookingRepository $bookingRepository;
-    public ReviewRepository $reviewRepository;
+    private ChartRepository $chartRepository;
+    private TransactionRepository $transactionRepository;
+    private BookingRepository $bookingRepository;
+    private ReviewRepository $reviewRepository;
 
     public function __construct()
     {

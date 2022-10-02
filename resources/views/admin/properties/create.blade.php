@@ -7,7 +7,7 @@
         </div>
         <div class="px-12 py-8 w-full">
             <div>
-                <form class="space-y-6">
+                <form class="space-y-6" action="{{ route('dashboard.properties.store') }}" method="post">
                     <div class="w-full flex space-x-6">
                         <div class="w-2/3 flex flex-col space-y-10">
                             <div class="flex space-x-6">
