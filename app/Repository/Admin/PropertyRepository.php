@@ -21,16 +21,20 @@ class PropertyRepository
 
     public function calculatePercent(): float
     {
-        if($this->lastMonthNewProperties() == 0 && $this->currentMonthNewProperties() != 0) {
+        if ($this->lastMonthNewProperties() == 0 && $this->currentMonthNewProperties() != 0) {
             return 100.0;
         }
 
-        if($this->currentMonthNewProperties() > $this->lastMonthNewProperties()) {
+        if ($this->lastMonthNewProperties() != 0 && $this->currentMonthNewProperties() == 0) {
+            return -100.0;
+        }
+
+        if ($this->currentMonthNewProperties() > $this->lastMonthNewProperties()) {
             $value = $this->currentMonthNewProperties() - $this->lastMonthNewProperties();
-            return (float) $value / $this->lastMonthNewProperties() * 100;
-        } elseif($this->currentMonthNewProperties() < $this->lastMonthNewProperties()) {
+            return (float)$value / $this->lastMonthNewProperties() * 100;
+        } elseif ($this->currentMonthNewProperties() < $this->lastMonthNewProperties()) {
             $value = $this->lastMonthNewProperties() - $this->currentMonthNewProperties();
-            return (float) $value / $this->currentMonthNewProperties() * 100;
+            return -1 * (float)$value / $this->lastMonthNewProperties() * 100;
         }
 
         return 0.0;

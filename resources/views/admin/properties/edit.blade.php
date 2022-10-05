@@ -26,7 +26,7 @@
                             </div>
                             <div class="flex space-x-6">
                                 @include('admin.components.form.select', [
-                                   'current' => $property->type->label,
+                                   'current' => $property->propertyType->label,
                                    'items' => $types,
                                    'label' => 'Property Type',
                                    'placeholder' => 'Select property type'

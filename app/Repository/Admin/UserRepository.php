@@ -21,18 +21,22 @@ class UserRepository
 
     public function calculatePercent(): float
     {
-        if($this->lastMonthNewUsers() == 0 && $this->currentMonthNewUsers() != 0) {
+        if ($this->lastMonthNewUsers() == 0 && $this->currentMonthNewUsers() != 0) {
             return 100.0;
         }
 
-        if($this->currentMonthNewUsers() > $this->lastMonthNewUsers()) {
-            $value = $this->currentMonthNewUsers() - $this->lastMonthNewUsers();
-            return (float) $value / $this->lastMonthNewUsers() * 100;
+        if ($this->lastMonthNewUsers() != 0 && $this->currentMonthNewUsers() == 0) {
+            return -100.0;
         }
 
-        if($this->currentMonthNewUsers() < $this->lastMonthNewUsers()) {
+        if ($this->currentMonthNewUsers() > $this->lastMonthNewUsers()) {
+            $value = $this->currentMonthNewUsers() - $this->lastMonthNewUsers();
+            return (float)$value / $this->lastMonthNewUsers() * 100;
+        }
+
+        if ($this->currentMonthNewUsers() < $this->lastMonthNewUsers()) {
             $value = $this->lastMonthNewUsers() - $this->currentMonthNewUsers();
-            return (float) $value / $this->currentMonthNewUsers() * 100;
+            return -1 * (float)$value / $this->lastMonthNewUsers() * 100;
         }
 
         return 0.0;

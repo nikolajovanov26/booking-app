@@ -21,8 +21,8 @@
                 <tbody>
                     @foreach($rooms as $room)
                         <tr class="hover:bg-gray-100 transition">
-                            <td class="px-6 py-4">{{ $room->type->label }}</td>
-                            <td class="px-6 py-4">{{ $room->view->label }}</td>
+                            <td class="px-6 py-4">{{ $room->roomType->label }}</td>
+                            <td class="px-6 py-4">{{ $room->roomView->label }}</td>
                             <td class="px-6 py-4">
                                 <div class="flex">
                                     @for($i = 0; $i < $room->number_of_persons; $i++)
@@ -33,11 +33,11 @@
                             <td class="px-6 py-4 text-center font-semibold text-lg">{{ $room->price }} &euro;</td>
                             <td class="px-6 py-4 text-center">{{ $room->size }} m<sup>2</sup></td>
                             <td class="px-6 py-4 text-center">
-                                @if($room->status->name == 'active')
+                                @if($room->roomStatus->name == 'active')
                                     <span class="bg-blue-600 text-center tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">Active</span>
-                                @elseif($room->status->name == 'booked')
+                                @elseif($room->roomStatus->name == 'booked')
                                     <span class="bg-green-600 text-center tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">Booked</span>
-                                @elseif($room->status->name == 'draft')
+                                @elseif($room->roomStatus->name == 'draft')
                                     <span class="bg-orange-600 text-center tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">Draft</span>
                                 @endif
                             </td>

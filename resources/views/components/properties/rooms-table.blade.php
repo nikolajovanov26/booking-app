@@ -11,7 +11,7 @@
     @foreach($rooms as $room)
         <tr class="bg-white hover:bg-gray-100 transition h-16">
             <td class="px-6 py-2 text-gray-800 text-lg flex flex-col">
-                {{ $room->type->label }}
+                {{ $room->roomType->label }}
                 <span class="text-sm text-gray-600">
                     @if($room->large_beds)
                         {{ $room->large_beds }} large beds

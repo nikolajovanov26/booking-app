@@ -22,7 +22,7 @@
                         <div class="flex-1">
                             <div class="flex items-center space-x-2 mb-2">
                                 <span
-                                    class="px-3 pt-1 pb-0.5 bg-blue-400 text-white text-xs rounded-sm">{{ $property->type->label }}</span>
+                                    class="px-3 pt-1 pb-0.5 bg-blue-400 text-white text-xs rounded-sm">{{ $property->propertyType->label }}</span>
                                 <div class="flex">
                                     @for($i = 0; $i < $property->stars; $i++)
                                         @include('icons.star', ['attributes' => 'h-6 w-6 text-yellow-500', 'fill' => '#ffff00'])

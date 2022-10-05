@@ -21,8 +21,12 @@ class BookingRepository
 
     public function calculatePercent(): float
     {
-        if($this->lastMonthNewBookings() == 0 && $this->currentMonthNewBookings() != 0) {
+        if ($this->lastMonthNewBookings() == 0 && $this->currentMonthNewBookings() != 0) {
             return 100.0;
+        }
+
+        if ($this->lastMonthNewBookings() != 0 && $this->currentMonthNewBookings() == 0) {
+            return -100.0;
         }
 
         if ($this->currentMonthNewBookings() > $this->lastMonthNewBookings()) {
@@ -32,7 +36,7 @@ class BookingRepository
 
         if ($this->currentMonthNewBookings() < $this->lastMonthNewBookings()) {
             $value = $this->lastMonthNewBookings() - $this->currentMonthNewBookings();
-            return (float)$value / $this->currentMonthNewBookings() * 100;
+            return -1 * (float)$value / $this->lastMonthNewBookings() * 100;
         }
 
         return 0.0;

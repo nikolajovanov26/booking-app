@@ -40,7 +40,7 @@ class TransactionRepository
 
         if ($this->currentMonthNewTransactions() < $this->lastMonthNewTransactions()) {
             $value = $this->lastMonthNewTransactions() - $this->currentMonthNewTransactions();
-            return (float)$value / $this->lastMonthNewTransactions() * 100;
+            return -1 * (float)$value / $this->lastMonthNewTransactions() * 100;
         }
 
         return 0.0;
