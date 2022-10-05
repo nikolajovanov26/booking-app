@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Property;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -19,6 +20,22 @@ class PropertyController extends Controller
     {
         return view('properties.show', [
             'property' => $property
+        ]);
+    }
+
+    public function trending()
+    {
+        $properties = Property::all();
+
+        foreach ($properties as $property) {
+            $property->bookings = Booking::where('property_id', $property->id)->where('created_at', '<=', now()->subMonth())->count();
+        }
+
+        return view('properties.trending', [
+            'properties' => $properties
+                ->where('bookings', '>', 0)
+                ->sortByDesc('bookings')
+                ->take(20)
         ]);
     }
 

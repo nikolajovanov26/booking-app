@@ -29,13 +29,14 @@
             <p>Show on map</p>
             <span class="mx-2">&bull;</span>
             <p>1.1km from city center</p>
-            <span class="mx-2">&bull;</span>
-            <!-- Optional -->
-            <p>Nearby place</p>
+            @if($trending = null)
+                <span class="mx-2">&bull;</span>
+                {{ $property?->bookings }} bookings in the past month
+            @endif
         </div>
         <div class="flex items-center space-x-2 my-2">
             @include('icons.building', ['attributes' => 'w-6 h-6'])
-            <p>900 m from Skopje</p>
+            <p>900 m from {{ $property->city }}</p>
         </div>
         <p class="line-clamp-3">{{ $property->description }}</p>
     </div>

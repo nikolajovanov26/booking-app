@@ -12,27 +12,27 @@
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
-                                @include('components.navigation.link', ['label' => 'Home', 'route' => 'home'])
                                 @if(isAdmin())
                                     @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'admin.dashboard'])
                                 @elseif(isOwner())
                                     @include('components.navigation.link', ['label' => 'Dashboard', 'route' => 'dashboard.index'])
                                 @endif
-                                @if(isUser())
-                                    @include('components.navigation.link', ['label' => 'Favorite Properties', 'route' => 'properties.favorite'])
+                                @include('components.navigation.link', ['label' => 'Home', 'route' => 'home'])
+                                @include('components.navigation.link', ['label' => 'Trending', 'route' => 'properties.trending'])
+                                @auth
+                                    @include('components.navigation.link', ['label' => 'Favorite Properties', 'route' => 'favorite'])
                                     @include('components.navigation.link', ['label' => 'My Bookings', 'route' => 'bookings.index'])
-                                @endif
+                                @endauth
                             </div>
                         </div>
                     </div>
                     <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
+                        <div class="ml-4 flex items-center md:ml-6" x-data="{ profileDropdown: false, notificationsDropdown: false }">
                             @auth()
                                 @if(isUser())
                                     @include('components.navigation.link', ['label' => 'Become a Property Owner', 'route' => 'becomeOwner'])
                                 @endif
-                                <div class="relative"
-                                     x-data="{ notificationsDropdown: false }">
+                                <div class="relative" @click.outside="notificationsDropdown = false">
 
                                     <button @click="notificationsDropdown = !notificationsDropdown"
                                             type="button"
@@ -40,32 +40,34 @@
                                         @include('icons.bell', ['attributes' => 'h-6 w-6'])
                                     </button>
 
-                                    <div
-                                        x-cloak
-                                        x-transition.origin.top
-                                        @click.outside="notificationsDropdow = false"
-                                        x-show="notificationsDropdown"
-                                        class="z-10 flex flex-col absolute bg-white overflow-hidden -left-80 top-10 w-96 shadow-lg rounded-lg">
-                                        @foreach(Auth::user()->unreadNotifications()->take(3)->get() as $notification)
-                                            <div class="px-3 py-3 border-b-2 border-gray-100 hover:bg-blue-100 transition cursor-default">
-                                                <h3 class="font-semibold">{{ $notification->heading }}</h3>
-                                                <p class="line-clamp-2 text-sm">{{ $notification->content }}</p>
-                                            </div>
-                                        @endforeach
-                                        @if(isUser())
-                                            <a href="{{ route('notifications.index') }}"
-                                                    class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
-                                            >View more</a>
-                                        @else
-                                            <a href="{{ route('dashboard.notifications.index') }}"
-                                                class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
-                                            >View more</a>
-                                        @endif
+                                    <div>
+                                        <div
+                                            x-cloak
+                                            x-transition.origin.top
+                                            x-show="notificationsDropdown"
+                                            class="z-10 flex flex-col absolute bg-white overflow-hidden -left-80 top-10 w-96 shadow-lg rounded-lg">
+                                            @foreach(Auth::user()->unreadNotifications()->take(3)->get() as $notification)
+                                                <div class="px-3 py-3 border-b-2 border-gray-100 hover:bg-blue-100 transition cursor-default">
+                                                    <h3 class="font-semibold">{{ $notification->heading }}</h3>
+                                                    <p class="line-clamp-2 text-sm">{{ $notification->content }}</p>
+                                                </div>
+                                            @endforeach
+                                            @if(isUser())
+                                                <a href="{{ route('notifications.index') }}"
+                                                   class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
+                                                >View more</a>
+                                            @else
+                                                <a href="{{ route('dashboard.notifications.index') }}"
+                                                   class="px-3 py-2 text-center w-full bg-blue-700 hover:bg-blue-900 transition text-white"
+                                                >View more</a>
+                                            @endif
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div
-                                    x-data="{ profileDropdown: false }"
+
                                     @click.outside="profileDropdown = false"
                                     class="relative ml-3">
                                     <div>

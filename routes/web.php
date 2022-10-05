@@ -54,7 +54,7 @@ Route::get('/', [PropertyController::class, 'index'])->name('home');
 
 Route::controller(PropertyController::class)->name('properties.')->prefix('properties')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/favorite', 'favorite')->name('favorite')->middleware('auth');
+    Route::get('/trending', 'trending')->name('trending');
     Route::get('/{property:slug}', 'show')->name('show');
 });
 
@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/become-owner', BecomeOwnerController::class)->name('becomeOwner');
+    Route::get('/favorite', [PropertyController::class, 'favorite'])->name('favorite');
     Route::post('/favorite/{property}', [PropertyController::class, 'toggleFavorite'])->name('toggleFavorite');
 });
 
