@@ -37,7 +37,6 @@ use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +53,7 @@ Route::get('/', [PropertyController::class, 'index'])->name('home');
 
 Route::controller(PropertyController::class)->name('properties.')->prefix('properties')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/search', 'filter')->name('filter');
     Route::get('/trending', 'trending')->name('trending');
     Route::get('/{property:slug}', 'show')->name('show');
 });

@@ -4,7 +4,7 @@
             <form method="post" action="{{ route('toggleFavorite', ['property' => $property->id]) }}">
                 @csrf
                 <button>
-                    @if(Auth::user()?->favorites()->get()->contains($property))
+                    @if(Auth::user()?->favorites->contains($property))
                         @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff0000'])
                     @else
                         @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff000033'])
@@ -44,17 +44,17 @@
         <div class="flex flex-col justify-end">
             <div class="flex flex-row justify-end items-e space-x-3">
                 <div class="flex flex-col text-right">
-                    <span class="font-bold text-xl -mb-1">{{ ratingString($property->reviews()->avg('rating')) }}</span>
-                    <span class="text-sm">{{ $property->reviews()->count() }} reviews</span>
+                    <span class="font-bold text-xl -mb-1">{{ ratingString($property->reviews_avg_rating) }}</span>
+                    <span class="text-sm">{{ $property->reviews_count }} reviews</span>
                 </div>
-                <div class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews()->avg('rating'), 1) }}</div>
+                <div class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews_avg_rating, 1) }}</div>
             </div>
             <span class="text-right mt-2 mb-7">Location 9.7</span>
         </div>
         <div class="flex flex-col justify-end">
             <div class="flex justify-end items-baseline space-x-2">
                 <span>From</span>
-                <span class="text-right text-2xl font-bold text-blue-800 my-2">{{ number_format($property->rooms()->min('price'), 2) }}&euro;</span>
+                <span class="text-right text-2xl font-bold text-blue-800 my-2">{{ number_format($property->rooms_min_price, 2) }}&euro;</span>
             </div>
             <div class="flex justify-end">
                 <a href="{{ route('properties.show', ['property' => $property->slug]) }}" class="bg-blue-600 hover:bg-blue-700 transition-all text-white rounded-md w-fit px-4 py-2">View Property

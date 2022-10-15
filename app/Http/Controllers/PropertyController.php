@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PropertyFilterRequest;
 use App\Models\Booking;
 use App\Models\Property;
+use App\Models\PropertyType;
+use App\Repository\PropertyRepository;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Session;
 
 class PropertyController extends Controller
 {
+    private PropertyRepository $propertyRepository;
+
+    public function __construct()
+    {
+        $this->propertyRepository = new PropertyRepository();
+    }
+
     public function index()
     {
         return view('properties.index', [
-            'properties' => Property::paginate(10)
+            'properties' => Property::valid()
+                ->withAvg('reviews', 'rating')
+                ->withCount('reviews')
+                ->withMin('rooms', 'price')
+                ->paginate(10)
         ]);
     }
 
@@ -23,9 +37,23 @@ class PropertyController extends Controller
         ]);
     }
 
+    public function filter(PropertyFilterRequest $request)
+    {
+        $properties = $this->propertyRepository->filter($request->all());
+
+        return view('properties.filtered', [
+            'properties' => $properties,
+            'types' => PropertyType::all()
+        ]);
+    }
+
     public function trending()
     {
-        $properties = Property::all();
+        $properties = Property::valid()
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->withMin('rooms', 'price')
+            ->get();
 
         foreach ($properties as $property) {
             $property->bookings = Booking::where('property_id', $property->id)->where('created_at', '<=', now()->subMonth())->count();
@@ -42,7 +70,11 @@ class PropertyController extends Controller
     public function favorite()
     {
         return view('properties.favorite', [
-            'properties' => Auth::user()->favorites()->paginate(10)
+            'properties' => Auth::user()->favorites()->valid()
+                ->withAvg('reviews', 'rating')
+                ->withCount('reviews')
+                ->withMin('rooms', 'price')
+                ->paginate(10)
         ]);
     }
 

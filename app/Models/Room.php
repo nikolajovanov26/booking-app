@@ -23,6 +23,11 @@ class Room extends Model
         'sofa_beds',
     ];
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function property()
     {
         return $this->belongsToMany(Property::class);

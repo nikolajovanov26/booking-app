@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Property;
 use App\Models\PropertyStatus;
 use App\Models\PropertyType;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PropertyRepository
@@ -58,8 +59,59 @@ class PropertyRepository
         $property->description = $data['description'];
         $property->cancellation_policy = $data['cancellation_policy'] ?? null;
 
-        if($property->isDirty()) {
+        if ($property->isDirty()) {
             $property->save();
         }
     }
+
+    public function filter(array $data)
+    {
+        $data['date_from'] = Carbon::make($data['date_from'])->endOfDay();
+        $data['date_to'] = Carbon::make($data['date_to'])->startOfDay();
+
+        $properties = Property::where(function ($query) use ($data) {
+            return $query
+                ->where('name', 'like', '%' . $data['location'] . '%')
+                ->orWhere('city', 'like', '%' . $data['location'] . '%');
+        })
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->whereHas('rooms', function ($query) use ($data) {
+                return $query->where('number_of_persons', '>=', $data['guests']);
+            })
+            ->whereHas('rooms', function ($query) use ($data) {
+                return $query->whereDoesntHave('bookings', fn($query) => $query
+                    ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
+                    ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
+                    ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
+                    ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
+            })
+            ->with('rooms', 'rooms.bookings')
+            ->withMin(['rooms' => function ($query) use ($data) {
+                return $query->where('number_of_persons', '>=', $data['guests'])
+                    ->whereDoesntHave('bookings', fn($query) => $query
+                        ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
+                        ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
+                        ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
+                        ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
+            }], 'price');
+
+        if (isset($data['type']) && $data['type'] != 'Any') {
+            if (PropertyType::where('label', $data['type'])->exists()) {
+                $properties->where('property_type_id', PropertyType::firstWhere('label', $data['type'])->id);
+            }
+        }
+
+        if (isset($data['stars']) && $data['stars'] != 0) {
+            $properties->where('stars', '>=', $data['stars']);
+        }
+
+        if (isset($data['pets'])) {
+            $properties->where('pets_allowed', '1');
+        }
+
+        return $properties->paginate(10);
+    }
+
 }
+

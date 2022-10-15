@@ -76,4 +76,12 @@ class Property extends Model
     {
         return $this->belongsTo(PropertyType::class, 'property_type_id');
     }
+
+    /**
+     * Scopes
+     */
+    public function scopeValid($query)
+    {
+        return $query->whereHas('rooms');
+    }
 }
