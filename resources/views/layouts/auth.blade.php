@@ -69,10 +69,6 @@
                             'icon' => 'house',
                             'label' => 'Properties'])
                         @include('dashboard.components.navigation.navigation-link', [
-                            'route' => 'dashboard.reviews',
-                            'icon' => 'star',
-                            'label' => 'Reviews'])
-                        @include('dashboard.components.navigation.navigation-link', [
                             'route' => 'dashboard.transactions',
                             'icon' => 'document',
                             'label' => 'Transactions'])

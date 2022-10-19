@@ -5,9 +5,6 @@
     <div class="mx-auto max-w-screen-2xl py-8 sm:px-6 lg:px-8">
         <div class="flex flex-col h-full space-y-8">
             @if($bookings->count() > 0)
-                <div class="bg-blue-100 h-12 flex items-center">
-                    filter
-                </div>
                 <div class="bg-white shadow-xl rounded-xl overflow-hidden">
                     <table class="text-left w-full">
                         <thead class="bg-gray-800 text-white text-lg">

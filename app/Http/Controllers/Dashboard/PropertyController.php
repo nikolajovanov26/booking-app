@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DashboardPropertyRequest;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Country;
@@ -23,10 +24,16 @@ class PropertyController extends Controller
         $this->propertyRepository = new PropertyRepository();
     }
 
-    public function index()
+    public function index(DashboardPropertyRequest $request)
     {
+        $properties = Property::where('user_id', Auth::user()->id);
+
+        if (isset($request->search)) {
+            $properties->where('name', 'like', '%' . $request->search . '%');
+        }
+
         return view('dashboard.properties.index', [
-            'properties' => Property::where('user_id', Auth::user()->id)->get()
+            'properties' => $properties->paginate(10)
         ]);
     }
 
@@ -108,6 +115,13 @@ class PropertyController extends Controller
     {
         return view('dashboard.favorites', [
             'properties' => Auth::user()->favorites()->get()
+        ]);
+    }
+
+    public function reviews(Property $property)
+    {
+        return view('dashboard.properties.reviews', [
+            'property' => $property->load('reviews.user.profile'),
         ]);
     }
 }

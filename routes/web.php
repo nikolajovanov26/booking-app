@@ -89,6 +89,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', DashboardController::class)->name('index');
 
         Route::get('properties/favorite', [DashboardPropertyController::class, 'favorite'])->name('properties.favorite');
+        Route::get('properties/{property}/reviews', [DashboardPropertyController::class, 'reviews'])->name('properties.reviews');
         Route::resource('properties/{property}/rooms', DashboardRoomController::class)->except('show');
         Route::resource('properties', DashboardPropertyController::class);
 
@@ -99,7 +100,6 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::get('transactions', [DashboardTransactionController::class, 'index'])->name('transactions');
-        Route::get('reviews', [DashboardReviewController::class, 'index'])->name('reviews');
         Route::get('bookings', [DashboardBookingController::class, 'index'])->name('bookings');
 
         Route::get('/settings', [DashboardProfileController::class, 'edit'])->name('settings');
