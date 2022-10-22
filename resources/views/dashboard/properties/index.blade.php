@@ -12,7 +12,7 @@
                                 <input class="border-gray-100 mr-3 focus:ring-blue-grad-light focus:border-blue-grad-light rounded text-lg" type="text" name="search" placeholder="Filter Properties" value="{{ request()->get('search') }}">
                                 <button class="bg-blue-grad-light border-2 border-blue-grad-light hover:border-white transition hover:bg-gray-800 px-6 py-2 text-white font-semibold rounded text-lg">Search</button>
                             </form>
-                            @if(request()->has('search'))
+                            @if(request()->get('search'))
                                 <form method="get" action="">
                                     <button class="ml-5 flex space-x-2 items-center hover:text-white hover:bg-red-600 transition py-2 px-3 text-white font-semibold text-lg rounded cursor-pointer">
                                         @include('icons.bin', ['attributes' => 'h-6 w-6'])
@@ -32,11 +32,11 @@
                 @if($properties->count() != 0)
                     <thead class="bg-gray-800 text-white text-lg">
                         <tr>
-                            <th class="w-2/12 px-6 py-6">Name</th>
-                            <th class="w-3/12 px-6 py-6">Location</th>
-                            <th class="w-1/12 px-6 py-6 text-center">Rating</th>
-                            <th class="w-1/12 px-6 py-6 text-center">Status</th>
-                            <th class="w-3/12 px-6 py-6"></th>
+                            <th class="w-2/12 p-6">Name</th>
+                            <th class="w-3/12 p-6">Location</th>
+                            <th class="w-1/12 p-6 text-center">Rating</th>
+                            <th class="w-1/12 p-6 text-center">Status</th>
+                            <th class="w-3/12 p-6"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
                             <td class="px-6 py-4 capitalize">{{ $property->name }}</td>
                             <td class="px-6 py-4">{{ $property->city }} {{ $property->zip_code }}
                                 , {{ $property->country->label }}</td>
-                            <td class="px-6 py-4 text-center">{{ number_format($property->reviews()->avg('rating'), 1) }}</td>
+                            <td class="px-6 py-4 text-center">{{ number_format($property->reviews_avg_rating, 1) }}</td>
                             <td class="px-6 py-4 text-center">
                                 @if($property->propertyStatus->name == 'active')
                                     <span class="bg-green-600 text-center tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">Active</span>

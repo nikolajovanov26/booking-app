@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end items-center px-10 bg-gray-100 h-2/5">
-                        <a href="{{ route('dashboard.reviews') }}"
+                        <a href="{{ route('dashboard.properties.index') }}"
                            class="text-lg py-2 text-blue-600 font-semibold hover:text-gray-800 transition"
                         >View Reviews</a>
                     </div>

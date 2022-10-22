@@ -19,7 +19,9 @@
         <div class="flex justify-end mt-12">
             <div class="flex flex-col items-center space-y-1">
                 <a href="{{ route('dashboard.switchToUser') }}" class="text-center bg-red-700 hover:bg-red-800 transition text-white font-semibold text-lg py-3 px-5 rounded">Switch to regular user</a>
-                <p class="text-center text-sm">You shouldn't have any active <br>properties for this option</p>
+                @if($canChange)
+                    <p class="text-center text-sm">You shouldn't have any active <br>properties for this option</p>
+                @endif
             </div>
         </div>
 

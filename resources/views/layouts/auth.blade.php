@@ -38,10 +38,6 @@
                             'icon' => 'features',
                             'label' => 'Property Types'])
                         @include('admin.components.navigation.navigation-link', [
-                            'route' => 'admin.reviews',
-                            'icon' => 'star',
-                            'label' => 'Reviews'])
-                        @include('admin.components.navigation.navigation-link', [
                             'route' => 'admin.roomTypes',
                             'icon' => 'hotel',
                             'label' => 'Room Types'])
@@ -91,14 +87,6 @@
                             'route' => 'dashboard.settings',
                             'icon' => 'settings',
                             'label' => 'Settings'])
-                        @include('dashboard.components.navigation.navigation-link', [
-                            'route' => 'dashboard.bookings',
-                            'icon' => 'globe',
-                            'label' => 'My Bookings'])
-                        @include('dashboard.components.navigation.navigation-link', [
-                            'route' => 'dashboard.properties.favorite',
-                            'icon' => 'heart',
-                            'label' => 'Favorites'])
                     @endif
                     <a href="{{ route('home') }}"
                        class="py-2 px-3 flex items-center text-sm space-x-2 text-white opacity-70 hover:opacity-100 hover:-translate-x-2 transition">

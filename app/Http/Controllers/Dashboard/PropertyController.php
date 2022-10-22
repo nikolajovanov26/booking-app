@@ -26,10 +26,12 @@ class PropertyController extends Controller
 
     public function index(DashboardPropertyRequest $request)
     {
-        $properties = Property::where('user_id', Auth::user()->id);
+        $properties = Property::where('user_id', Auth::user()->id)
+            ->with('propertyStatus', 'country')
+            ->withAvg('reviews', 'rating');
 
-        if (isset($request->search)) {
-            $properties->where('name', 'like', '%' . $request->search . '%');
+        if ($request->has('search')) {
+            $properties->where('name', 'like', '%' . $request->get('search') . '%');
         }
 
         return view('dashboard.properties.index', [
