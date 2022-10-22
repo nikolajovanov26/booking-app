@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DashboardPropertyRequest;
+use App\Http\Requests\SearchFilterRequest;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Country;
@@ -24,13 +24,13 @@ class PropertyController extends Controller
         $this->propertyRepository = new PropertyRepository();
     }
 
-    public function index(DashboardPropertyRequest $request)
+    public function index(SearchFilterRequest $request)
     {
         $properties = Property::where('user_id', Auth::user()->id)
             ->with('propertyStatus', 'country')
             ->withAvg('reviews', 'rating');
 
-        if ($request->has('search')) {
+        if ($request->get('search')) {
             $properties->where('name', 'like', '%' . $request->get('search') . '%');
         }
 

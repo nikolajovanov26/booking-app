@@ -9,35 +9,51 @@
         editIconDropdown: @entangle('editIconDropdown'),
         editSelected: @entangle('editIcon')
     }">
-    <div class="flex justify-end">
-        <div class="mb-6">
-            <button
-                @click="showCreateModal = true" @keydown.esc="showCreateModal = false"
-                class="bg-blue-600 hover:bg-blue-900 transition py-4 px-6 text-white font-semibold text-lg rounded-xl">
-                Add Feature
-            </button>
-        </div>
-
-    </div>
     <div class="bg-white shadow-xl rounded-xl overflow-hidden">
         <div>
             <table class="text-left w-full">
+                <div class="px-6 py-4 flex items-center justify-between bg-blue-grad-dark">
+                    <div class="flex items-center">
+
+                        <input wire:model.defer="search"
+                               class="border-gray-100 mr-3 focus:ring-blue-grad-light focus:border-blue-grad-light rounded text-lg"
+                               type="text" name="search" placeholder="Filter Features"
+                               value="{{ request()->get('search') }}">
+                        <button wire:click="filter"
+                                class="bg-blue-grad-light border-2 border-blue-grad-light hover:border-white transition hover:bg-gray-800 px-6 py-2 text-white font-semibold rounded text-lg">
+                            Search
+                        </button>
+                        @if($search != '')
+                            <button wire:click="resetSearch"
+                                    class="ml-5 flex space-x-2 items-center hover:text-white hover:bg-red-600 transition py-2 px-3 text-white font-semibold text-lg rounded cursor-pointer">
+                                @include('icons.bin', ['attributes' => 'h-6 w-6'])
+                                <spam>Reset</spam>
+                            </button>
+                        @endif
+                    </div>
+                    <div class="flex items-center">
+                        <button @click="showCreateModal = true" @keydown.esc="showCreateModal = false"
+                                class="bg-white hover:text-white hover:bg-blue-grad-light transition py-3 px-6 text-blue-grad-dark font-semibold text-lg rounded">
+                            Add Feature
+                        </button>
+                    </div>
+                </div>
                 <thead class="bg-gray-800 text-white text-lg">
                 <tr>
-                    <th class="w-1/12 px-6 py-6">#</th>
-                    <th class="w-2/12 px-6 py-6">Name</th>
-                    <th class="w-6/12 px-6 py-6">Explanation</th>
-                    <th class="w-2/12 px-6 py-6">Icon Name</th>
-                    <th class="w-1/12 px-6 py-6"></th>
+                    <th class="w-1/12 p-4">#</th>
+                    <th class="w-2/12 p-4">Name</th>
+                    <th class="w-6/12 p-4">Explanation</th>
+                    <th class="w-2/12 p-4">Icon Name</th>
+                    <th class="w-1/12 p-4"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($features as $feature)
                     <tr class="hover:bg-gray-100 transition">
-                        <td class="px-6 py-4">{{ $feature->id }}</td>
-                        <td class="px-6 py-4 capitalize">{{ $feature->label }}</td>
-                        <td class="px-6 py-4 line-clamp-1">{{ $feature->explanation }}</td>
-                        <td class="px-6 py-4">
+                        <td class="p-4">{{ $feature->id }}</td>
+                        <td class="p-4 capitalize">{{ $feature->label }}</td>
+                        <td class="p-4 line-clamp-1">{{ $feature->explanation }}</td>
+                        <td class="p-4">
                             <div class="flex items-center space-x-1">
                                 @if(isset($feature->icon))
                                     @include('icons.' . $feature->icon, ['attributes' => 'w-6 h-6'])
@@ -82,11 +98,13 @@
                                class="border-0 text-gray-800 px-0 py-0 border-b-2 border-transparent focus:ring-0 focus:border-b-2 focus:border-blue-grad-light">
                     </div>
                     @error('explanation') <span class="text-red-600">{{ $message }}</span> @enderror
-                    <div class="w-full border border-blue-grad-dark/25 focus-within:border-blue-grad-dark focus-within:shadow-xl hover:border-blue-grad-dark/75 hover:shadow-lg transition rounded flex flex-col px-3 pt-1.5 pb-2 space-y-1">
+                    <div
+                        class="w-full border border-blue-grad-dark/25 focus-within:border-blue-grad-dark focus-within:shadow-xl hover:border-blue-grad-dark/75 hover:shadow-lg transition rounded flex flex-col px-3 pt-1.5 pb-2 space-y-1">
                         <label class="text-sm text-blue-800 font-semibold">Icon</label>
                         <input type="hidden" name="terms" x-model="createSelected" wire:model.defer="icon"/>
                         <div @click.outside="createIconDropdown = false" class="relative">
-                            <button @click="createIconDropdown = !createIconDropdown" type="button" aria-haspopup="listbox"
+                            <button @click="createIconDropdown = !createIconDropdown" type="button"
+                                    aria-haspopup="listbox"
                                     aria-expanded="true" aria-labelledby="listbox-label"
                                     class="relative w-full h-full bg-white py-0.5 pr-10 text-left cursor-pointer">
                                 <span class="flex items-center">
@@ -162,7 +180,8 @@
                                class="border-0 text-gray-800 px-0 py-0 border-b-2 border-transparent focus:ring-0 focus:border-b-2 focus:border-blue-grad-light">
                     </div>
                     @error('editExplanation') <span class="text-red-600">{{ $message }}</span> @enderror
-                    <div class="w-full border border-blue-grad-dark/25 focus-within:border-blue-grad-dark focus-within:shadow-xl hover:border-blue-grad-dark/75 hover:shadow-lg transition rounded flex flex-col px-3 pt-1.5 pb-2 space-y-1">
+                    <div
+                        class="w-full border border-blue-grad-dark/25 focus-within:border-blue-grad-dark focus-within:shadow-xl hover:border-blue-grad-dark/75 hover:shadow-lg transition rounded flex flex-col px-3 pt-1.5 pb-2 space-y-1">
                         <label class="text-sm text-blue-800 font-semibold">Icon</label>
                         <input type="hidden" name="terms" x-model="editSelected" wire:model.defer="editIcon"/>
                         <div @click.outside="editIconDropdown = false" class="relative">

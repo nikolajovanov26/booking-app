@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Models\Country;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CountryController extends Component
 {
+    use WithPagination;
+
     public $counties;
     public $country;
     public $showCreateModal = false;
@@ -17,10 +20,22 @@ class CountryController extends Component
     public $name;
     public $editName;
     public $modalText = '';
+    public $search = '';
 
     public function mount()
     {
-        $this->counties = Country::all();
+        $this->counties = Country::where('name', 'like', '%' . $this->search . '%')->withCount('properties')->get();
+    }
+
+    public function filter()
+    {
+        $this->mount();
+    }
+
+    public function resetSearch()
+    {
+        $this->search = '';
+        $this->mount();
     }
 
     public function render()

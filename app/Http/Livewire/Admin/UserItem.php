@@ -56,10 +56,8 @@ class UserItem extends Component
         $this->saveButton = false;
         $this->changeRole = false;
 
-
-
         $this->refresh();
-        $this->emit('userEdited', ['id' => 1]);
+        $this->emit('userEdited', ['id' => $this->user->id]);
     }
 
     public function delete()

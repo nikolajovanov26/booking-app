@@ -17,10 +17,22 @@ class PaymentMethodController extends Component
     public $name;
     public $editName;
     public $modalText = '';
+    public $search = '';
 
     public function mount()
     {
-        $this->paymentMethods = PaymentMethod::all();
+        $this->paymentMethods = PaymentMethod::where('name', 'like', '%' . $this->search . '%')->get();
+    }
+
+    public function filter()
+    {
+        $this->mount();
+    }
+
+    public function resetSearch()
+    {
+        $this->search = '';
+        $this->mount();
     }
 
     public function render()

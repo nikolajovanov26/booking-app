@@ -5,36 +5,56 @@
         showDeleteModal: @entangle('showDeleteModal'),
         modalText: @entangle('modalText')
     }">
-    <div class="flex justify-end">
-        <div class="mb-6">
-            <button
-                @click="showCreateModal = true" @keydown.esc="showCreateModal = false"
-                class="bg-blue-600 hover:bg-blue-900 transition py-4 px-6 text-white font-semibold text-lg rounded-xl">
-                Add Property Type
-            </button>
-        </div>
 
-    </div>
     <div class="bg-white shadow-xl rounded-xl overflow-hidden">
         <div>
             <table class="text-left w-full">
+                <div class="px-6 py-4 flex items-center justify-between bg-blue-grad-dark">
+                    <div class="flex items-center">
+                        <input wire:model.defer="search"
+                               class="border-gray-100 mr-3 focus:ring-blue-grad-light focus:border-blue-grad-light rounded text-lg"
+                               type="text" name="search" placeholder="Filter Property Types"
+                               value="{{ request()->get('search') }}">
+                        <button wire:click="filter"
+                                class="bg-blue-grad-light border-2 border-blue-grad-light hover:border-white transition hover:bg-gray-800 px-6 py-2 text-white font-semibold rounded text-lg">
+                            Search
+                        </button>
+                        @if($search != '')
+                            <button wire:click="resetSearch"
+                                    class="ml-5 flex space-x-2 items-center hover:text-white hover:bg-red-600 transition py-2 px-3 text-white font-semibold text-lg rounded cursor-pointer">
+                                @include('icons.bin', ['attributes' => 'h-6 w-6'])
+                                <spam>Reset</spam>
+                            </button>
+                        @endif
+                    </div>
+                    <div class="flex items-center">
+                        <button @click="showCreateModal = true" @keydown.esc="showCreateModal = false"
+                                class="bg-white hover:text-white hover:bg-blue-grad-light transition py-3 px-6 text-blue-grad-dark font-semibold text-lg rounded">
+                            Add Property Type
+                        </button>
+                    </div>
+                </div>
                 <thead class="bg-gray-800 text-white text-lg">
                 <tr>
-                    <th class="w-1/12 px-6 py-6">#</th>
-                    <th class="w-3/12 px-6 py-6">Name</th>
-                    <th class="w-3/12 px-6 py-6 text-center">Num. of Properties</th>
-                    <th class="w-5/12 px-6 py-6"></th>
+                    <th class="w-1/12 p-4">#</th>
+                    <th class="w-3/12 p-4">Name</th>
+                    <th class="w-3/12 p-4 text-center">Num. of Properties</th>
+                    <th class="w-5/12 p-4"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($propertyTypes as $type)
                     <tr class="hover:bg-gray-100 transition">
-                        <td class="px-6 py-4">{{ $type->id }}</td>
-                        <td class="px-6 py-4 capitalize">{{ $type->label }}</td>
-                        <td class="px-6 py-4 text-center">{{ $type->properties()->count() }}</td>
-                        <td class="flex items-center justify-end px-6 py-4 text-right space-x-4">
-                            <button wire:click="editModal({{ $type->id }})" class="bg-blue-600 text-white rounded px-3 py-2 hover:bg-blue-800 transition">Edit</button>
-                            <button wire:click="deleteModal({{ $type->id }})" class="bg-red-700 text-white rounded px-3 py-2">Delete</button>
+                        <td class="p-4">{{ $type->id }}</td>
+                        <td class="p-4 capitalize">{{ $type->label }}</td>
+                        <td class="p-4 text-center">{{ $type->properties()->count() }}</td>
+                        <td class="flex items-center justify-end p-4 text-right space-x-4">
+                            <button wire:click="editModal({{ $type->id }})"
+                                    class="bg-blue-600 text-white rounded px-3 py-2 hover:bg-blue-800 transition">Edit
+                            </button>
+                            <button wire:click="deleteModal({{ $type->id }})"
+                                    class="bg-red-700 text-white rounded px-3 py-2">Delete
+                            </button>
                         </td>
                     </tr>
                 @endforeach

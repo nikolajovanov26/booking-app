@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class RoomViewController extends Component
 {
-
     public $roomViews;
     public $roomView;
     public $showCreateModal = false;
@@ -18,10 +17,21 @@ class RoomViewController extends Component
     public $name;
     public $editName;
     public $modalText = '';
+    public $search = '';
 
     public function mount()
     {
-        $this->roomViews = RoomView::all();
+        $this->roomViews = RoomView::where('name', 'like', '%' . $this->search . '%')->get();
+    }
+    public function filter()
+    {
+        $this->mount();
+    }
+
+    public function resetSearch()
+    {
+        $this->search = '';
+        $this->mount();
     }
 
     public function render()

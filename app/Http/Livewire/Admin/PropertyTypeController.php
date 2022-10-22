@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class PropertyTypeController extends Component
 {
-
     public $propertyTypes;
     public $propertyType;
     public $showCreateModal = false;
@@ -18,10 +17,22 @@ class PropertyTypeController extends Component
     public $name;
     public $editName;
     public $modalText = '';
+    public $search = '';
 
     public function mount()
     {
-        $this->propertyTypes = PropertyType::all();
+        $this->propertyTypes = PropertyType::where('name', 'like', '%' . $this->search . '%')->get();
+    }
+
+    public function filter()
+    {
+        $this->mount();
+    }
+
+    public function resetSearch()
+    {
+        $this->search = '';
+        $this->mount();
     }
 
     public function render()

@@ -36,7 +36,6 @@ class User extends Authenticatable
 
     protected $with = [
         'profile',
-        'role'
     ];
 
     public function favorites()

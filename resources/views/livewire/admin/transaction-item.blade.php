@@ -12,17 +12,11 @@
     @endif
     ">
         <div class="p-4">{{ $transaction->id }}</div>
-        <div class="w-1/12 p-4">
-            <p href=""
-               class="text-blue-700 hover:underline hover:text-blue-900 transition">
-                {{ $transaction->owner->profile->fullName() }}
-            </p>
+        <div class="w-2/12 p-4">
+            <p>{{ $transaction->owner->profile->fullName() }}</p>
         </div>
-        <div class="w-1/12 p-4">
-            <a href=""
-               class="text-blue-700 hover:underline hover:text-blue-900 transition">
-                {{ $transaction->customer->profile->fullName() }}
-            </a>
+        <div class="w-2/12 p-4">
+            <p>{{ $transaction->customer->profile->fullName() }}</p>
         </div>
         <div class="w-2/12 p-4">
             <a href="{{ route('properties.show', ['property' => 1]) }}"
@@ -32,7 +26,7 @@
         </div>
         <div class="w-1/12 p-4 text-center">{{ $transaction->total }} &euro;</div>
         <div class="w-2/12 p-4 text-center">{{ $transaction->created_at->toDateString() }}</div>
-        <div class="w-3/12 p-4 text-center">
+        <div class="w-2/12 p-4 text-center">
             @if($changeStatus)
                 <div class="flex items-center space-x-1">
                     <div class="w-full border bg-white border-blue-grad-dark/25 focus-within:border-blue-grad-dark focus-within:shadow-xl hover:border-blue-grad-dark/75 hover:shadow-lg transition rounded flex flex-col px-3 pt-1.5 pb-2 space-y-1">
@@ -83,7 +77,7 @@
             </span>
             @endif
         </div>
-        <div class="w-2/12 p-4 text-right">
+        <div class="w-1/12 p-4 text-right">
             <div class="flex items-center justify-end space-x-3">
                 @if($changeStatus)
                     <div x-show="saveButton">

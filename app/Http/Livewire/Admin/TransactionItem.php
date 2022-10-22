@@ -16,6 +16,11 @@ class TransactionItem extends Component
     public $saveButton = false;
     public $changeStatus = false;
 
+    protected $listeners = [
+        'editFlash' => 'editFlash',
+        'transactionEdited' => 'clearEditFlash',
+    ];
+
     public function mount(Transaction $transaction, Collection $statuses)
     {
         $this->transaction = $transaction;
@@ -47,17 +52,37 @@ class TransactionItem extends Component
         $this->transaction->transaction_status_id = $this->statuses->firstWhere('label', $this->status)->id;
         $this->transaction->save();
         $this->saveButton = false;
-
-        Session::flash('success', [
-            'action' => 'Success!',
-            'message' => "Transaction status was changed"
-        ]);
+        $this->changeStatus = false;
 
         $this->refresh();
+        $this->emit('transactionEdited', ['id' => $this->transaction->id]);
     }
 
     public function refresh()
     {
         //
+    }
+
+    public function editFlash()
+    {
+
+        Session::flash('success', [
+            'action' => 'Success!',
+            'message' => "Transaction's status was changed"
+        ]);
+    }
+
+    public function clearEditFlash($params)
+    {
+        if($this->transaction->id == $params['id']) {
+            $this->emitSelf('editFlash');
+        }
+    }
+
+    public function clearDeleteFlash($id)
+    {
+        if($this->transaction->id == $id) {
+            $this->emitSelf('editFlash');
+        }
     }
 }

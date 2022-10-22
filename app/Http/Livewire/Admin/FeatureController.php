@@ -25,6 +25,7 @@ class FeatureController extends Component
     public $icons;
     public $editIconDropdown = false;
     public $createIconDropdown = false;
+    public $search = '';
 
     public function mount()
     {
@@ -35,8 +36,19 @@ class FeatureController extends Component
             $icons[$i] = $files[$i]->getBasename('.blade.php');
         }
 
-        $this->features = Feature::all();
+        $this->features = Feature::where('name', 'like', '%' . $this->search . '%')->get();
         $this->icons = $icons;
+    }
+
+    public function filter()
+    {
+        $this->mount();
+    }
+
+    public function resetSearch()
+    {
+        $this->search = '';
+        $this->mount();
     }
 
     public function render()
