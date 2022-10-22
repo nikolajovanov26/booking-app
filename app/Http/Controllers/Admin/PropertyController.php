@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchFilterRequest;
 use App\Models\Country;
 use App\Models\Feature;
 use App\Models\PaymentMethod;
@@ -12,10 +13,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
-    public function index()
+    public function index(SearchFilterRequest $request)
     {
+        $properties = Property:: with('propertyStatus', 'country')
+            ->withAvg('reviews', 'rating');
+
+        if ($request->get('search')) {
+            $properties->where('name', 'like', '%' . $request->get('search') . '%');
+        }
+
         return view('admin.properties.index', [
-            'properties' => Property::all()
+            'properties' => $properties->paginate(10)
         ]);
     }
 
