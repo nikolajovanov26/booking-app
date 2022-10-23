@@ -3,17 +3,19 @@
 namespace App\Repository;
 
 use App\Models\Country;
+use App\Models\Image;
 use App\Models\Property;
 use App\Models\PropertyStatus;
 use App\Models\PropertyType;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PropertyRepository
 {
     public function store(array $data, string $status): void
     {
-        Property::create([
+        $property = Property::create([
             'user_id' => Auth::user()->id,
             'property_status_id' => PropertyStatus::firstWhere('name', $status)->id,
             'property_type_id' => PropertyType::firstWhere('name', $data['property_type_id'])->id,
@@ -35,6 +37,30 @@ class PropertyRepository
             'description' => $data['description'],
             'cancellation_policy' => $data['cancellation_policy'] ?? null,
         ]);
+
+        if (isset($data['main_photo'])) {
+            $name = Carbon::now()->timestamp . '-'
+                . $data['slug'] . '.'
+                . last(explode('.',  $data['main_photo']->getClientOriginalName()));
+
+            Storage::disk('property_main_images')->putFileAs('', $data['main_photo'], $name);
+
+            $property->main_photo = $name;
+            $property->save();
+        }
+
+        if (isset($data['gallery_images'])) {
+            foreach ($data['gallery_images'] as $galleryImage) {
+                $name = Carbon::now()->timestamp . '-' . $galleryImage->getClientOriginalName();
+
+                Storage::disk('property_gallery')->putFileAs($property->slug, $galleryImage, $name);
+
+                Image::create([
+                    'property_id' => $property->id,
+                    'path' => $name
+                ]);
+            }
+        }
     }
 
     public function update(array $data, Property $property, string $status): void
@@ -44,7 +70,6 @@ class PropertyRepository
         $property->country_id = Country::firstWhere('label', $data['country_id'])->id;
         $property->name = $data['name'];
         $property->slug = $data['slug'];
-        $property->main_photo = null;
         $property->stars = $data['stars'] ?? null;
         $property->email = $data['email'];
         $property->phone_number = $data['phone_number'] ?? null;
@@ -59,9 +84,34 @@ class PropertyRepository
         $property->description = $data['description'];
         $property->cancellation_policy = $data['cancellation_policy'] ?? null;
 
-        if ($property->isDirty()) {
-            $property->save();
+        if (isset($data['main_photo'])) {
+            $name = Carbon::now()->timestamp . '-'
+                . $data['slug'] . '.'
+                . last(explode('.',  $data['main_photo']->getClientOriginalName()));
+
+            Storage::disk('property_main_images')->putFileAs('', $data['main_photo'], $name);
+
+            if ($property->main_photo) {
+                Storage::disk('property_main_images')->delete($property->main_photo);
+            }
+
+            $property->main_photo = $name;
         }
+
+        if (isset($data['gallery_images'])) {
+            foreach ($data['gallery_images'] as $galleryImage) {
+                $name = Carbon::now()->timestamp . '-' . $galleryImage->getClientOriginalName();
+
+                Storage::disk('property_gallery')->putFileAs($property->slug, $galleryImage, $name);
+
+                Image::create([
+                    'property_id' => $property->id,
+                    'path' => $name
+                ]);
+            }
+        }
+
+        $property->save();
     }
 
     public function filter(array $data)

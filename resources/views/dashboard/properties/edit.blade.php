@@ -7,7 +7,7 @@
         </div>
         <div class="px-12 py-8 w-full">
             <div>
-                <form class="space-y-6" method="POST"
+                <form class="space-y-6" method="POST" enctype="multipart/form-data"
                       action="{{ route('dashboard.properties.update', ['property' => $property->id]) }}">
                     @csrf
                     @method('PUT')
@@ -79,10 +79,7 @@
                             </div>
                         </div>
                         <div class="w-1/3 flex space-x-6">
-                            <div
-                                class="h-full w-full flex items-center justify-center rounded-xl border-dashed border-2">
-                                Upload main image
-                            </div>
+                            @include('dashboard.components.form.image')
                         </div>
                     </div>
                     <div class="w-full flex space-x-6">
@@ -207,9 +204,7 @@
                         ])
                     </div>
                     <div class="w-full flex space-x-6">
-                        <div class="h-52 w-full flex items-center justify-center rounded-xl border-dashed border-2">
-                            Upload more images
-                        </div>
+                        @include('dashboard.components.form.multi-image')
                     </div>
                     <div class="flex justify-end space-x-4">
                         <button class="py-3 px-6 rounded bg-orange-600 hover:bg-orange-800 transition text-white"

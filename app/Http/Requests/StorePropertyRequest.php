@@ -27,7 +27,7 @@ class StorePropertyRequest extends FormRequest
             'property_type_id' => 'required|exists:property_types,name',
             'country_id' => 'required|exists:countries,name',
             'name' => 'required|string',
-            'slug' => 'required|string|unique:properties,slug',
+            'slug' => 'required|alpha_dash|unique:properties,slug',
             'main_photo' => 'nullable|image',
             'stars' => 'nullable|integer|min:0|max:5',
             'email' => 'required|email',
@@ -42,6 +42,8 @@ class StorePropertyRequest extends FormRequest
             'check_out_to' => 'required|string',
             'description' => 'required|string',
             'cancellation_policy' => 'nullable|string',
+            'gallery_images' => 'nullable',
+            'gallery_images.*' => 'required|image'
         ];
     }
 }

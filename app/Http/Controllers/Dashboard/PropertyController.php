@@ -69,7 +69,7 @@ class PropertyController extends Controller
             'message' => "Your new property has been created"
         ]);
 
-        return redirect()->route('dashboard.properties.index');
+        return back();
     }
 
     public function edit(Property $property)
@@ -96,7 +96,7 @@ class PropertyController extends Controller
             'message' => "Your property was updated"
         ]);
 
-        return redirect()->route('dashboard.properties.index');
+        return back();
     }
 
     public function destroy(Property $property)

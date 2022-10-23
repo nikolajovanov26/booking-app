@@ -9,6 +9,11 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'property_id',
+        'path'
+    ];
+
     public function property()
     {
         return $this->belongsToMany(Property::class);

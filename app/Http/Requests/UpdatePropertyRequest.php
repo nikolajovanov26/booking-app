@@ -27,7 +27,7 @@ class UpdatePropertyRequest extends FormRequest
             'property_type_id' => 'required|exists:property_types,name',
             'country_id' => 'required|exists:countries,label',
             'name' => 'required|string',
-            'slug' => 'required|string|unique:properties,slug,' . $this->property->id,
+            'slug' => 'required|alpha_dash|unique:properties,slug,' . $this->property->id,
             'main_photo' => 'nullable|image',
             'stars' => 'nullable|integer|min:0|max:5',
             'email' => 'required|email',
