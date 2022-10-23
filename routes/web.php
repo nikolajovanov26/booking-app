@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
     /**
      * Owner Routes
      */
-    Route::prefix('dashboard/')->name('dashboard.')->group(function () {
+    Route::middleware('owner')->prefix('dashboard/')->name('dashboard.')->group(function () {
         Route::get('/', DashboardController::class)->name('index');
 
         Route::get('properties/favorite', [DashboardPropertyController::class, 'favorite'])->name('properties.favorite');
