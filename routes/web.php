@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     /**
      * Admin Routes
      */
-    Route::prefix('admin/')->name('admin.')->group(function () {
+    Route::middleware('admin')->prefix('admin/')->name('admin.')->group(function () {
         Route::get('dashboard', AdminDashboardController::class)->name('dashboard');
         Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings');
         Route::get('countries', AdminCountryController::class)->name('countries');
