@@ -18,6 +18,10 @@ class NotificationController extends Controller
 
     public function delete(Notification $notification)
     {
+        if (Auth::user()->cannot('delete', $notification)) {
+            abort(403);
+        }
+
         $notification->delete();
 
         Session::flash('success', [
@@ -30,6 +34,10 @@ class NotificationController extends Controller
 
     public function toggleRead(Notification $notification)
     {
+        if (Auth::user()->cannot('update', $notification)) {
+            abort(403);
+        }
+
         $notification->read = !$notification->read;
         $notification->save();
 

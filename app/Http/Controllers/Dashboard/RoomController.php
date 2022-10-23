@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\RoomType;
 use App\Models\RoomView;
 use App\Repository\RoomRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class RoomController extends Controller
@@ -22,6 +23,10 @@ class RoomController extends Controller
 
     public function index(Property $property)
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         return view('dashboard.properties.rooms.index', [
             'property' => $property,
             'rooms' => Room::where('property_id', $property->id)->get()
@@ -30,6 +35,10 @@ class RoomController extends Controller
 
     public function create(Property $property)
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         return view('dashboard.properties.rooms.create', [
             'property' => $property,
             'views' => RoomView::all(),
@@ -39,6 +48,10 @@ class RoomController extends Controller
 
     public function store(RoomRequest $request, Property $property, string $status = 'active')
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         if($request->action == 'draft') {
             $status = 'draft';
         }
@@ -55,6 +68,10 @@ class RoomController extends Controller
 
     public function edit(Property $property, Room $room)
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         if($room->property_id != $property->id) {
             abort(404);
         }
@@ -69,6 +86,10 @@ class RoomController extends Controller
 
     public function update(RoomRequest $request, Property $property, Room $room, string $status = 'active')
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         if($room->property_id != $property->id) {
             abort(404);
         }
@@ -89,6 +110,10 @@ class RoomController extends Controller
 
     public function destroy(Property $property, Room $room)
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         if($room->property_id != $property->id) {
             abort(404);
         }

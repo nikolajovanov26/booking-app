@@ -41,6 +41,10 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
+        if (Auth::user()->cannot('view', $property)) {
+            abort(403);
+        }
+
         return view('dashboard.properties.show', [
             'property' => $property
         ]);
@@ -74,6 +78,10 @@ class PropertyController extends Controller
 
     public function edit(Property $property)
     {
+        if (Auth::user()->cannot('update', $property)) {
+            abort(403);
+        }
+
         return view('dashboard.properties.edit', [
             'property' => $property,
             'types' => PropertyType::all(),
@@ -85,6 +93,10 @@ class PropertyController extends Controller
 
     public function update(UpdatePropertyRequest $request, Property $property, string $status = 'active')
     {
+        if (Auth::user()->cannot('update', $property)) {
+            abort(403);
+        }
+
         if($request->action == 'draft') {
             $status = 'draft';
         }
@@ -101,6 +113,10 @@ class PropertyController extends Controller
 
     public function destroy(Property $property)
     {
+        if (Auth::user()->cannot('delete', $property)) {
+            abort(403);
+        }
+
         $property->delete();
 
         Session::flash('success', [
