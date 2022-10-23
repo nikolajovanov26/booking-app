@@ -30,6 +30,27 @@ return [
 
     'disks' => [
 
+        'profile_pictures' => [
+            'driver' => 'local',
+            'root' => public_path('images/profile_pictures'),
+            'url' => '/images/profile_pictures',
+            'throw' => false,
+        ],
+
+        'property_main_images' => [
+            'driver' => 'local',
+            'root' => public_path('images/property_main_images'),
+            'url' => '/images/property_main_images',
+            'throw' => false,
+        ],
+
+        'property_gallery' => [
+            'driver' => 'local',
+            'root' => public_path('images/property_gallery'),
+            'url' => '/images/property_gallery',
+            'throw' => false,
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
