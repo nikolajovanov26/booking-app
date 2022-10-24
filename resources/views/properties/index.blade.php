@@ -29,7 +29,6 @@
                                 class="relative w-full h-12 opacity-0 hover:opacity-100 bg-gradient-to-b from-blue-grad-light to-blue-grad-dark transition font-semibold text-white">
                                 Search
                             </button>
-
                         </div>
                     </div>
                 </form>

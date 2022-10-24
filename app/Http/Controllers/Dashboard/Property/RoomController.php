@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Property;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
@@ -29,7 +29,7 @@ class RoomController extends Controller
 
         return view('dashboard.properties.rooms.index', [
             'property' => $property,
-            'rooms' => Room::where('property_id', $property->id)->get()
+            'rooms' => Room::where('property_id', $property->id)->paginate(10)
         ]);
     }
 

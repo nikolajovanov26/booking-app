@@ -41,7 +41,7 @@ class PropertyRepository
         if (isset($data['main_photo'])) {
             $name = Carbon::now()->timestamp . '-'
                 . $data['slug'] . '.'
-                . last(explode('.',  $data['main_photo']->getClientOriginalName()));
+                . last(explode('.', $data['main_photo']->getClientOriginalName()));
 
             Storage::disk('property_main_images')->putFileAs('', $data['main_photo'], $name);
 
@@ -87,7 +87,7 @@ class PropertyRepository
         if (isset($data['main_photo'])) {
             $name = Carbon::now()->timestamp . '-'
                 . $data['slug'] . '.'
-                . last(explode('.',  $data['main_photo']->getClientOriginalName()));
+                . last(explode('.', $data['main_photo']->getClientOriginalName()));
 
             Storage::disk('property_main_images')->putFileAs('', $data['main_photo'], $name);
 
@@ -163,5 +163,23 @@ class PropertyRepository
         return $properties->paginate(10);
     }
 
-}
+    public function filterRooms(Property $property, array $data)
+    {
+        $property->load('reviews', 'images')
+            ->loadCount('reviews', 'images')
+            ->loadAvg('reviews', 'rating');
 
+        if (isset($data['date_from'])) {
+            $property->load(['rooms' => function ($query) use ($data) {
+                $query->where('number_of_persons', '>=', $data['guests'])
+                    ->whereDoesntHave('bookings', fn($query) => $query
+                        ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
+                        ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
+                        ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
+                        ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
+            }]);
+        }
+
+        return $property;
+    }
+}

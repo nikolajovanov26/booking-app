@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PropertyFilterRequest;
+use App\Http\Requests\PropertyRoomRequest;
 use App\Models\Booking;
 use App\Models\Property;
 use App\Models\PropertyType;
@@ -30,10 +31,13 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function show(Property $property)
+    public function show(Property $property, PropertyRoomRequest $request)
     {
+        $property = $this->propertyRepository->filterRooms($property, $request->all());
+
         return view('properties.show', [
-            'property' => $property
+            'property' => $property,
+            'available' => $property->rooms->count() != 0
         ]);
     }
 

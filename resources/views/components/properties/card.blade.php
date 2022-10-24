@@ -12,7 +12,8 @@
                 </button>
             </form>
         </div>
-        <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6" alt="" class="rounded-xl">
+        <img src="{{ Storage::disk('property_main_images')->url( $property->main_photo ?? 'default_photo.jpg' ) }}"
+             alt="" class="rounded-xl w-full h-full">
     </div>
     <div class="w-8/12">
         <div class="flex items-center space-x-3">
@@ -47,7 +48,8 @@
                     <span class="font-bold text-xl -mb-1">{{ ratingString($property->reviews_avg_rating) }}</span>
                     <span class="text-sm">{{ $property->reviews_count }} reviews</span>
                 </div>
-                <div class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews_avg_rating, 1) }}</div>
+                <div
+                    class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews_avg_rating, 1) }}</div>
             </div>
             <span class="text-right mt-2 mb-7">Location 9.7</span>
         </div>
@@ -57,7 +59,13 @@
                 <span class="text-right text-2xl font-bold text-blue-800 my-2">{{ number_format($property->rooms_min_price, 2) }}&euro;</span>
             </div>
             <div class="flex justify-end">
-                <a href="{{ route('properties.show', ['property' => $property->slug]) }}" class="bg-blue-600 hover:bg-blue-700 transition-all text-white rounded-md w-fit px-4 py-2">View Property
+                <a href="{{ route('properties.show', [
+                    'property' => $property->slug,
+                    'date_from' => request()->get('date_from'),
+                    'date_to' => request()->get('date_to'),
+                    'guests' => request()->get('guests'),
+            ]) }}" class="bg-blue-600 hover:bg-blue-700 transition-all text-white rounded-md w-fit px-4 py-2">View
+                    Property
                 </a>
             </div>
         </div>

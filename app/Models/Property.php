@@ -47,6 +47,11 @@ class Property extends Model
         return $this->belongsToMany(Feature::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');

@@ -1,34 +1,31 @@
 <?php
 
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\CountryController as AdminCountryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FeatureController as AdminFeatureController;
 use App\Http\Controllers\Admin\PaymentMethodController as AdminPaymentMethodController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 use App\Http\Controllers\Admin\PropertyTypeController as AdminPropertyTypeController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\Admin\RoomTypeController as AdminRoomTypeController;
 use App\Http\Controllers\Admin\RoomViewController as AdminRoomViewController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
-use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
-use App\Http\Controllers\Admin\BookingController as AdminBookingController;
-use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\PropertyController as DashboardPropertyController;
-use App\Http\Controllers\Dashboard\RoomController as DashboardRoomController;
-use App\Http\Controllers\Dashboard\NotificationController as DashboardNotificationController;
-use App\Http\Controllers\Dashboard\SwitchToUserController;
-use App\Http\Controllers\Dashboard\TransactionController as DashboardTransactionController;
-use App\Http\Controllers\Dashboard\ReviewController as DashboardReviewController;
-use App\Http\Controllers\Dashboard\BookingController as DashboardBookingController;
-use App\Http\Controllers\Dashboard\ProfileController as DashboardProfileController;
-
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\BecomeOwnerController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Dashboard\BookingController as DashboardBookingController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\NotificationController as DashboardNotificationController;
+use App\Http\Controllers\Dashboard\ProfileController as DashboardProfileController;
+use App\Http\Controllers\Dashboard\Property\RoomController as DashboardRoomController;
+use App\Http\Controllers\Dashboard\PropertyController as DashboardPropertyController;
+use App\Http\Controllers\Dashboard\SwitchToUserController;
+use App\Http\Controllers\Dashboard\TransactionController as DashboardTransactionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Livewire\Auth\Login;
