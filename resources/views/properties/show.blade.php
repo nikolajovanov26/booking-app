@@ -6,7 +6,7 @@
             <div class="flex space-x-12">
                 <div class="w-1/4">
                     <div class="bg-gray-800 py-4 px-6 rounded shadow-xl">
-                        <form action="" method="get">
+                        <form action="" method="get" id="filter">
                             @csrf
                             <h2 class="text-white text-2xl font-semibold mb-6">Filter</h2>
                             <div class="mb-4">
@@ -30,15 +30,15 @@
                             </button>
                         </form>
                     </div>
-{{--                    <div class="mt-8 bg-white rounded overflow-hidden shadow-xl">--}}
-{{--                        <iframe class="w-full h-96"--}}
-{{--                                style="border:0"--}}
-{{--                                loading="lazy"--}}
-{{--                                allowfullscreen--}}
-{{--                                referrerpolicy="no-referrer-when-downgrade"--}}
-{{--                                src="https://www.google.com/maps/embed/v1/place?key={{ env('GOOGLE_MAPS_EMBED_API') }}&q={{$property->country->label }}">--}}
-{{--                        </iframe>--}}
-{{--                    </div>--}}
+                    <div class="mt-8 bg-white rounded overflow-hidden shadow-xl">
+                        <iframe class="w-full h-96"
+                                style="border:0"
+                                loading="lazy"
+                                allowfullscreen
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="https://www.google.com/maps/embed/v1/place?key={{ env('GOOGLE_MAPS_EMBED_API') }}&q={{$property->country->label }}">
+                        </iframe>
+                    </div>
                 </div>
                 <div class="flex flex-col w-3/4 space-y-6">
                     @if(!$available)

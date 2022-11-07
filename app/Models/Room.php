@@ -30,7 +30,7 @@ class Room extends Model
 
     public function property()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function roomStatus()

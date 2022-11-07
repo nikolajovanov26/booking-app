@@ -28,6 +28,7 @@ use App\Http\Controllers\Dashboard\SwitchToUserController;
 use App\Http\Controllers\Dashboard\TransactionController as DashboardTransactionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -111,6 +112,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/become-owner', BecomeOwnerController::class)->name('becomeOwner');
     Route::get('/favorite', [PropertyController::class, 'favorite'])->name('favorite');
     Route::post('/favorite/{property}', [PropertyController::class, 'toggleFavorite'])->name('toggleFavorite');
+
+    Route::post('/reservation', [ReservationController::class, 'reservation'])->name('reservation');
+    Route::post('/reserve', [ReservationController::class, 'reserve'])->name('reserve');
 });
 
 /*

@@ -40,9 +40,21 @@
                 </div>
             </td>
             <td class="px-4">
-                <button class="w-full h-10 rounded font-semibold text-white bg-blue-600 hover:bg-blue-900 transition">
-                    Book Now
-                </button>
+                @if(request()->get('date_from') && request()->get('date_to'))
+                <form method="post" action="{{ route('reservation') }}">
+                    @csrf
+                    <input name="room_id" value="{{ $room->id }}" hidden>
+                    <input name="date_from" value="{{ request()->get('date_from') }}" hidden>
+                    <input name="date_to" value="{{ request()->get('date_to') }}" hidden>
+                    <button class="w-full h-10 rounded font-semibold text-white bg-blue-600 hover:bg-blue-900 transition">
+                        Book Now
+                    </button>
+                </form>
+                @else
+                    <a href="#filter" class="w-full cursor-pointer border border-blue-600 px-4 py-2 h-10 rounded font-semibold text-blue-600 bg-white hover:bg-blue-100 transition">
+                        Select Dates
+                    </a>
+                @endif
             </td>
         </tr>
     @endforeach
