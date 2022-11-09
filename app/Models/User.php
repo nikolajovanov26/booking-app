@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany(Property::class, 'favorites');
+        return $this->belongsToMany(Property::class, 'favorites')->withTimestamps();
     }
 
     public function profile()

@@ -43,6 +43,7 @@ class PropertyFactory extends Factory
             'check_out_to' => $this->faker->time('H:i'),
             'description' => $this->faker->paragraphs(4, true),
             'cancellation_policy' => $this->faker->paragraphs(4, true),
+            'created_at' => now()->subDays(mt_rand(0, 100)),
         ];
     }
 }

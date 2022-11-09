@@ -44,7 +44,7 @@ class Property extends Model
 
     public function features()
     {
-        return $this->belongsToMany(Feature::class);
+        return $this->belongsToMany(Feature::class)->withTimestamps();
     }
 
     public function images()
@@ -59,7 +59,7 @@ class Property extends Model
 
     public function paymentMethods()
     {
-        return $this->belongsToMany(PaymentMethod::class);
+        return $this->belongsToMany(PaymentMethod::class)->withTimestamps();
     }
 
     public function reviews()

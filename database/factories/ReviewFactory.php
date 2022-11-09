@@ -22,7 +22,8 @@ class ReviewFactory extends Factory
             'user_id' => User::all()->random()->id,
             'property_id' => Property::all()->random()->id,
             'rating' => $this->faker->numberBetween(1, 10),
-            'comment' => $this->faker->paragraph(5)
+            'comment' => $this->faker->paragraph(5),
+            'created_at' => now()->subDays(mt_rand(0, 100)),
         ];
     }
 }

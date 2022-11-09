@@ -32,8 +32,8 @@
                         <th class="p-4">Location</th>
                         <th class="p-4">Price</th>
                         <th class="p-4">Status</th>
-                        <th class="p-4 text-center">Date From</th>
-                        <th class="p-4 text-center">Date To</th>
+                        <th class="p-4 text-center w-1/12">Date From</th>
+                        <th class="p-4 text-center w-1/12">Date To</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,7 +47,7 @@
                             <td class="px-6 py-4">{{ $booking->price }} &euro;</td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="bg-green-600 tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">paid</span>
+                                    class="bg-green-600 tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">{{ $booking->bookingStatus->label }}</span>
                             </td>
                             <td class="px-6 py-4 text-center">{{ $booking->date_from->format('d M Y') }}</td>
                             <td class="px-6 py-4 text-center">{{ $booking->date_to->format('d M Y') }}</td>

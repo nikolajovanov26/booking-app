@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('rooms', function (Blueprint $table) {
-            $table->dropColumn('number_of_rooms');
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->foreignId('payment_method_id')->after('room_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('rooms', function (Blueprint $table) {
-            //
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('payment_method_id');
         });
     }
 };

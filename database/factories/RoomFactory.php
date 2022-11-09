@@ -25,7 +25,6 @@ class RoomFactory extends Factory
             'room_status_id' => RoomStatus::firstWhere('name', 'active')->id,
             'room_type_id' => RoomType::all()->random()->id,
             'room_view_id' => RoomView::all()->random()->id,
-            'number_of_rooms' => $this->faker->numberBetween(1, 5),
             'number_of_persons' => $this->faker->numberBetween(1, 8),
             'size' => $this->faker->numberBetween(20, 200),
             'price' => $this->faker->randomFloat(1, 5.0, 500.0),

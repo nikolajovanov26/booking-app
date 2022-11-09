@@ -25,8 +25,8 @@ class BookingStatusSeeder extends Seeder
                 'label' => 'On Hold',
             ],
             [
-                'name' => 'pay-at-property',
-                'label' => 'Pay at Property',
+                'name' => 'reserved',
+                'label' => 'Reserved',
             ],
             [
                 'name' => 'past',

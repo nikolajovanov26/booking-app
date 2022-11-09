@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'email' => fake()->safeEmail(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'created_at' => now()->subDays(mt_rand(0, 100)),
         ];
     }
 }
