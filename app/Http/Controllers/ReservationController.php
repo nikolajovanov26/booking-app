@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\ReserveRequest;
+use App\Models\Booking;
 use App\Models\Room;
 use App\Repository\ReservationRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class ReservationController extends Controller
 {
@@ -49,13 +52,37 @@ class ReservationController extends Controller
         }
 
         if ($request->paymentMethod == 'stripe') {
-            $this->reservationRepository->stripeReservation($room, $request->except('room_id'));
+            $booking = $this->reservationRepository->stripeReservation($room, $request->except('room_id'));
 
-            return redirect(route('bookings.index'));
+            return view('payment', [
+                'user' => Auth::user(),
+                'intent' => Auth::user()->createSetupIntent(),
+                'product' => $booking->property->name,
+                'price' => $booking->price,
+                'id' => \Crypt::encrypt($booking->id)
+            ]);
         }
 
         $this->reservationRepository->reservation($room, $request->except('room_id'));
 
         return redirect(route('bookings.index'));
+    }
+
+    public function processPayment(string $id, Request $request)
+    {
+        $booking = Booking::find(Crypt::decrypt($id));
+
+        $user = Auth::user();
+        $paymentMethod = $request->input('payment_method');
+        $user->createOrGetStripeCustomer();
+        $user->addPaymentMethod($paymentMethod);
+
+        try {
+            $user->charge($booking->price * 100, $paymentMethod);
+        } catch (\Exception $e) {
+            return back()->withErrors(['message' => 'Error accrued while charging customer. ' . $e->getMessage()]);
+        }
+
+        return redirect(route('properties.index'));
     }
 }

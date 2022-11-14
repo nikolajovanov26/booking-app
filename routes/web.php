@@ -115,6 +115,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/reservation', [ReservationController::class, 'reservation'])->name('reservation');
     Route::post('/reserve', [ReservationController::class, 'reserve'])->name('reserve');
+    Route::post('/stripe-payment/{id}', [ReservationController::class, 'processPayment'])->name('processStripePayment');
 });
 
 /*
