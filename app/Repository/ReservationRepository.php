@@ -40,16 +40,26 @@ class ReservationRepository
         ]);
     }
 
-    private function saveTransaction(Room $room, array $data)
+    public function saveTransaction(Booking $booking, string $status)
     {
-        Transaction::create([
-            'owner_id' => $room->property->owner->id,
-            'customer_id' => Auth::user()->id,
-            'property_id' => $room->property_id,
-            'room_id' => $room->id,
-            'transaction_status_id' => TransactionStatus::firstWhere('name', 'paid')->id,
-            'total' => $data['price'],
+        return Transaction::create([
+            'owner_id' => $booking->property->user_id,
+            'customer_id' => $booking->user_id,
+            'property_id' => $booking->property_id,
+            'room_id' => $booking->room_id,
+            'transaction_status_id' => TransactionStatus::firstWhere('name', $status)->id,
+            'total' => $booking->price,
         ]);
+    }
+
+    public function payToOwner(Transaction $transaction)
+    {
+        $transaction->owner->createOrGetStripeCustomer();
+
+        $transaction->owner->debitBalance(
+            $transaction->total  * 95, // 5% commission :)
+            'Reservation for: ' . $transaction->property->name
+        );
     }
 
     private function sendMail(Booking $booking)

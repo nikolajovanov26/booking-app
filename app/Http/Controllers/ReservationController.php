@@ -79,7 +79,13 @@ class ReservationController extends Controller
 
         try {
             $user->charge($booking->price * 100, $paymentMethod);
+
+            $transaction = $this->reservationRepository->saveTransaction($booking, 'paid');
+
+            $this->reservationRepository->payToOwner($transaction);
         } catch (\Exception $e) {
+            $this->reservationRepository->saveTransaction($booking, 'on-hold');
+
             return back()->withErrors(['message' => 'Error accrued while charging customer. ' . $e->getMessage()]);
         }
 

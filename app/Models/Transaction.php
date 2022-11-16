@@ -9,6 +9,15 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'owner_id',
+        'customer_id',
+        'property_id',
+        'room_id',
+        'transaction_status_id',
+        'total'
+    ];
+
     public function customer()
     {
         return $this->belongsTo(User::class);
