@@ -21,6 +21,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Dashboard\BookingController as DashboardBookingController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\NotificationController as DashboardNotificationController;
+use App\Http\Controllers\Dashboard\InvoiceController as DashboardInvoiceController;
 use App\Http\Controllers\Dashboard\ProfileController as DashboardProfileController;
 use App\Http\Controllers\Dashboard\Property\RoomController as DashboardRoomController;
 use App\Http\Controllers\Dashboard\PropertyController as DashboardPropertyController;
@@ -91,11 +92,16 @@ Route::middleware('auth')->group(function () {
         Route::resource('properties/{property}/rooms', DashboardRoomController::class)->except('show');
         Route::resource('properties', DashboardPropertyController::class);
 
-        Route::controller(DashboardNotificationController::class)->name('notifications.')->prefix('notifications')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::put('/{notification}', 'toggleRead')->name('toggleRead');
-            Route::delete('/{notification}', 'delete')->name('delete');
+        Route::controller(DashboardNotificationController::class)
+            ->name('notifications.')
+            ->prefix('notifications')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::put('/{notification}', 'toggleRead')->name('toggleRead');
+                Route::delete('/{notification}', 'delete')->name('delete');
         });
+
+        Route::get('invoices', [DashboardInvoiceController::class, 'index'])->name('invoices.index');
 
         Route::get('transactions', [DashboardTransactionController::class, 'index'])->name('transactions');
         Route::get('bookings', [DashboardBookingController::class, 'index'])->name('bookings');
