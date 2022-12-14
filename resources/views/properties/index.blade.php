@@ -35,10 +35,12 @@
             </div>
             <div class="space-y-6">
                 @foreach($properties as $property)
-                    @include('components.properties.card', ['property' => $property,
-'favorite' => is_null($property->pivot) ? false : $property->pivot?->user_id == $user_id])
+                    @include('components.properties.card', [
+                        'property' => $property,
+                        'user' => $user
+                    ])
                 @endforeach
-                {{ $properties->links() }}
+{{--                {{ $properties->links() }}--}}
             </div>
         </div>
     </main>

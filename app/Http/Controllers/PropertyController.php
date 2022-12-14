@@ -29,9 +29,9 @@ class PropertyController extends Controller
                 ->withAvg('reviews', 'rating')
                 ->withCount('reviews')
                 ->withMin('rooms', 'price')
-                ->with('favorites')
+                ->with('country')
                 ->paginate(10),
-            'user_id' => $user->id ?? 0
+            'user' => $user->load('favorites')
         ]);
     }
 
@@ -47,11 +47,14 @@ class PropertyController extends Controller
 
     public function filter(PropertyFilterRequest $request)
     {
-        $properties = $this->propertyRepository->filter($request->all());
+        $user = Auth::user();
+
+        $properties = $this->propertyRepository->filter($user, $request->all());
 
         return view('properties.filtered', [
             'properties' => $properties,
-            'types' => PropertyType::all()
+            'types' => PropertyType::all(),
+            'user' => $user->load('favorites')
         ]);
     }
 

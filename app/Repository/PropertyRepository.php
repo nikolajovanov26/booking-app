@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Property;
 use App\Models\PropertyStatus;
 use App\Models\PropertyType;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -114,7 +115,7 @@ class PropertyRepository
         $property->save();
     }
 
-    public function filter(array $data)
+    public function filter(User $user, array $data)
     {
         $data['date_from'] = Carbon::make($data['date_from'])->endOfDay();
         $data['date_to'] = Carbon::make($data['date_to'])->startOfDay();
@@ -136,7 +137,7 @@ class PropertyRepository
                     ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
                     ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
             })
-            ->with('rooms', 'rooms.bookings')
+            ->with('rooms', 'rooms.bookings', 'country')
             ->withMin(['rooms' => function ($query) use ($data) {
                 return $query->where('number_of_persons', '>=', $data['guests'])
                     ->whereDoesntHave('bookings', fn($query) => $query

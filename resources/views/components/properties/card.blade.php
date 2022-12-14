@@ -4,7 +4,7 @@
             <form method="post" action="{{ route('toggleFavorite', ['property' => $property->id]) }}">
                 @csrf
                 <button>
-                    @if($favorite)
+                    @if(!is_null($user) && $user->favorites->contains($property))
                         @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff0000'])
                     @else
                         @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff000033'])
@@ -27,17 +27,11 @@
         <div class="flex text-sm text-gray-800 my-2">
             <p>{{ $property->city }}</p>
             <span class="mx-2">&bull;</span>
-            <p>Show on map</p>
-            <span class="mx-2">&bull;</span>
-            <p>1.1km from city center</p>
-            @if($trending = null)
-                <span class="mx-2">&bull;</span>
-                {{ $property?->bookings }} bookings in the past month
-            @endif
-        </div>
-        <div class="flex items-center space-x-2 my-2">
-            @include('icons.building', ['attributes' => 'w-6 h-6'])
-            <p>900 m from {{ $property->city }}</p>
+            <a class="text-blue-700 hover:text-blue-grad-light transition" href="{{ 'https://www.google.com/maps/place/' . $property->country->label}}">Show on map</a>
+{{--            @if($trending == null)--}}
+{{--                <span class="mx-2">&bull;</span>--}}
+{{--                {{ $property?->bookings }} bookings in the past month--}}
+{{--            @endif--}}
         </div>
         <p class="line-clamp-3">{{ $property->description }}</p>
     </div>
@@ -49,9 +43,9 @@
                     <span class="text-sm">{{ $property->reviews_count }} reviews</span>
                 </div>
                 <div
-                    class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews_avg_rating, 1) }}</div>
+                    class="bg-blue-600 text-white font-bold text-2xl p-3 rounded-xl">{{ number_format($property->reviews_avg_rating, 1) }}
+                </div>
             </div>
-            <span class="text-right mt-2 mb-7">Location 9.7</span>
         </div>
         <div class="flex flex-col justify-end">
             <div class="flex justify-end items-baseline space-x-2">
