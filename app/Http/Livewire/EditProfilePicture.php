@@ -26,7 +26,14 @@ class EditProfilePicture extends Component
     public function mount()
     {
         $this->profile = Auth::user()->profile;
-        $this->imagePath = Storage::disk('profile_pictures')->url($this->profile->user_id . DIRECTORY_SEPARATOR .$this->profile->profile_picture);
+        $hasImage = Auth::user()->profile->profile_picture && Storage::disk('profile_pictures')->exists($this->profile->user_id . DIRECTORY_SEPARATOR .$this->profile->profile_picture);
+
+        $this->imagePath = Storage::disk('profile_pictures')->url(
+            $hasImage
+            ? $this->profile->user_id . DIRECTORY_SEPARATOR .$this->profile->profile_picture
+            : 'avatar.png'
+        );
+
         $this->hasImage = !is_null($this->profile->profile_picture);
     }
 

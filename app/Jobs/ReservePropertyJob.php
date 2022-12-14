@@ -10,7 +10,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class ReservePropertyJob implements ShouldQueue
 {
@@ -49,8 +51,19 @@ class ReservePropertyJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('nikolajovanov26@gmail.com')->send(new ReservationCompleteMail($this->booking));
+//        Mail::to('nikolajovanov26@gmail.com')->send(new ReservationCompleteMail($this->booking));
 
-//        Mail::to($this->booking->user->email)->send(new ReservationCompleteMail($this->booking));
+        Mail::to($this->booking->user->email)->send(new ReservationCompleteMail($this->booking));
+    }
+
+    /**
+     * Handle a job failure.
+     *
+     * @param  \Throwable  $exception
+     * @return void
+     */
+    public function failed(Throwable $exception)
+    {
+        Log::error('Reservation Property mail was not send to ' . $this->booking->user->email);
     }
 }

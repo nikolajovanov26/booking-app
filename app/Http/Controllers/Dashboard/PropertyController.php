@@ -73,7 +73,7 @@ class PropertyController extends Controller
             'message' => "Your new property has been created"
         ]);
 
-        return back();
+        return redirect(route('dashboard.properties.index'));
     }
 
     public function edit(Property $property)

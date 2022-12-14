@@ -4,7 +4,7 @@
              class="flex items-center w-full h-24 border-b-2 border-gray-100 bg-white py-6 px-8">
             <div class="w-1/5">Profile Picture</div>
             <div class="w-3/5">
-                <img x-show="hasImage" x-bind:src="imagePath" class="w-16 h-16">
+                <img x-bind:src="imagePath" class="w-16 h-16">
             </div>
             <div class="w-1/5 text-right">
                 <button @click="show = true"

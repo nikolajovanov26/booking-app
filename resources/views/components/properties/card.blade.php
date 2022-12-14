@@ -4,7 +4,7 @@
             <form method="post" action="{{ route('toggleFavorite', ['property' => $property->id]) }}">
                 @csrf
                 <button>
-                    @if(Auth::user()?->favorites->contains($property))
+                    @if($favorite)
                         @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff0000'])
                     @else
                         @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer', 'fill' => '#ff000033'])

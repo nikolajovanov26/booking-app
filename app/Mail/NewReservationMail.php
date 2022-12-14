@@ -45,6 +45,6 @@ class NewReservationMail extends Mailable
             'status' => $this->booking->bookingStatus->label,
             'phone' => $this->booking->user->profile->phone_number,
             'email' => $this->booking->user->email
-        ]);
+        ])->subject('New Reservation');
     }
 }

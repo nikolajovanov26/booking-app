@@ -22,12 +22,16 @@ class PropertyController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
+
         return view('properties.index', [
             'properties' => Property::valid()
                 ->withAvg('reviews', 'rating')
                 ->withCount('reviews')
                 ->withMin('rooms', 'price')
-                ->paginate(10)
+                ->with('favorites')
+                ->paginate(10),
+            'user_id' => $user->id ?? 0
         ]);
     }
 
@@ -73,12 +77,15 @@ class PropertyController extends Controller
 
     public function favorite()
     {
+        $user = Auth::user();
+
         return view('properties.favorite', [
-            'properties' => Auth::user()->favorites()->valid()
+            'properties' => $user->favorites()->valid()
                 ->withAvg('reviews', 'rating')
                 ->withCount('reviews')
                 ->withMin('rooms', 'price')
-                ->paginate(10)
+                ->paginate(10),
+            'user_id' => $user?->id
         ]);
     }
 

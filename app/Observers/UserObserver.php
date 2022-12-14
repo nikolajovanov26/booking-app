@@ -39,7 +39,9 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        //
+        if (isset($user->profile)) {
+            $user->profile->delete();
+        }
     }
 
     /**

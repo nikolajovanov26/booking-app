@@ -7,7 +7,7 @@
             @if($properties->count() > 0)
                 <div class="space-y-6">
                     @foreach($properties as $property)
-                        @include('components.properties.card', ['property' => $property])
+                        @include('components.properties.card', ['property' => $property, 'favorite' => $property->pivot->user_id == $user_id])
                     @endforeach
                     {{ $properties->links() }}
                 </div>

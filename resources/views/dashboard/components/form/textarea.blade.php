@@ -2,5 +2,5 @@
     <label class="text-sm text-blue-800 font-semibold">{{ $label }}</label>
     <textarea placeholder="{{ $placeholder }}" name="{{ $name }}" rows="{{ $rows }}"
               class="resize-none border-0 text-gray-800 px-0 py-0 border-b-2 border-transparent focus:ring-0 focus:border-b-2 focus:border-blue-grad-light"
-    >{{ $value ?? '' }}</textarea>
+    >{{ $value ?? old($name) ?? '' }}</textarea>
 </div>

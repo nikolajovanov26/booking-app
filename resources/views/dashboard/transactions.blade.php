@@ -46,11 +46,9 @@
                         <tr class="hover:bg-gray-100 transition">
                             <td class="w-2/12 p-6">
                                 {{ $transaction->customer->profile->full_name }}
-                                {{--                            <a href=""--}}
-                                {{--                               class="text-blue-700 hover:underline hover:text-blue-900 transition">{{ $transaction->customer->profile->fullName() }}</a>--}}
                             </td>
                             <td class="w-3/12 p-6">
-                                <a href="{{ route('properties.show', ['property' => $transaction->property_id]) }}"
+                                <a href="{{ route('properties.show', ['property' => $transaction->property->slug]) }}"
                                    class="text-blue-700 hover:underline hover:text-blue-900 transition">{{ ucwords($transaction->property->name) }}</a>
                             </td>
                             <td class="w-2/12 p-6">{{ $transaction->room->roomType->label }}</td>
