@@ -115,7 +115,7 @@ class PropertyRepository
         $property->save();
     }
 
-    public function filter(User $user, array $data)
+    public function filter(array $data)
     {
         $data['date_from'] = Carbon::make($data['date_from'])->endOfDay();
         $data['date_to'] = Carbon::make($data['date_to'])->startOfDay();

@@ -36,11 +36,10 @@
             <div class="space-y-6">
                 @foreach($properties as $property)
                     @include('components.properties.card', [
-                        'property' => $property,
-                        'user' => $user
+                        'property' => $property
                     ])
                 @endforeach
-{{--                {{ $properties->links() }}--}}
+                {{ $properties->links() }}
             </div>
         </div>
     </main>

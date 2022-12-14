@@ -22,16 +22,13 @@ class PropertyController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-
         return view('properties.index', [
             'properties' => Property::valid()
                 ->withAvg('reviews', 'rating')
                 ->withCount('reviews')
                 ->withMin('rooms', 'price')
                 ->with('country')
-                ->paginate(10),
-            'user' => $user->load('favorites')
+                ->paginate(10)
         ]);
     }
 
@@ -47,14 +44,11 @@ class PropertyController extends Controller
 
     public function filter(PropertyFilterRequest $request)
     {
-        $user = Auth::user();
-
-        $properties = $this->propertyRepository->filter($user, $request->all());
+        $properties = $this->propertyRepository->filter($request->all());
 
         return view('properties.filtered', [
             'properties' => $properties,
             'types' => PropertyType::all(),
-            'user' => $user->load('favorites')
         ]);
     }
 
@@ -64,6 +58,7 @@ class PropertyController extends Controller
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
             ->withMin('rooms', 'price')
+            ->with('country')
             ->get();
 
         foreach ($properties as $property) {
@@ -87,6 +82,7 @@ class PropertyController extends Controller
                 ->withAvg('reviews', 'rating')
                 ->withCount('reviews')
                 ->withMin('rooms', 'price')
+                ->with('country')
                 ->paginate(10),
             'user_id' => $user?->id
         ]);
