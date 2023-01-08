@@ -32,6 +32,11 @@ class Property extends Model
         'cancellation_policy',
     ];
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class);

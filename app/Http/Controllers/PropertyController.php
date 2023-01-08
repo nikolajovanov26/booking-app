@@ -38,7 +38,8 @@ class PropertyController extends Controller
 
         return view('properties.show', [
             'property' => $property,
-            'available' => $property->rooms->count() != 0
+            'available' => $property->rooms_count != 0,
+            'user' => Auth::user() ?? null
         ]);
     }
 
@@ -59,16 +60,15 @@ class PropertyController extends Controller
             ->withCount('reviews')
             ->withMin('rooms', 'price')
             ->with('country')
+            ->withCount(['bookings', 'bookings as last_month_bookings' => function ($query) {
+                $query->where('created_at', '>=', now()->subMonth());
+            }])
             ->get();
-
-        foreach ($properties as $property) {
-            $property->bookings = Booking::where('property_id', $property->id)->where('created_at', '<=', now()->subMonth())->count();
-        }
 
         return view('properties.trending', [
             'properties' => $properties
-                ->where('bookings', '>', 0)
-                ->sortByDesc('bookings')
+                ->where('last_month_bookings', '>', 0)
+                ->sortByDesc('last_month_bookings')
                 ->take(20)
         ]);
     }

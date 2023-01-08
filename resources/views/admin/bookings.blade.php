@@ -44,10 +44,10 @@
                             <td class="px-6 py-4">{{ ucwords($booking->property->name) }}</td>
                             <td class="px-6 py-4">{{ $booking->room->roomType->label }}</td>
                             <td class="px-6 py-4 line-clamp-1">{{ $booking->property->city }}, {{ $booking->property->country->label }}</td>
-                            <td class="px-6 py-4">{{ $booking->price }} &euro;</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $booking->price }} &euro;</td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="bg-green-600 tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">{{ $booking->bookingStatus->label }}</span>
+                                    class="{{ $booking->bookingStatus->color }} tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl">{{ $booking->bookingStatus->label }}</span>
                             </td>
                             <td class="px-6 py-4 text-center">{{ $booking->date_from->format('d M Y') }}</td>
                             <td class="px-6 py-4 text-center">{{ $booking->date_to->format('d M Y') }}</td>

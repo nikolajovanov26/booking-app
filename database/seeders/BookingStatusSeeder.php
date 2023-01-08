@@ -31,6 +31,10 @@ class BookingStatusSeeder extends Seeder
             [
                 'name' => 'past',
                 'label' => 'Past',
+            ],
+            [
+                'name' => 'cancelled',
+                'label' => 'Cancelled',
             ]
         ];
 

@@ -11,29 +11,35 @@
                     <p>{{ $notification->content }}</p>
                     <div class="flex justify-between items-baseline mt-4">
                         <div class="flex items-center space-x-8">
-                            {{--                        @if(isset($notification->property))--}}
-                            {{--                            <a href="{{ route('properties.show') }}"--}}
-                            {{--                               class="text-blue-600 hover:text-blue-800 transition hover:underline">View Property</a>--}}
-                            {{--                        @endif--}}
-                            {{--                        <a href="{{ route('properties.show') }}"--}}
-                            {{--                           class="text-blue-600 hover:text-blue-800 transition hover:underline">View Reports</a>--}}
                         </div>
                         <div class="flex space-x-3">
                             @if($notification->read)
-                                <button
-                                    class="py-2 px-4 border-2 rounded border-blue-600 hover:bg-blue-100 text-blue-600 font-semibold text-lg">
-                                    Mark as unread
-                                </button>
+                                <form action="{{ route('notifications.toggleRead', ['notification' => $notification->id]) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button
+                                        class="py-2 px-4 border-2 rounded border-blue-600 hover:bg-blue-100 text-blue-600 font-semibold text-lg">
+                                        Mark as unread
+                                    </button>
+                                </form>
                             @else
-                                <button
-                                    class="py-2 px-4 border-2 rounded border-blue-600 hover:border-blue-900 bg-blue-600 hover:bg-blue-900 text-white font-semibold text-lg">
-                                    Mark as read
-                                </button>
+                                <form action="{{ route('notifications.toggleRead', ['notification' => $notification->id]) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button
+                                        class="py-2 px-4 border-2 rounded border-blue-600 hover:border-blue-900 bg-blue-600 hover:bg-blue-900 text-white font-semibold text-lg">
+                                        Mark as read
+                                    </button>
+                                </form>
                             @endif
-                            <button
-                                class="py-2 px-4 border-2 rounded border-red-600 hover:border-red-900 bg-red-600 hover:bg-red-900 text-white font-semibold text-lg">
-                                Delete
-                            </button>
+                                <form action="{{ route('notifications.delete', ['notification' => $notification->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="py-2 px-4 border-2 rounded border-red-600 hover:border-red-900 bg-red-600 hover:bg-red-900 text-white font-semibold text-lg">
+                                        Delete
+                                    </button>
+                                </form>
                         </div>
                     </div>
                 </div>

@@ -36,6 +36,9 @@ class ChartRepository
                     $labels[] = DateTime::createFromFormat('!m', $z . '')->format('M');
                     $values[] = 0;
                     $z++;
+                    if ($z == 13) {
+                        $z = 1;
+                    }
                 }
             }
 
@@ -136,6 +139,9 @@ class ChartRepository
                     $labels[] = DateTime::createFromFormat('!m', $z . '')->format('M');
                     $values[] = 0;
                     $z++;
+                    if ($z == 13) {
+                        $z = 1;
+                    }
                 }
             }
 

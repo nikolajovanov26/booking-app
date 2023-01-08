@@ -27,21 +27,20 @@
                                 <td class="p-4">{{ $booking->property->city }} {{ $booking->property->zip_code }}, {{ $booking->property->country->label }}</td>
                                 <td class="p-4">{{ $booking->price }} &euro;</td>
                                 <td class="p-4">
-                                    <span class="tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl
-                                    @switch($booking->bookingStatus->name)
-                                        @case('paid') bg-green-600 @break
-                                        @case('on-hold') bg-orange-600 @break
-                                        @case('refunded') bg-red-600 @break
-                                        @default bg-gray-700
-                                    @endswitch
+                                    <span class="tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl {{ $booking->bookingStatus->color }}
                                     ">{{ $booking->bookingStatus->label }}</span>
                                 </td>
                                 <td class="p-4">{{ $booking->date_from->format('d M Y') }}</td>
                                 <td class="p-4">{{ $booking->date_to->format('d M Y') }}</td>
                                 <td class="flex items-center justify-end p-4 text-right space-x-4">
-                                    <button class="bg-red-700 hover:bg-red-900 transition text-white rounded px-3 py-2">
-                                        Cancel
-                                    </button>
+                                    @if ($booking->bookingStatus->isCancellable)
+                                        <form method="post" action="{{ route('bookings.cancel', ['booking' => $booking->id]) }}">
+                                            @csrf
+                                            <button class="bg-red-700 hover:bg-red-900 transition text-white rounded px-3 py-2">
+                                                Cancel
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

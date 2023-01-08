@@ -166,12 +166,12 @@ class PropertyRepository
 
     public function filterRooms(Property $property, array $data)
     {
-        $property->load('reviews', 'images')
+        $property->load('reviews.user.profile.country', 'images')
             ->loadCount('reviews', 'images')
             ->loadAvg('reviews', 'rating');
 
         if (isset($data['date_from'])) {
-            $property->load(['rooms' => function ($query) use ($data) {
+            $property->load(['rooms.roomType' => function ($query) use ($data) {
                 $query->where('number_of_persons', '>=', $data['guests'])
                     ->whereDoesntHave('bookings', fn($query) => $query
                         ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))

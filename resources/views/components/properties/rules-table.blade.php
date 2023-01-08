@@ -8,7 +8,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            {{ $property->check_in }}
+            {{ $property->check_in_from }} - {{ $property->check_in_to }}
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">
@@ -19,7 +19,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            {{ $property->check_out }}
+            {{ $property->check_out_from }} - {{ $property->check_out_to }}
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">
@@ -30,7 +30,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            {{ $property->cancalation_policy }}
+            {{ $property->cancellation_policy }}
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">
@@ -41,7 +41,11 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            This property only accepts cash payments.
+            @forelse($property->paymentMethods as $paymentMethod)
+                <p>{{ $paymentMethod->label }}</p>
+            @empty
+               <p>Please contact property to see available payment methods</p>
+            @endforelse
         </td>
     </tr>
     <tr class="hover:bg-blue-200 transition h-16">
@@ -52,7 +56,7 @@
             </div>
         </td>
         <td class="w-4/5 px-6 py-2">
-            Pets are not allowed.
+            Pets are @if(!$property->pets_allowed) not @endif allowed.
         </td>
     </tr>
     </tbody>

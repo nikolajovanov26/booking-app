@@ -40,7 +40,13 @@
                             <td class="p-4 capitalize">{{ $property->name }}</td>
                             <td class="p-4">{{ $property->city }} {{ $property->zip_code }}
                                 , {{ $property->country->label }}</td>
-                            <td class="p-4 text-center">{{ number_format($property->reviews_avg_rating, 1) }}</td>
+                            <td class="p-4 text-center">
+                                @if($property->reviews_avg_rating > 0.9)
+                                    {{ number_format($property->reviews_avg_rating, 1) }}
+                                @else
+                                    Not rated
+                                @endif
+                            </td>
                             <td class="w-2/12 p-4 text-center">
                                 <span class="text-center tracking-wide text-white px-4 pt-0.5 pb-1 rounded-xl
                                 @if($property->propertyStatus->name == 'active')

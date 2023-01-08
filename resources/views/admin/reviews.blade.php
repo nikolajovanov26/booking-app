@@ -10,9 +10,7 @@
                 <div class="bg-white shadow hover:shadow-xl transition px-5 py-3 rounded-lg">
                     <div class="flex justify-between items-start mb-3">
                         <div>
-                            <a href="#"
-                               class="font-semibold text-lg text-blue-800 hover:text-blue-900 hover:underline transition"
-                            >{{ $review->user->profile->fullName() }}</a>
+                            {{ $review->user->profile->fullName() }}
                             <p class="text-sm text-gray-400">{{ $review->created_at->diffForHumans() }}</p>
                         </div>
                         <div class="flex items-center space-x-3">

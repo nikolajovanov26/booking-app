@@ -114,7 +114,15 @@ Route::middleware('auth')->group(function () {
      * User Routes
      */
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::controller(NotificationController::class)
+        ->name('notifications.')
+        ->prefix('notifications')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::put('/{notification}', 'toggleRead')->name('toggleRead');
+            Route::delete('/{notification}', 'delete')->name('delete');
+        });
     Route::get('/become-owner', BecomeOwnerController::class)->name('becomeOwner');
     Route::get('/favorite', [PropertyController::class, 'favorite'])->name('favorite');
     Route::post('/favorite/{property}', [PropertyController::class, 'toggleFavorite'])->name('toggleFavorite');

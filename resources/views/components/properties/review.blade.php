@@ -1,8 +1,14 @@
 <div class="bg-white rounded-xl shadow-2xl px-4 py-5">
     <div class="flex items-center space-x-3 mb-3">
         <div
-            class="flex rounded-full bg-purple-600 text-white font-semibold items-center justify-center text-xl w-12 h-12">
-            I
+            class="flex rounded-full font-semibold items-center justify-center text-xl w-12 h-12">
+            <img class="w-12 h-12 rounded-full"
+                 src="{{
+                                Storage::disk('profile_pictures')->url(
+                                    $review->user->profile->profile_picture
+                                    ? $review->user->id . DIRECTORY_SEPARATOR . $review->user->profile->profile_picture
+                                    : 'avatar.png'
+                                )}}">
         </div>
         <div class="">
             <p class="font-lg font-semibold text-gray-900">{{ $review->user->profile->fullName() }}</p>

@@ -82,7 +82,7 @@
                                       action="{{ route('toggleFavorite', ['property' => $property->id]) }}">
                                     @csrf
                                     <button>
-                                        @if(Auth::user()?->favorites->contains($property))
+                                        @if($user?->favorites->contains($property))
                                             @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer text-red-600', 'fill' => '#ff0000'])
                                         @else
                                             @include('icons.heart', ['attributes' => 'h-8 w-8 cursor-pointer text-red-600', 'fill' => '#ff000033'])
@@ -90,10 +90,10 @@
                                     </button>
                                 </form>
                                 @if($available)
-                                    <button
-                                        class="bg-blue-600 hover:bg-blue-900 font-semibold text-lg transition text-white px-4 py-2 rounded-md">
+                                    <a href="#rooms"
+                                        class="hover:cursor-pointer bg-blue-600 hover:bg-blue-900 font-semibold text-lg transition text-white px-4 py-2 rounded-md">
                                         Reserve
-                                    </button>
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -114,7 +114,10 @@
 
                                     @foreach($property->features()->take(4)->get() as $feature)
                                         <div class="flex items-center space-x-1">
-                                            @include('icons.wifi', ['attributes' => 'w-6 h-6'])
+                                            @php
+                                             $icon = !is_null($feature->icon) ? $feature->icon : 'features';
+                                            @endphp
+                                            @include("icons.$icon", ['attributes' => 'w-6 h-6'])
                                             <p>{{ $feature->label }}</p>
                                         </div>
                                     @endforeach
@@ -128,26 +131,21 @@
                                 <span class="flex mr-2">
                                     @include('icons.heart', ['attributes' => 'w-6 h-6', 'fill' => '#000000'])
                                 </span>
-                                Situated in the best rated area in Ohrid, this property has an excellent location score
-                                of 9.7
-                            </div>
-                            <div class="flex justify-start items-start">
-                                <span class="flex mr-2">
-                                    @include('icons.wifi', ['attributes' => 'w-6 h-6'])
-                                </span>
-                                Free private parking available on-site
+                                Situated in the best rated area in {{ $property->city }}, this property has an
+                                {{ strtolower(ratingString($property->reviews_avg_rating)) }} rating score
+                                of {{ number_format($property->reviews_avg_rating, 1) }}
                             </div>
                             <div class="space-y-2 mt-6 mb-3">
                                 @if($available)
-                                <button
-                                    class="bg-blue-600 hover:bg-blue-900 transition text-white font-semibold text-lg w-full h-12">
+                                <a href="#rooms"
+                                    class="hover:cursor-pointer block text-center w-full py-3 bg-blue-600 hover:bg-blue-900 transition text-white font-semibold text-lg w-full h-12">
                                     Reserve
-                                </button>
+                                </a>
                                 @endif
                                 <form method="post"
                                       action="{{ route('toggleFavorite', ['property' => $property->id]) }}">
                                     @csrf
-                                    @if(Auth::user()?->favorites->contains($property))
+                                    @if($user?->favorites->contains($property))
                                         <div
                                             class="flex items-center justify-center bg-white bg-opacity-70 border border-2 border-blue-600 transition text-blue-600 font-semibold text-lg w-full h-12">
                                             Saved ✓
@@ -160,7 +158,7 @@
                                     @endif
                                 </form>
                             </div>
-                            <span class="block text-center w-full text-sm text-gray-600">Saved to {{ $property->favorites()->count() }} lists</span>
+                            <span class="block text-center w-full text-sm text-gray-600">Saved to {{ $property->favorites->count() }} lists</span>
                         </div>
                     </div><!-- End description -->
                     @if($available)
@@ -188,8 +186,9 @@
                                     @include('components.properties.review', ['review' => $review])
                                 @endforeach
                             </div>
+
                             <div class="flex justify-end">
-                                <button
+                                <button @click="reviewModal = true"
                                     class="border border-2 border-blue-600 bg-white hover:bg-blue-50 transition rounded text-blue-600 font-semibold text-lg px-4 py-2">
                                     Read all reviews
                                 </button>

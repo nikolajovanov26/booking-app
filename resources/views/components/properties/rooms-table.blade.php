@@ -8,7 +8,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($rooms as $room)
+    @foreach($rooms->sortBy('price') as $room)
         <tr class="bg-white hover:bg-gray-100 transition h-16">
             <td class="px-6 py-2 text-gray-800 text-lg flex flex-col">
                 {{ $room->roomType->label }}
