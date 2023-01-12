@@ -7,7 +7,7 @@
         @endif
         <div class="bg-white shadow-xl rounded-xl overflow-hidden">
             <table class="text-left w-full">
-                @if($invoices->count() != 0)
+                @if(isset($invoices))
                     <thead class="bg-gray-800 text-white text-lg">
                     <tr>
                         <th class="w-2/12 p-6">Number</th>
@@ -34,7 +34,7 @@
             </table>
         </div>
 
-        @if($invoices->count() == 0)
+        @if(!isset($invoices))
             <div class="text-center text-2xl">
                 <p>No transactions have been made &#128532;</p>
             </div>

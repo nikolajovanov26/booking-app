@@ -72,10 +72,6 @@
                             'route' => 'dashboard.invoices.index',
                             'icon' => 'invoice',
                             'label' => 'Invoices'])
-                        @include('dashboard.components.navigation.navigation-link', [
-                            'route' => 'dashboard.notifications.index',
-                            'icon' => 'bell',
-                            'label' => 'Notifications'])
                     @endif
                 </div>
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
