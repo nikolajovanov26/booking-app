@@ -26,7 +26,7 @@
             @empty
                 <div class="col-span-3 flex flex-col items-center space-y-3">
                     <p class="text-2xl text-center">No reviews for this property 🥱</p>
-                    <a href="{{ route('dashboard.properties.index') }}" class="flex items-center space-x-2 text-blue-600 opacity-70 hover:opacity-100 hover:-translate-x-2 transition">
+                    <a href="{{ route('admin.properties.index') }}" class="flex items-center space-x-2 text-blue-600 opacity-70 hover:opacity-100 hover:-translate-x-2 transition">
                         <span>@include('icons.arrow-left-long', ['attributes' => 'h-6 w-6'])</span>
                         <span>Back to Properties</span>
                     </a>

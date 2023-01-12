@@ -42,10 +42,12 @@
                 </div>
                 <div class="flex flex-col w-3/4 space-y-6">
                     @if(!$available)
+                        @if(request()->get('guests'))
                         <div class="bg-red-200 text-red-600 px-6 py-4 text-lg flex space-x-4">
                             @include('icons.info', ['attributes' => 'h-6 w-6'])
                             <p>There are no free rooms for <span class="underline">{{ request()->get('guests') }} guests</span> for the selected period in this property. <a href="{{ route('properties.index') }}" class="font-semibold hover:underline">Find available properties.</a></p>
                         </div>
+                        @endif
                     @endif
 
                     <div id="in-page-nav" class="flex space-x-4">

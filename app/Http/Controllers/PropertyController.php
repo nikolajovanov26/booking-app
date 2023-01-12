@@ -38,7 +38,7 @@ class PropertyController extends Controller
 
         return view('properties.show', [
             'property' => $property,
-            'available' => $property->rooms_count != 0,
+            'available' => $property->rooms->count() != 0,
             'user' => Auth::user() ?? null
         ]);
     }

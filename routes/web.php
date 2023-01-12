@@ -20,7 +20,6 @@ use App\Http\Controllers\BecomeOwnerController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Dashboard\BookingController as DashboardBookingController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\NotificationController as DashboardNotificationController;
 use App\Http\Controllers\Dashboard\InvoiceController as DashboardInvoiceController;
 use App\Http\Controllers\Dashboard\ProfileController as DashboardProfileController;
 use App\Http\Controllers\Dashboard\Property\RoomController as DashboardRoomController;
@@ -76,6 +75,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('properties', AdminPropertyController::class);
         Route::resource('properties/{property}/rooms', AdminRoomController::class)->except('show');
+        Route::get('properties/{property}/reviews', [AdminPropertyController::class, 'reviews'])->name('properties.reviews');
 
         Route::get('users', [AdminUserController::class, 'index'])->name('users');
         Route::get('/settings', [AdminProfileController::class, 'edit'])->name('settings');
@@ -91,15 +91,6 @@ Route::middleware('auth')->group(function () {
         Route::get('properties/{property}/reviews', [DashboardPropertyController::class, 'reviews'])->name('properties.reviews');
         Route::resource('properties/{property}/rooms', DashboardRoomController::class)->except('show');
         Route::resource('properties', DashboardPropertyController::class);
-
-        Route::controller(DashboardNotificationController::class)
-            ->name('notifications.')
-            ->prefix('notifications')
-            ->group(function () {
-                Route::get('/', 'index')->name('index');
-                Route::put('/{notification}', 'toggleRead')->name('toggleRead');
-                Route::delete('/{notification}', 'delete')->name('delete');
-        });
 
         Route::get('invoices', [DashboardInvoiceController::class, 'index'])->name('invoices.index');
 

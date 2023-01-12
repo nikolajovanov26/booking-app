@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PropertyRoomRequest;
 use App\Http\Requests\SearchFilterRequest;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
@@ -39,14 +40,18 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function show(Property $property)
+    public function show(Property $property, PropertyRoomRequest $request)
     {
         if (Auth::user()->cannot('view', $property)) {
             abort(403);
         }
 
+        $property = $this->propertyRepository->filterRooms($property, $request->all());
+
         return view('dashboard.properties.show', [
-            'property' => $property
+            'property' => $property,
+            'available' => $property->rooms->count() != 0,
+            'user' => Auth::user() ?? null
         ]);
     }
 
@@ -124,9 +129,7 @@ class PropertyController extends Controller
             'message' => "A property was deleted"
         ]);
 
-        return view('dashboard.properties.index', [
-            'properties' => Property::where('user_id', Auth::user()->id)->get()
-        ]);
+        return redirect(route('dashboard.properties.index'));
     }
 
     public function favorite()

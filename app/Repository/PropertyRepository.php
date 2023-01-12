@@ -171,14 +171,14 @@ class PropertyRepository
             ->loadAvg('reviews', 'rating');
 
         if (isset($data['date_from'])) {
-            $property->load(['rooms.roomType' => function ($query) use ($data) {
+            $property->load(['rooms' => function ($query) use ($data) {
                 $query->where('number_of_persons', '>=', $data['guests'])
                     ->whereDoesntHave('bookings', fn($query) => $query
                         ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
                         ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
                         ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
                         ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
-            }]);
+            }], 'roomType');
         }
 
         return $property;
