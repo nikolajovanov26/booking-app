@@ -12,7 +12,7 @@ class BookingController extends Controller
     public function index()
     {
         return view('bookings', [
-            'bookings' => Booking::where('user_id', Auth::user()->id)->get()
+            'bookings' => Booking::where('user_id', Auth::user()->id)->latest()->get()
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\ReserveRequest;
 use App\Models\Booking;
+use App\Models\BookingStatus;
 use App\Models\Room;
 use App\Repository\ReservationRepository;
 use Carbon\Carbon;
@@ -80,9 +81,10 @@ class ReservationController extends Controller
         try {
             $user->charge($booking->price * 100, $paymentMethod);
 
-            $transaction = $this->reservationRepository->saveTransaction($booking, 'paid');
+            $this->reservationRepository->saveTransaction($booking, 'paid');
 
-            $this->reservationRepository->payToOwner($transaction);
+            $booking->booking_status_id = BookingStatus::firstWhere('name', 'paid')->id;
+            $booking->save();
         } catch (\Exception $e) {
             $this->reservationRepository->saveTransaction($booking, 'on-hold');
 

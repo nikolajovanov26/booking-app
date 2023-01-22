@@ -68,10 +68,6 @@
                             'route' => 'dashboard.transactions',
                             'icon' => 'document',
                             'label' => 'Transactions'])
-                        @include('dashboard.components.navigation.navigation-link', [
-                            'route' => 'dashboard.invoices.index',
-                            'icon' => 'invoice',
-                            'label' => 'Invoices'])
                     @endif
                 </div>
                 <div class="h-1 rounded w-10/12 bg-white bg-opacity-40 my-6"></div>
@@ -101,13 +97,6 @@
                 <div class="mx-auto px-8">
                     <div class="flex h-16 items-center justify-end">
                         <div class="block ml-4 flex items-center md:ml-6">
-                            @if(isOwner())
-                                <a href="{{ route('dashboard.invoices.index') }}" class="rounded px-3 py-1.5 border-green-800 border-2 bg-green-100 font-semibold hover:bg-green-800 hover:text-white transition cursor-pointer">Balance:
-                                    @php
-                                        Auth()->user()->createOrGetStripeCustomer();
-                                        echo (Auth()->user()->balance())
-                                    @endphp &euro;</a>
-                            @endif
                             <div
                                 x-data="{ profileDropdown: false }"
                                 @click.outside="profileDropdown = false"

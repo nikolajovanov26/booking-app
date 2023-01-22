@@ -52,16 +52,6 @@ class ReservationRepository
         ]);
     }
 
-    public function payToOwner(Transaction $transaction)
-    {
-        $transaction->owner->createOrGetStripeCustomer();
-
-        $transaction->owner->debitBalance(
-            $transaction->total  * 95, // 5% commission :)
-            'Reservation for: ' . $transaction->property->name
-        );
-    }
-
     private function sendMail(Booking $booking)
     {
         NewReservationJob::dispatch($booking)->onQueue('emails');

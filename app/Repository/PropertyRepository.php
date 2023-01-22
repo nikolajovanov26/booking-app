@@ -135,7 +135,8 @@ class PropertyRepository
                     ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
                     ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
                     ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
-                    ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
+                    ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to']))
+                    ->orWhere(fn($query) => $query->where('date_from', '=', $data['date_from'])));
             })
             ->with('rooms', 'rooms.bookings', 'country')
             ->withMin(['rooms' => function ($query) use ($data) {
@@ -144,7 +145,8 @@ class PropertyRepository
                         ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
                         ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
                         ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
-                        ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
+                        ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to']))
+                        ->orWhere(fn($query) => $query->where('date_from', '=', $data['date_from'])));
             }], 'price');
 
         if (isset($data['type']) && $data['type'] != 'Any') {
@@ -177,7 +179,8 @@ class PropertyRepository
                         ->where(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_from', '<', $data['date_to']))
                         ->orWhere(fn($query) => $query->where('date_to', '>', $data['date_from'])->where('date_to', '<', $data['date_to']))
                         ->orWhere(fn($query) => $query->where('date_from', '>', $data['date_from'])->where('date_to', '<', $data['date_from']))
-                        ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to'])));
+                        ->orWhere(fn($query) => $query->where('date_from', '<', $data['date_from'])->where('date_to', '>=', $data['date_to']))
+                        ->orWhere(fn($query) => $query->where('date_from', '=', $data['date_from'])));
             }], 'roomType');
         }
 
